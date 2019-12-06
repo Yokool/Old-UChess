@@ -2,8 +2,13 @@ package com.EKEY.Board;
 
 public class NormalTile extends BoardTile{
 
-	public NormalTile() {
-		super();
+	// Cloning constructor
+	public NormalTile(NormalTile tiletoclone) {
+		super(tiletoclone);
+	}
+	
+	public NormalTile(int x, int y, int width, int height) {
+		super(x, y, width, height);
 	}
 
 
@@ -11,6 +16,11 @@ public class NormalTile extends BoardTile{
 	public void tick() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public NormalTile clone() {
+		return new NormalTile(this);
 	}
 	
 

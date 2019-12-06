@@ -4,20 +4,23 @@ import java.awt.Color;
 
 import com.EKEY.Board.NormalTile;
 import com.EKEY.Board.ChessFigures.Figure;
+import com.EKEY.Misc.DataShare;
 
 public class NormalTileBuilder extends BoardTileBuilder{
 	
-	private NormalTile tile = new NormalTile();
+	private NormalTile tile = new NormalTile(0, 0, 64, 64);
 	
 	@Override
 	public void reset() {
-		tile = new NormalTile();
+		tile = new NormalTile(0, 0, 64, 64);
 	}
 	
 	@Override
 	public NormalTile getResult() {
-		NormalTile buffTile = tile;
-		reset();
+		
+		NormalTile buffTile = tile.clone();
+		reset(); // FIXME: RESET
+		
 		return buffTile;
 	}
 

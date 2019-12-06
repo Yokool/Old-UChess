@@ -5,8 +5,13 @@ import java.util.LinkedList;
 
 import com.EKEY.Interfaces.Renderable;
 import com.EKEY.Interfaces.Tickable;
+import com.EKEY.Misc.DataShare;
 
 public class Handler {
+	
+	public Handler() {
+		DataShare.HANDLER = this;
+	}
 	
 	private LinkedList<Tickable> tickList = new LinkedList<Tickable>();
 	private LinkedList<Renderable> renderList = new LinkedList<Renderable>();

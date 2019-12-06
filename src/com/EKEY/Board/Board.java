@@ -1,5 +1,11 @@
 package com.EKEY.Board;
 
+import java.awt.Color;
+
+import com.EKEY.Board.Builder.NormalTileBuilder;
+import com.EKEY.Board.Builder.TileDirector;
+import com.EKEY.Misc.DataShare;
+
 /**
  * A class that represents the chess board. It acts as a sort of a
  * wrappe since the object contains a BoardTile multidimensional array, which holds all the board tiles.
@@ -7,6 +13,13 @@ package com.EKEY.Board;
  * is bigger than 8.
  */
 public class Board {
+	
+	private NormalTileBuilder NormalTILEBuilder = new NormalTileBuilder();
+	private TileDirector tileDirector = new TileDirector();
+	
+	public Board() {
+		DataShare.BOARD = this;
+	}
 	
 	/**
 	 * A multidimensional array which holds all the tiles.
@@ -29,6 +42,25 @@ public class Board {
 		
 		tiles = new BoardTile[boardHeight][boardWidth];
 		
+		for(int height = 0; height < boardHeight; height++) {
+			
+			for(int width = 0; width < boardWidth; width++) {
+				
+				BoardTile tile = tileDirector.createEmptyTile(NormalTILEBuilder);
+				tile.setX(64 + (width * 32));
+				tile.setY(64 + (height * 32));
+				//tile.setWidth(64);
+				//tile.setHeight(64) FIXME;
+				tile.setColor(Color.BLACK);
+				System.out.println("TILE X: " + tile.getX() + " TILE Y: " + tile.getY() + " TILE WIDTH: " + tile.getWidth() + "TILE HEIGHT " + tile.getHeight());
+				tiles[height][width] = tile;
+				
+				DataShare.HANDLER.registerTick(tile);
+				DataShare.HANDLER.registerRender(tile);
+				
+			}
+			
+		}
 	}
 	
 	public void createFigures() {

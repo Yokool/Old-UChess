@@ -3,7 +3,7 @@ package com.EKEY;
 import com.EKEY.Interfaces.Renderable;
 import com.EKEY.Interfaces.Tickable;
 
-public abstract class GameObject implements Renderable, Tickable{
+public abstract class GameObject implements Renderable, Tickable, Cloneable{
 	
 	protected int x;
 	protected int y;
@@ -21,14 +21,12 @@ public abstract class GameObject implements Renderable, Tickable{
 		
 	}
 	
-	/**
-	 * A constructor that creates an "empty" object.
-	 */
-	public GameObject() {
-		this.x = 0;
-		this.y = 0;
-		this.width = 0;
-		this.height = 0;
+	
+	public GameObject(GameObject gameobjecttoclone) {
+		this.x = gameobjecttoclone.x;
+		this.y = gameobjecttoclone.y;
+		this.width = gameobjecttoclone.width;
+		this.height = gameobjecttoclone.height;
 	}
 	
 	public int getX() {

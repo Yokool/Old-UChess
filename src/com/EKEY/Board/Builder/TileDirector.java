@@ -19,8 +19,8 @@ public class TileDirector {
 		
 		builder.setX(0);
 		builder.setY(0);
-		builder.setWidth(32);
-		builder.setHeight(32);
+		builder.setWidth(64);
+		builder.setHeight(64);
 		builder.setColor( builder.getResult().getColor() ); // <--- get the actual color of the tile
 		builder.setFigure(null);
 		
@@ -28,19 +28,5 @@ public class TileDirector {
 		
 	}
 	
-	/**
-	 * A way to create a standart tile with a figure on top of it.
-	 * 
-	 * @param builder
-	 * @param figure
-	 * @return
-	 */
-	public BoardTile createEmptyTileWithFigure(BoardTileBuilder builder, Figure figure) {
-		
-		BoardTile tile = createEmptyTile(builder);
-		tile.setTileFigure(figure);
-		return tile;
-		
-	}
 	
 }

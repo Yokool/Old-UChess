@@ -2,6 +2,8 @@ package com.EKEY;
 
 import java.awt.Canvas;
 
+import com.EKEY.Misc.DataShare;
+
 public final class Game extends Canvas {
 
 	private static final long serialVersionUID = -8829932882588586364L;
@@ -9,9 +11,12 @@ public final class Game extends Canvas {
 	private Thread gameThread = null;
 
 	private boolean mainThreadRunning = false;
+	
+	private Handler handler = null;
 
-	public Game() {
-		
+	public Game(Handler handler) {
+		DataShare.GAME = this;
+		this.handler = handler;
 	}
 	
 	public void startGame() {
@@ -24,7 +29,9 @@ public final class Game extends Canvas {
 	 * The main tick method.
 	 */
 	public void tick() {
-
+		
+		handler.tick();
+		
 	}
 	
 	/**
@@ -32,6 +39,8 @@ public final class Game extends Canvas {
 	 */
 	public void render() {
 
+		handler.render(getGraphics());
+		
 	}
 	
 	/**
