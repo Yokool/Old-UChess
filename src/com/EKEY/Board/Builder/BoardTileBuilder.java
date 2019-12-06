@@ -22,5 +22,6 @@ public abstract class BoardTileBuilder {
 	public abstract void setFigure(Figure figure);
 	
 	public abstract BoardTile getResult();
+	public abstract BoardTile getUnifinshedProduct();
 	
 }

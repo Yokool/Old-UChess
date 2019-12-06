@@ -3,6 +3,7 @@ package com.EKEY;
 import java.awt.Dimension;
 
 import com.EKEY.Board.Board;
+import com.EKEY.Board.NormalTile;
 import com.EKEY.GUI.Window;
 
 public class AppRun {
@@ -19,6 +20,7 @@ public class AppRun {
 		board.createBoard(20, 20);
 		
 		game.startGame();
+		
 	}
 	
 }

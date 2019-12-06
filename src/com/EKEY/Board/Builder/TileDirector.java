@@ -21,7 +21,7 @@ public class TileDirector {
 		builder.setY(0);
 		builder.setWidth(64);
 		builder.setHeight(64);
-		builder.setColor( builder.getResult().getColor() ); // <--- get the actual color of the tile
+		builder.setColor( builder.getUnifinshedProduct().getColor() ); // <--- get the actual color of the tile
 		builder.setFigure(null);
 		
 		return builder.getResult();

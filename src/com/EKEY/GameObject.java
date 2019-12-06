@@ -5,11 +5,11 @@ import com.EKEY.Interfaces.Tickable;
 
 public abstract class GameObject implements Renderable, Tickable, Cloneable{
 	
-	protected int x;
-	protected int y;
+	protected int x = 0;
+	protected int y = 0;
 	
-	protected int width;
-	protected int height;
+	protected int width = 0;
+	protected int height = 0;
 	
 	public GameObject(int x, int y, int width, int height) {
 		

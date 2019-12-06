@@ -49,10 +49,8 @@ public class Board {
 				BoardTile tile = tileDirector.createEmptyTile(NormalTILEBuilder);
 				tile.setX(64 + (width * 32));
 				tile.setY(64 + (height * 32));
-				//tile.setWidth(64);
-				//tile.setHeight(64) FIXME;
 				tile.setColor(Color.BLACK);
-				System.out.println("TILE X: " + tile.getX() + " TILE Y: " + tile.getY() + " TILE WIDTH: " + tile.getWidth() + "TILE HEIGHT " + tile.getHeight());
+				
 				tiles[height][width] = tile;
 				
 				DataShare.HANDLER.registerTick(tile);
