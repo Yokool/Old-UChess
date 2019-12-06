@@ -5,7 +5,6 @@ import java.awt.Color;
 import com.EKEY.Board.BoardTile;
 import com.EKEY.Board.NormalTile;
 import com.EKEY.Board.ChessFigures.Figure;
-import com.EKEY.Misc.DataShare;
 
 public class NormalTileBuilder extends BoardTileBuilder{
 	

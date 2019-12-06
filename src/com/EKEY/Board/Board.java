@@ -40,16 +40,28 @@ public class Board {
 			throw new IllegalArgumentException("createBoard was called with the wrong parameters.");
 		}
 		
+		boolean coloroddness = true;
+		
 		tiles = new BoardTile[boardHeight][boardWidth];
 		
 		for(int height = 0; height < boardHeight; height++) {
 			
+			coloroddness = !coloroddness;
+			
 			for(int width = 0; width < boardWidth; width++) {
 				
 				BoardTile tile = tileDirector.createEmptyTile(NormalTILEBuilder);
-				tile.setX(64 + (width * 32));
-				tile.setY(64 + (height * 32));
-				tile.setColor(Color.BLACK);
+				tile.setX(width * 128);
+				tile.setY(height * 128);
+				
+				if(!coloroddness) {
+					tile.setColor(new Color(238, 238, 210));
+					coloroddness = true;
+				}else {
+					tile.setColor(new Color(118, 150, 86));
+					coloroddness = false;
+				}
+				
 				
 				tiles[height][width] = tile;
 				

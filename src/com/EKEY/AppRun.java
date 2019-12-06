@@ -17,7 +17,7 @@ public class AppRun {
 		w.buildFrame();
 		
 		Board board = new Board();
-		board.createBoard(20, 20);
+		board.createBoard(8, 8);
 		
 		game.startGame();
 		
