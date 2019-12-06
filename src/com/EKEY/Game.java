@@ -54,7 +54,7 @@ public final class Game extends Canvas {
 		Graphics g = bf.getDrawGraphics();
 		
 		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		g.fillRect(0, 0, this.getWidth(), this.getHeight()); // TODO: actual width and height of the jframe
 		
 		handler.render(g);
 		
