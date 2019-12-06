@@ -13,8 +13,7 @@ public class AppRun {
 		Window w = new Window("UChess", new Dimension(1080, 720), game);
 		w.buildFrame();
 		
-		game.createThread();
-		game.startThread();
+		
 	}
 	
 }
