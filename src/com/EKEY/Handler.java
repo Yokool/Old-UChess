@@ -1,5 +1,6 @@
 package com.EKEY;
 
+import java.awt.Graphics;
 import java.util.LinkedList;
 
 import com.EKEY.Interfaces.Renderable;
@@ -18,10 +19,10 @@ public class Handler {
 		
 	}
 	
-	public void render() {
+	public void render(Graphics g) {
 		
 		for(Renderable renderable : renderList) {
-			renderable.render();
+			renderable.render(g);
 		}
 		
 	}
