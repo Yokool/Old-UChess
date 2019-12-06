@@ -1,14 +1,11 @@
 package com.EKEY.Board;
 
-import java.awt.Graphics;
-
 public class NormalTile extends BoardTile{
 
-	public NormalTile(int x, int y, int width, int height) {
-		super(x, y, width, height);
+	public NormalTile() {
+		super();
 	}
 
-	
 
 	@Override
 	public void tick() {

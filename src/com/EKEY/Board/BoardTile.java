@@ -20,15 +20,15 @@ public abstract class BoardTile extends GameObject{
 	private Figure tileFigure = null;
 	
 	
-	public BoardTile(int x, int y, int width, int height) {
-		super(x, y, width, height);
+	public BoardTile() {
+		super();
 	}
 	
 	@Override
 	public void render(Graphics g) {
 		
 		g.setColor(color);
-		g.drawRect(x, y, width, height);
+		g.fillRect(x, y, width, height);
 		
 	}
 	
@@ -39,5 +39,14 @@ public abstract class BoardTile extends GameObject{
 	public void setTileFigure(Figure tileFigure) {
 		this.tileFigure = tileFigure;
 	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+	
 	
 }
