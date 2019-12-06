@@ -1,6 +1,9 @@
 package com.EKEY;
 
 import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
 
 import com.EKEY.Misc.DataShare;
 
@@ -39,7 +42,24 @@ public final class Game extends Canvas {
 	 */
 	public void render() {
 
-		handler.render(getGraphics());
+		
+		
+		BufferStrategy bf = this.getBufferStrategy();
+		
+		if(bf == null) {
+			this.createBufferStrategy(3);
+			return;
+		}
+		
+		Graphics g = bf.getDrawGraphics();
+		
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		
+		handler.render(g);
+		
+		g.dispose();
+		bf.show();
 		
 	}
 	

@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 import com.EKEY.Game;
+import com.EKEY.Listeners.MouseDrag;
 
 /**
  * A class that acts as a wrapper for the main Window (JFrame) of our game.
@@ -71,6 +72,10 @@ public final class Window extends JFrame{
 		
 		frame.add(gameComponent);
 		
+		MouseDrag mousedrag = new MouseDrag();
+		
+		gameComponent.addMouseListener(mousedrag);
+		gameComponent.addMouseMotionListener(mousedrag);
 	}
 	
 	
