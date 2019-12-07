@@ -36,7 +36,7 @@ public abstract class BoardTile extends GameObject implements Cloneable{
 		
 		g.setColor(color);
 		
-		g.fillRect(x, y, width, height);
+		g.fillRect(x - DataShare.CAMERA.getCameraX(), y - DataShare.CAMERA.getCameraY(), width, height);
 		
 	}
 	

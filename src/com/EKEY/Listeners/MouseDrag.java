@@ -11,7 +11,7 @@ public class MouseDrag implements MouseListener, MouseMotionListener{
 	private int X;
 	private int Y;
 	
-	private double Speed = 0.5;
+	private double Speed = 1;
 	
 	@Override
 	public void mouseDragged(MouseEvent EVENT) {
