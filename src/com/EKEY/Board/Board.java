@@ -53,11 +53,19 @@ public class Board {
 		
 		boolean coloroddness = true;
 		
+		boolean odd = false;
+		if(boardWidth % 3 == 0 || boardWidth % 3 == 0) {
+			odd = true;
+		}
+		
 		tiles = new BoardTile[boardHeight][boardWidth];
 		
 		for(int height = 0; height < boardHeight; height++) {
 			
-			coloroddness = !coloroddness;
+			if(!odd) {
+				coloroddness = !coloroddness;
+			}
+			
 			
 			for(int width = 0; width < boardWidth; width++) {
 				
