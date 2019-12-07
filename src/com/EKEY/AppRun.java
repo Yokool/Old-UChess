@@ -3,10 +3,12 @@ package com.EKEY;
 import java.awt.Dimension;
 
 import com.EKEY.Board.Board;
+import com.EKEY.Board.ChessFigures.Pawn;
 import com.EKEY.Files.UChessImages;
 import com.EKEY.Files.UChessPaths;
 import com.EKEY.GUI.Window;
 import com.EKEY.Misc.Camera;
+import com.EKEY.Misc.DataShare;
 
 public class AppRun {
 	
