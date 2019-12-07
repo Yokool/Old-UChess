@@ -16,6 +16,8 @@ public class Handler {
 	private LinkedList<Tickable> tickList = new LinkedList<Tickable>();
 	private LinkedList<Renderable> renderList = new LinkedList<Renderable>();
 	
+	private LinkedList<Renderable> figureRenderList = new LinkedList<Renderable>();
+	
 	public void tick() {
 		
 		for(Tickable tickable : tickList) {
@@ -30,6 +32,10 @@ public class Handler {
 			renderable.render(g);
 		}
 		
+		for(Renderable renderable : figureRenderList) {
+			renderable.render(g);
+		}
+		
 	}
 	
 	public void registerTick(Tickable tickable) {
@@ -38,6 +44,10 @@ public class Handler {
 	
 	public void registerRender(Renderable renderable) {
 		renderList.add(renderable);
+	}
+	
+	public void registerFigureRender(Renderable renderable) {
+		figureRenderList.add(renderable);
 	}
 	
 }
