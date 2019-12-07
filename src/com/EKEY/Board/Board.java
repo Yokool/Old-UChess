@@ -4,6 +4,9 @@ import java.awt.Color;
 
 import com.EKEY.Board.Builder.NormalTileBuilder;
 import com.EKEY.Board.Builder.TileDirector;
+import com.EKEY.Board.ChessFigures.Pawn;
+import com.EKEY.Board.ChessFigures.Builder.PawnBuilder;
+import com.EKEY.Files.UChessImages;
 import com.EKEY.Misc.DataShare;
 
 /**
@@ -16,6 +19,11 @@ public class Board {
 	
 	private NormalTileBuilder NormalTILEBuilder = new NormalTileBuilder();
 	private TileDirector tileDirector = new TileDirector();
+	
+	private PawnBuilder pawnBuilder = new PawnBuilder();
+	
+	private int boardWidth = 0;
+	private int boardHeight = 0;
 	
 	public Board() {
 		DataShare.BOARD = this;
@@ -39,6 +47,9 @@ public class Board {
 		if(boardWidth < 8 || boardHeight < 8) {
 			throw new IllegalArgumentException("createBoard was called with the wrong parameters.");
 		}
+		
+		this.boardWidth = boardWidth;
+		this.boardHeight = boardHeight;
 		
 		boolean coloroddness = true;
 		
@@ -74,6 +85,34 @@ public class Board {
 	}
 	
 	public void createFigures() {
+		
+		for(int height = 0; height < boardHeight; height++) {
+			
+			if(height == 1) {
+				
+				for(int width = 0; width < boardWidth; width++) {
+					
+					Pawn p = (Pawn) DataShare.FIGUREDIRECTOR.createFigureOnTile(pawnBuilder, tiles[height][width], UChessImages.pawn_black);
+					tiles[height][width].setTileFigure(p);
+					DataShare.HANDLER.registerFigureRender(p);
+					
+				}
+				
+			}
+			
+			if(height == boardHeight - 2) {
+				
+				for(int width = 0; width < boardWidth; width++) {
+					Pawn p = (Pawn) DataShare.FIGUREDIRECTOR.createFigureOnTile(pawnBuilder, tiles[height][width], UChessImages.pawn_white);
+					tiles[height][width].setTileFigure(p);
+					DataShare.HANDLER.registerFigureRender(p);
+				}
+				
+			}
+			
+			
+			
+		}
 		
 	}
 	

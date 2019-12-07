@@ -4,6 +4,7 @@ import com.EKEY.Game;
 import com.EKEY.Handler;
 import com.EKEY.Board.Board;
 import com.EKEY.Board.Builder.NormalTileBuilder;
+import com.EKEY.Board.ChessFigures.Builder.FigureDirector;
 import com.EKEY.GUI.Window;
 
 /**
@@ -18,6 +19,8 @@ public abstract class DataShare {
 	public static Camera CAMERA;
 	
 	public static NormalTileBuilder NORMALTILEBUILDER;
+	
+	public static FigureDirector FIGUREDIRECTOR;
 	
 	
 }

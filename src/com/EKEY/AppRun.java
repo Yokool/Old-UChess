@@ -3,12 +3,11 @@ package com.EKEY;
 import java.awt.Dimension;
 
 import com.EKEY.Board.Board;
-import com.EKEY.Board.ChessFigures.Pawn;
+import com.EKEY.Board.ChessFigures.Builder.FigureDirector;
 import com.EKEY.Files.UChessImages;
 import com.EKEY.Files.UChessPaths;
 import com.EKEY.GUI.Window;
 import com.EKEY.Misc.Camera;
-import com.EKEY.Misc.DataShare;
 
 public class AppRun {
 	
@@ -16,7 +15,9 @@ public class AppRun {
 		
 		Handler handler = new Handler();
 		Game game = new Game(handler);
-
+		
+		FigureDirector figureBuilder = new FigureDirector();
+		
 		UChessPaths.loadFiles();
 		UChessImages.loadAllImages();
 		
@@ -27,6 +28,7 @@ public class AppRun {
 		
 		Board board = new Board();
 		board.createBoard(8, 8);
+		board.createFigures();
 		
 		game.startGame();
 		
