@@ -21,19 +21,19 @@ public abstract class UChessPaths {
 	
 	public static void loadFiles() {
 		
-		bishop_white = new File("assets\\bishop\\bishop_white.png");
+		bishop_white = new File("assets\\figures\\bishop\\bishop_white.png");
 		king_white = new File("assets\\king\\king_white.png");
-		knight_white = new File("assets\\knight\\knight_white.png");
+		knight_white = new File("assets\\figures\\knight\\knight_white.png");
 		pawn_white = new File("assets\\figures\\pawn\\pawn_white.png");
-		queen_white = new File("assets\\queen\\queen_white.png");
-		rook_white = new File("assets\\rook\\rook_white.png");
+		queen_white = new File("assets\\figures\\queen\\queen_white.png");
+		rook_white = new File("assets\\figures\\rook\\rook_white.png");
 		
-		bishop_black = new File("assets\\bishop\\bishop_black.png");
-		king_black = new File("assets\\king\\king_black.png");
-		knight_black = new File("assets\\knight\\knight_black.png");
-		pawn_black = new File("assets\\pawn\\pawn_black.png");
-		queen_black = new File("assets\\queen\\queen_black.png");
-		rook_black = new File("assets\\rook\\rook_black.png");
+		bishop_black = new File("assets\\figures\\bishop\\bishop_black.png");
+		king_black = new File("assets\\figures\\king\\king_black.png");
+		knight_black = new File("assets\\figures\\knight\\knight_black.png");
+		pawn_black = new File("assets\\figures\\pawn\\pawn_black.png");
+		queen_black = new File("assets\\figures\\queen\\queen_black.png");
+		rook_black = new File("assets\\figures\\rook\\rook_black.png");
 		
 	}
 	
