@@ -6,6 +6,9 @@ import com.EKEY.Board.Board;
 import com.EKEY.Board.Builder.NormalTileBuilder;
 import com.EKEY.GUI.Window;
 
+/**
+ * A class to easily share data between classes.
+ */
 public abstract class DataShare {
 	
 	public static Game GAME;

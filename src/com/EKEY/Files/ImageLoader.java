@@ -7,9 +7,16 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * A helper class for getting images out of files.
+ */
 public abstract class ImageLoader {
 	
-	
+	/**
+	 * A method for loading a Image object from a File.
+	 * @param file - The path to the file.
+	 * @return - The image return, if the file can't be read, then null is returned.
+	 */
 	public static Image loadImage(File file) {
 		
 		BufferedImage bf;

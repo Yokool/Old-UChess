@@ -1,5 +1,8 @@
 package com.EKEY.Board;
 
+/**
+ * A standart chess tile, with nothing special happening.
+ */
 public class NormalTile extends BoardTile{
 
 	// Cloning constructor

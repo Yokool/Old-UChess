@@ -6,11 +6,17 @@ import java.awt.event.MouseMotionListener;
 
 import com.EKEY.Misc.DataShare;
 
+/**
+ * A mouse listener and a mousemotionlistener, mainly controls the cameras position in the world.
+ */
 public class MouseDrag implements MouseListener, MouseMotionListener{
 	
 	private int X;
 	private int Y;
 	
+	/**
+	 * The speed at which the camera is dragged. Can be changed for different results.
+	 */
 	private double Speed = 1;
 	
 	@Override
