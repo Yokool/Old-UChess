@@ -22,7 +22,7 @@ public abstract class UChessPaths {
 	public static void loadFiles() {
 		
 		bishop_white = new File("assets\\figures\\bishop\\bishop_white.png");
-		king_white = new File("assets\\king\\king_white.png");
+		king_white = new File("assets\\figures\\king\\king_white.png");
 		knight_white = new File("assets\\figures\\knight\\knight_white.png");
 		pawn_white = new File("assets\\figures\\pawn\\pawn_white.png");
 		queen_white = new File("assets\\figures\\queen\\queen_white.png");
