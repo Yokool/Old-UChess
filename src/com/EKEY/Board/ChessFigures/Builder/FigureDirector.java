@@ -23,6 +23,8 @@ public class FigureDirector {
 		builder.setImage(figureImage);
 		
 		return builder.getResult();
+		
 	}
+	
 	
 }

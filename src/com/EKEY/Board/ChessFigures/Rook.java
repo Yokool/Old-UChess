@@ -12,6 +12,10 @@ public class Rook extends Figure{
 		super(clone);
 	}
 	
+	public Rook() {
+		super();
+	}
+
 	@Override
 	public void tick() {
 		
