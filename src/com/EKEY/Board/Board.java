@@ -94,29 +94,27 @@ public class Board {
 	
 	public void createFigures() {
 		
+		for(int width = 0; width < boardWidth; width++) {
+			
+			Pawn p = (Pawn) DataShare.FIGUREDIRECTOR.createFigureOnTile(pawnBuilder, tiles[1][width], UChessImages.pawn_black);
+			tiles[1][width].setTileFigure(p);
+			DataShare.HANDLER.registerFigureRender(p);
+			
+		}
+	
+	
+		
+		for(int width = 0; width < boardWidth; width++) {
+			Pawn p = (Pawn) DataShare.FIGUREDIRECTOR.createFigureOnTile(pawnBuilder, tiles[boardHeight - 2][width], UChessImages.pawn_white);
+			tiles[boardHeight - 2][width].setTileFigure(p);
+			DataShare.HANDLER.registerFigureRender(p);
+		}
+		
 		for(int height = 0; height < boardHeight; height++) {
 			
-			if(height == 1) {
-				
-				for(int width = 0; width < boardWidth; width++) {
-					
-					Pawn p = (Pawn) DataShare.FIGUREDIRECTOR.createFigureOnTile(pawnBuilder, tiles[height][width], UChessImages.pawn_black);
-					tiles[height][width].setTileFigure(p);
-					DataShare.HANDLER.registerFigureRender(p);
-					
-				}
-				
-			}
 			
-			if(height == boardHeight - 2) {
 				
-				for(int width = 0; width < boardWidth; width++) {
-					Pawn p = (Pawn) DataShare.FIGUREDIRECTOR.createFigureOnTile(pawnBuilder, tiles[height][width], UChessImages.pawn_white);
-					tiles[height][width].setTileFigure(p);
-					DataShare.HANDLER.registerFigureRender(p);
-				}
-				
-			}
+			
 			
 			
 			
