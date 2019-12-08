@@ -10,12 +10,19 @@ public class Queen extends Figure{
 	
 	public Queen(int x, int y, int width, int height, Image image) {
 		super(x, y, width, height, image);
-		this.figureImage = image;
+	}
+	
+	public Queen(Queen clone) {
+		super(clone);
 	}
 	
 	@Override
 	public void tick() {
 		
+	}
+	
+	public Queen clone() {
+		return new Queen(this);
 	}
 	
 }

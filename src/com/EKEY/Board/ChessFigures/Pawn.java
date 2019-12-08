@@ -11,10 +11,18 @@ public class Pawn extends Figure{
 	public Pawn() {
 		super();
 	}
+	
+	public Pawn(Pawn clone) {
+		super(clone);
+	}
 
 	@Override
 	public void tick() {
 		
+	}
+	
+	public Pawn clone() {
+		return new Pawn(this);
 	}
 
 }

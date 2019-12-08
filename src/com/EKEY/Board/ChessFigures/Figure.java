@@ -22,6 +22,11 @@ public abstract class Figure extends GameObject{
 		this.figureImage = null;
 	}
 	
+	public Figure(Figure clone) {
+		super(clone);
+		this.figureImage = clone.getFigureImage();
+	}
+	
 	@Override
 	public void render(Graphics g) {
 		

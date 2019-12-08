@@ -10,12 +10,19 @@ public class Bishop extends Figure{
 	
 	public Bishop(int x, int y, int width, int height, Image image) {
 		super(x, y, width, height, image);
-		this.figureImage = image;
+	}
+	
+	public Bishop(Bishop clone) {
+		super(clone);
 	}
 	
 	@Override
 	public void tick() {
 		
+	}
+	
+	public Bishop clone() {
+		return new Bishop(this);
 	}
 	
 }

@@ -10,12 +10,19 @@ public class Knight extends Figure{
 	
 	public Knight(int x, int y, int width, int height, Image image) {
 		super(x, y, width, height, image);
-		this.figureImage = image;
+	}
+	
+	public Knight(Knight clone) {
+		super(clone);
 	}
 	
 	@Override
 	public void tick() {
 		
+	}
+	
+	public Knight clone() {
+		return new Knight(this);
 	}
 	
 }
