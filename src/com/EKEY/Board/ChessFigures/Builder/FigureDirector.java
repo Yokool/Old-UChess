@@ -4,6 +4,7 @@ import java.awt.Image;
 
 import com.EKEY.Board.BoardTile;
 import com.EKEY.Board.ChessFigures.Figure;
+import com.EKEY.Board.ChessFigures.Pawn;
 import com.EKEY.Misc.DataShare;
 
 public class FigureDirector {
@@ -24,6 +25,19 @@ public class FigureDirector {
 		
 		return builder.getResult();
 		
+	}
+
+	public Figure createStandartFigure(FigureBuilder builder, Image figureImage) {
+		
+		builder.setX(0);
+		builder.setY(0);
+		
+		builder.setWidth(128);
+		builder.setHeight(128);
+		
+		builder.setImage(figureImage);
+		
+		return builder.getResult();
 	}
 	
 	
