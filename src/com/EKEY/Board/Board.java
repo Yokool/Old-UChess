@@ -5,6 +5,7 @@ import java.awt.Color;
 import com.EKEY.Board.Builder.NormalTileBuilder;
 import com.EKEY.Board.Builder.TileDirector;
 import com.EKEY.Board.ChessFigures.Bishop;
+import com.EKEY.Board.ChessFigures.Figure;
 import com.EKEY.Board.ChessFigures.King;
 import com.EKEY.Board.ChessFigures.Knight;
 import com.EKEY.Board.ChessFigures.Pawn;
@@ -85,7 +86,8 @@ public class Board {
 				BoardTile tile = tileDirector.createEmptyTile(NormalTILEBuilder);
 				tile.setX(width * 128);
 				tile.setY(height * 128);
-
+				
+				
 				if (!coloroddness) {
 					tile.setColor(new Color(238, 238, 210));
 					coloroddness = true;
@@ -95,7 +97,9 @@ public class Board {
 				}
 
 				tiles[height][width] = tile;
-
+				tile.setTileDimension(width, height);
+				
+				
 				DataShare.HANDLER.registerTick(tile);
 				DataShare.HANDLER.registerRender(tile);
 
@@ -112,22 +116,21 @@ public class Board {
 		
 		// Initializing black pawns
 		for(int width = 0; width < boardWidth; width++) {
-			
-			Pawn p = (Pawn) DataShare.FIGUREDIRECTOR.createFigureOnTile(pawnBuilder, tiles[1][width], UChessImages.pawn_black);
-			tiles[1][width].setTileFigure(p);
-			DataShare.HANDLER.registerFigureRender(p);
+			BoardTile tile_z = this.getTileByLoc(1, width);
+			Pawn p = (Pawn) DataShare.FIGUREDIRECTOR.createFigureOnTile(pawnBuilder, tile_z, UChessImages.pawn_black);
+			setupInitialTile(p, tile_z);
 			
 		}
 		
 		// black queen
-		Queen q_b = (Queen) DataShare.FIGUREDIRECTOR.createFigureOnTile(queenBuilder, tiles[0][centerCord], UChessImages.queen_black);
-		tiles[0][centerCord].setTileFigure(q_b);
-		DataShare.HANDLER.registerFigureRender(q_b); // TODO: TICKING
+		BoardTile tile_x = this.getTileByLoc(0, centerCord);
+		Queen q_b = (Queen) DataShare.FIGUREDIRECTOR.createFigureOnTile(queenBuilder, tile_x, UChessImages.queen_black);
+		setupInitialTile(q_b, tile_x);
 		
 		// black king
-		King k_b = (King) DataShare.FIGUREDIRECTOR.createFigureOnTile(kingBuilder, tiles[0][centerCord + 1], UChessImages.king_black);
-		tiles[0][centerCord + 1].setTileFigure(k_b);
-		DataShare.HANDLER.registerFigureRender(k_b);
+		BoardTile tile_y = this.getTileByLoc(0, centerCord + 1);
+		King k_b = (King) DataShare.FIGUREDIRECTOR.createFigureOnTile(kingBuilder, tile_y, UChessImages.king_black);
+		this.setupInitialTile(k_b, tile_y);
 		
 		
 		int SecondDivider = (int)(DividerWidth / 3.0);
@@ -136,33 +139,34 @@ public class Board {
 		for(int width = 0; width < DividerWidth; width++) {
 			
 			if(width < SecondDivider) {
-				// rooks
-				Rook r_b = (Rook) DataShare.FIGUREDIRECTOR.createFigureOnTile(rookBuilder, tiles[0][width], UChessImages.rook_black);
-				tiles[0][width].setTileFigure(r_b);
-				DataShare.HANDLER.registerFigureRender(r_b);
 				
-				Rook r2_b = (Rook) DataShare.FIGUREDIRECTOR.createFigureOnTile(rookBuilder, tiles[0][this.boardWidth - width - 1], UChessImages.rook_black);
-				tiles[0][this.boardWidth - width - 1].setTileFigure(r2_b);
-				DataShare.HANDLER.registerFigureRender(r2_b);
+				// rooks
+				BoardTile tile = this.getTileByLoc(0, width);
+				Rook r_b = (Rook) DataShare.FIGUREDIRECTOR.createFigureOnTile(rookBuilder, tile, UChessImages.rook_black);
+				setupInitialTile(r_b, tile);
+				
+				BoardTile _tile = this.getTileByLoc(0, this.boardWidth - width - 1);
+				Rook r2_b = (Rook) DataShare.FIGUREDIRECTOR.createFigureOnTile(rookBuilder, _tile, UChessImages.rook_black);
+				setupInitialTile(r2_b, _tile);
 				
 			}else if (width < SecondDivider*2) {
 				// knights
-				Knight kn_b = (Knight) DataShare.FIGUREDIRECTOR.createFigureOnTile(knightBuilder, tiles[0][width], UChessImages.knight_black);
-				tiles[0][width].setTileFigure(kn_b);
-				DataShare.HANDLER.registerFigureRender(kn_b);
+				BoardTile tile = this.getTileByLoc(0, width);
+				Knight kn_b = (Knight) DataShare.FIGUREDIRECTOR.createFigureOnTile(knightBuilder, tile, UChessImages.knight_black);
+				setupInitialTile(kn_b, tile);
 				
-				Knight kn2_b = (Knight) DataShare.FIGUREDIRECTOR.createFigureOnTile(knightBuilder, tiles[0][this.boardWidth - width - 1], UChessImages.knight_black);
-				tiles[0][this.boardWidth - width - 1].setTileFigure(kn2_b);
-				DataShare.HANDLER.registerFigureRender(kn2_b);
+				BoardTile _tile = this.getTileByLoc(0, this.boardWidth - width - 1);
+				Knight kn2_b = (Knight) DataShare.FIGUREDIRECTOR.createFigureOnTile(knightBuilder, _tile, UChessImages.knight_black);
+				setupInitialTile(kn2_b, _tile);
 			}else {
 				// bishops
-				Bishop b_b = (Bishop) DataShare.FIGUREDIRECTOR.createFigureOnTile(bishopBuilder, tiles[0][width], UChessImages.bishop_black);
-				tiles[0][width].setTileFigure(b_b);
-				DataShare.HANDLER.registerFigureRender(b_b);
+				BoardTile tile = this.getTileByLoc(0, width);
+				Bishop b_b = (Bishop) DataShare.FIGUREDIRECTOR.createFigureOnTile(bishopBuilder, tile, UChessImages.bishop_black);
+				this.setupInitialTile(b_b, tile);
 				
-				Bishop b2_b = (Bishop) DataShare.FIGUREDIRECTOR.createFigureOnTile(bishopBuilder, tiles[0][this.boardWidth - width - 1], UChessImages.bishop_black);
-				tiles[0][this.boardWidth - width - 1].setTileFigure(b2_b);
-				DataShare.HANDLER.registerFigureRender(b2_b);
+				BoardTile _tile = this.getTileByLoc(0, this.boardWidth - width - 1);
+				Bishop b2_b = (Bishop) DataShare.FIGUREDIRECTOR.createFigureOnTile(bishopBuilder, _tile, UChessImages.bishop_black);
+				this.setupInitialTile(b2_b, _tile);
 			}
 			
 			
@@ -171,31 +175,33 @@ public class Board {
 		
 		// Initializing white pawns
 		for(int width = 0; width < boardWidth; width++) {
-			Pawn p = (Pawn) DataShare.FIGUREDIRECTOR.createFigureOnTile(pawnBuilder, tiles[boardHeight - 2][width], UChessImages.pawn_white);
-			tiles[boardHeight - 2][width].setTileFigure(p);
-			DataShare.HANDLER.registerFigureRender(p);
+			BoardTile tile_a = this.getTileByLoc(boardHeight - 2, width);
+			Pawn p = (Pawn) DataShare.FIGUREDIRECTOR.createFigureOnTile(pawnBuilder, tile_a, UChessImages.pawn_white);
+			setupInitialTile(p, tile_a);
 		}
 		
 		// white queen
-		Queen q_w = (Queen) DataShare.FIGUREDIRECTOR.createFigureOnTile(queenBuilder, tiles[boardHeight - 1][centerCord], UChessImages.queen_white);
-		tiles[boardHeight - 1][centerCord].setTileFigure(q_w);
-		DataShare.HANDLER.registerFigureRender(q_w); // TODO: TICKING
+		BoardTile tile_b = this.getTileByLoc(boardHeight - 1, centerCord);
+		Queen q_w = (Queen) DataShare.FIGUREDIRECTOR.createFigureOnTile(queenBuilder, tile_b, UChessImages.queen_white);
+		setupInitialTile(q_w, tile_b);
 		
 		// white king
-		King k_w = (King) DataShare.FIGUREDIRECTOR.createFigureOnTile(kingBuilder, tiles[boardHeight - 1][centerCord + 1], UChessImages.king_white);
-		tiles[boardHeight - 1][centerCord + 1].setTileFigure(k_w);
-		DataShare.HANDLER.registerFigureRender(k_w);
+		BoardTile tile_c = this.getTileByLoc(boardHeight - 1, centerCord + 1);
+		King k_w = (King) DataShare.FIGUREDIRECTOR.createFigureOnTile(kingBuilder, tile_c, UChessImages.king_white);
+		setupInitialTile(k_w, tile_c);
 		
 		// other black figures - left side
 		for (int width = 0; width < DividerWidth; width++) {
 
 			if (width < SecondDivider) {
 				// rooks
+				
 				Rook r_w = (Rook) DataShare.FIGUREDIRECTOR.createFigureOnTile(rookBuilder, tiles[this.boardWidth - 1][width],
 						UChessImages.rook_white);
 				tiles[this.boardWidth - 1][width].setTileFigure(r_w);
 				DataShare.HANDLER.registerFigureRender(r_w);
-
+				
+				// FIXME POSSIBLE ERROR?????
 				Rook r2_w = (Rook) DataShare.FIGUREDIRECTOR.createFigureOnTile(rookBuilder,
 						tiles[this.boardWidth - 1][this.boardWidth - width - 1], UChessImages.rook_white);
 				tiles[this.boardWidth - 1][this.boardWidth - width - 1].setTileFigure(r2_w);
@@ -203,22 +209,26 @@ public class Board {
 
 			} else if (width < SecondDivider * 2) {
 				// knights
+				
 				Knight kn_w = (Knight) DataShare.FIGUREDIRECTOR.createFigureOnTile(knightBuilder, tiles[this.boardWidth - 1][width],
 						UChessImages.knight_white);
 				tiles[this.boardWidth - 1][width].setTileFigure(kn_w);
 				DataShare.HANDLER.registerFigureRender(kn_w);
-
+				
+				
 				Knight kn2_w = (Knight) DataShare.FIGUREDIRECTOR.createFigureOnTile(knightBuilder,
 						tiles[this.boardWidth - 1][this.boardWidth - width - 1], UChessImages.knight_white);
 				tiles[this.boardWidth - 1][this.boardWidth - width - 1].setTileFigure(kn2_w);
 				DataShare.HANDLER.registerFigureRender(kn2_w);
 			} else {
 				// bishops
+				
 				Bishop b_w = (Bishop) DataShare.FIGUREDIRECTOR.createFigureOnTile(bishopBuilder, tiles[this.boardWidth - 1][width],
 						UChessImages.bishop_white);
 				tiles[this.boardWidth - 1][width].setTileFigure(b_w);
 				DataShare.HANDLER.registerFigureRender(b_w);
-
+				
+				 
 				Bishop b2_w = (Bishop) DataShare.FIGUREDIRECTOR.createFigureOnTile(bishopBuilder,
 						tiles[this.boardWidth - 1][this.boardWidth - width - 1], UChessImages.bishop_white);
 				tiles[this.boardWidth - 1][this.boardWidth - width - 1].setTileFigure(b2_w);
@@ -228,9 +238,28 @@ public class Board {
 					
 		}
 	}
+	
+	private void setupInitialTile(Figure figure, BoardTile tile) {
+		figure.setTileX(tile.getTileX());
+		figure.setTileY(tile.getTileY());
+		
+		tile.setTileFigure(figure);
+		
+		DataShare.HANDLER.registerTick(figure);
+		DataShare.HANDLER.registerFigureRender(figure);
+		
+	}
 
 	public BoardTile getTileByLoc(int height, int width) {
-		return tiles[height][width];
+		BoardTile tilereturn = tiles[height][width];
+		
+		if(tilereturn == null) {
+			RuntimeException ex = new RuntimeException("getTileByLoc failed to find a cell with params: " + height + ", " + width);
+			ex.printStackTrace();
+			throw ex;
+		}
+		
+		return tilereturn;
 	}
 
 	public BoardTile[][] getTiles() {

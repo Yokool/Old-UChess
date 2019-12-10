@@ -12,6 +12,9 @@ public abstract class Figure extends GameObject{
 	
 	protected int HP = 100;
 	
+	protected int tileX = -1;
+	protected int tileY = -1;
+	
 	public Figure(int x, int y, int width, int height, Image image) {
 		super(x, y, width, height);
 		this.figureImage = image;
@@ -49,6 +52,24 @@ public abstract class Figure extends GameObject{
 	public void setHP(int hP) {
 		HP = hP;
 	}
+
+	public int getTileX() {
+		return tileX;
+	}
+
+	public void setTileX(int tileX) {
+		this.tileX = tileX;
+	}
+
+	public int getTileY() {
+		return tileY;
+	}
+
+	public void setTileY(int tileY) {
+		this.tileY = tileY;
+	}
+	
+	
 	
 	
 

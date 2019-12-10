@@ -16,6 +16,9 @@ public abstract class BoardTile extends GameObject implements Cloneable{
 	
 	protected Color color;
 	
+	protected int tileX = -1;
+	protected int tileY = -1;
+	
 	/**
 	 * The figure that is currently on the tile.
 	 */
@@ -40,6 +43,13 @@ public abstract class BoardTile extends GameObject implements Cloneable{
 		
 	}
 	
+	public void setTileDimension(int gridX, int gridY) {
+		
+		this.tileX = gridX;
+		this.tileY = gridY;
+		
+	}
+	
 	public Figure getTileFigure() {
 		return tileFigure;
 	}
@@ -55,6 +65,23 @@ public abstract class BoardTile extends GameObject implements Cloneable{
 	public void setColor(Color color) {
 		this.color = color;
 	}
+
+	public int getTileX() {
+		return tileX;
+	}
+
+	public void setTileX(int tileX) {
+		this.tileX = tileX;
+	}
+
+	public int getTileY() {
+		return tileY;
+	}
+
+	public void setTileY(int tileY) {
+		this.tileY = tileY;
+	}
+	
 	
 	
 	
