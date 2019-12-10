@@ -195,44 +195,39 @@ public class Board {
 
 			if (width < SecondDivider) {
 				// rooks
-				
-				Rook r_w = (Rook) DataShare.FIGUREDIRECTOR.createFigureOnTile(rookBuilder, tiles[this.boardWidth - 1][width],
+				BoardTile tile_d = this.getTileByLoc(this.boardHeight - 1, width);
+				Rook r_w = (Rook) DataShare.FIGUREDIRECTOR.createFigureOnTile(rookBuilder, tile_d,
 						UChessImages.rook_white);
-				tiles[this.boardWidth - 1][width].setTileFigure(r_w);
-				DataShare.HANDLER.registerFigureRender(r_w);
+				setupInitialTile(r_w, tile_d);
 				
-				// FIXME POSSIBLE ERROR?????
+				BoardTile tile_e = this.getTileByLoc(this.boardHeight - 1, this.boardWidth - width - 1);
 				Rook r2_w = (Rook) DataShare.FIGUREDIRECTOR.createFigureOnTile(rookBuilder,
-						tiles[this.boardWidth - 1][this.boardWidth - width - 1], UChessImages.rook_white);
-				tiles[this.boardWidth - 1][this.boardWidth - width - 1].setTileFigure(r2_w);
-				DataShare.HANDLER.registerFigureRender(r2_w);
+						tile_e, UChessImages.rook_white);
+				setupInitialTile(r2_w, tile_e);
 
 			} else if (width < SecondDivider * 2) {
 				// knights
-				
-				Knight kn_w = (Knight) DataShare.FIGUREDIRECTOR.createFigureOnTile(knightBuilder, tiles[this.boardWidth - 1][width],
+				BoardTile tile_f = this.getTileByLoc(this.boardHeight - 1, width);
+				Knight kn_w = (Knight) DataShare.FIGUREDIRECTOR.createFigureOnTile(knightBuilder, tile_f,
 						UChessImages.knight_white);
-				tiles[this.boardWidth - 1][width].setTileFigure(kn_w);
-				DataShare.HANDLER.registerFigureRender(kn_w);
+				setupInitialTile(kn_w, tile_f);
 				
-				
+				BoardTile tile_g = this.getTileByLoc(this.boardHeight - 1, this.boardWidth - width - 1);
 				Knight kn2_w = (Knight) DataShare.FIGUREDIRECTOR.createFigureOnTile(knightBuilder,
-						tiles[this.boardWidth - 1][this.boardWidth - width - 1], UChessImages.knight_white);
-				tiles[this.boardWidth - 1][this.boardWidth - width - 1].setTileFigure(kn2_w);
-				DataShare.HANDLER.registerFigureRender(kn2_w);
+						tile_g, UChessImages.knight_white);
+				setupInitialTile(kn2_w, tile_g);
+				
 			} else {
 				// bishops
-				
-				Bishop b_w = (Bishop) DataShare.FIGUREDIRECTOR.createFigureOnTile(bishopBuilder, tiles[this.boardWidth - 1][width],
+				BoardTile tile_h = this.getTileByLoc(this.boardHeight - 1, width);
+				Bishop b_w = (Bishop) DataShare.FIGUREDIRECTOR.createFigureOnTile(bishopBuilder, tile_h,
 						UChessImages.bishop_white);
-				tiles[this.boardWidth - 1][width].setTileFigure(b_w);
-				DataShare.HANDLER.registerFigureRender(b_w);
+				setupInitialTile(b_w, tile_h);
 				
-				 
+				BoardTile tile_i = this.getTileByLoc(this.boardHeight - 1, this.boardWidth - width - 1);
 				Bishop b2_w = (Bishop) DataShare.FIGUREDIRECTOR.createFigureOnTile(bishopBuilder,
-						tiles[this.boardWidth - 1][this.boardWidth - width - 1], UChessImages.bishop_white);
-				tiles[this.boardWidth - 1][this.boardWidth - width - 1].setTileFigure(b2_w);
-				DataShare.HANDLER.registerFigureRender(b2_w);
+						tile_i, UChessImages.bishop_white);
+				setupInitialTile(b2_w, tile_i);
 			}
 					
 					
