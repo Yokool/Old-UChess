@@ -27,8 +27,6 @@ public class AppRun {
 		Window w = new Window("UChess", new Dimension(1080, 720), game);
 		w.buildFrame();
 		
-		Camera camera = new Camera();
-		
 		Board board = new Board();
 		board.createBoard(8, 8);
 		board.createFigures();
