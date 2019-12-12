@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 import com.EKEY.Game;
+import com.EKEY.Listeners.ClickableMouse;
 import com.EKEY.Listeners.MouseDrag;
 import com.EKEY.Misc.DataShare;
 
@@ -78,9 +79,12 @@ public final class Window extends JFrame{
 		
 		
 		MouseDrag mousedrag = new MouseDrag();
+		ClickableMouse clickableMouse = new ClickableMouse();
 		
 		gameComponent.addMouseListener(mousedrag);
 		gameComponent.addMouseMotionListener(mousedrag);
+		gameComponent.addMouseListener(clickableMouse);
+		
 	}
 	
 	

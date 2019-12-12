@@ -36,7 +36,11 @@ public abstract class Figure extends GameObject{
 		
 		Camera camera = Camera.getInstance();
 		g.drawImage(figureImage, x - camera.getCameraX(), y - camera.getCameraY(), width, height, null);
-		
+	}
+	
+	@Override
+	public void onClick() {
+		System.out.println("Clicked figure " + this);
 	}
 	
 	public Image getFigureImage() {

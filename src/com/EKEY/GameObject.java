@@ -1,9 +1,13 @@
 package com.EKEY;
 
+import java.awt.Rectangle;
+
+import com.EKEY.Interfaces.Clickable;
 import com.EKEY.Interfaces.Renderable;
 import com.EKEY.Interfaces.Tickable;
+import com.EKEY.Misc.Camera;
 
-public abstract class GameObject implements Renderable, Tickable, Cloneable{
+public abstract class GameObject implements Renderable, Tickable, Cloneable, Clickable{
 	
 	protected int x = 0;
 	protected int y = 0;
@@ -27,6 +31,11 @@ public abstract class GameObject implements Renderable, Tickable, Cloneable{
 		this.y = gameobjecttoclone.y;
 		this.width = gameobjecttoclone.width;
 		this.height = gameobjecttoclone.height;
+	}
+	
+	public Rectangle getBounds() {
+		Camera cam = Camera.getInstance();
+		return new Rectangle(x - cam.getCameraX(), y - cam.getCameraY(), width, height);
 	}
 	
 	public int getX() {

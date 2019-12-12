@@ -102,7 +102,7 @@ public class Board {
 				
 				
 				DataShare.HANDLER.registerTick(tile);
-				DataShare.HANDLER.registerRender(tile);
+				DataShare.HANDLER.registerRender(tile); // TODO: CLICKABLE TILE REGISTERING
 
 			}
 
@@ -243,6 +243,7 @@ public class Board {
 		
 		DataShare.HANDLER.registerTick(figure);
 		DataShare.HANDLER.registerFigureRender(figure);
+		DataShare.HANDLER.registerClickable(figure);
 		
 	}
 

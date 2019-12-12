@@ -4,8 +4,6 @@ import java.awt.Image;
 
 import com.EKEY.Board.BoardTile;
 import com.EKEY.Board.ChessFigures.Figure;
-import com.EKEY.Board.ChessFigures.Pawn;
-import com.EKEY.Misc.DataShare;
 
 public class FigureDirector {
 	
