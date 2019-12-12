@@ -38,7 +38,7 @@ public abstract class FigurePrototypes {
 	
 	public static void createPrototypes() {
 		
-		FigureDirector dirCopy = DataShare.FIGUREDIRECTOR;
+		FigureDirector dirCopy = FigureDirector.getInstance();
 		
 		PawnBuilder pawnBuilder = new PawnBuilder();
 		RookBuilder rookBuilder = new RookBuilder();
