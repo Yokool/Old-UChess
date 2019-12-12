@@ -9,8 +9,20 @@ import com.EKEY.Misc.DataShare;
 
 public class FigureDirector {
 	
-	public FigureDirector() {
-		DataShare.FIGUREDIRECTOR = this;
+	private static FigureDirector INSTANCE;
+	
+	private FigureDirector() {
+		
+	}
+	
+	public static FigureDirector getInstance() {
+		
+		if(INSTANCE == null) {
+			INSTANCE = new FigureDirector();
+		}
+		
+		return INSTANCE;
+		
 	}
 	
 	public Figure createFigureOnTile(FigureBuilder builder, BoardTile tile, Image figureImage) {

@@ -19,7 +19,5 @@ public abstract class DataShare {
 	
 	public static NormalTileBuilder NORMALTILEBUILDER;
 	
-	public static FigureDirector FIGUREDIRECTOR;
-	
 	
 }

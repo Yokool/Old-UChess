@@ -17,8 +17,6 @@ public class AppRun {
 		Handler handler = new Handler();
 		Game game = new Game(handler);
 		
-		FigureDirector figureBuilder = new FigureDirector();
-		
 		UChessPaths.loadFiles();
 		UChessImages.loadAllImages();
 		
