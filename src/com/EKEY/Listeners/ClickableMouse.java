@@ -4,11 +4,14 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import com.EKEY.Board.ChessFigures.Figure;
 import com.EKEY.Interfaces.Clickable;
 import com.EKEY.Misc.DataShare;
 
 public class ClickableMouse implements MouseListener{
-
+	
+	private Figure selectedFigure = null;
+	
 	@Override
 	public void mouseClicked(MouseEvent EVENT) {
 		
@@ -17,6 +20,29 @@ public class ClickableMouse implements MouseListener{
 		for(Clickable clickable : DataShare.HANDLER.getClickList()) {
 			
 			if(clickable.getBounds().contains(clickPoint)) {
+				
+				if(clickable instanceof Figure) {
+					
+					Figure fig = (Figure) clickable;
+					
+					if(selectedFigure == null || fig != selectedFigure) {
+						
+						if(selectedFigure != null) {
+							selectedFigure.setSelected(false);
+						}
+						
+						fig.setSelected(true);
+						selectedFigure = fig;
+						
+						// TODO: SELECTED FIGURE SHOW GRAPHICS
+						
+						System.out.println("Selected figure: " + selectedFigure);
+						
+					}
+					
+					
+					
+				}
 				
 				clickable.onClick();
 				
