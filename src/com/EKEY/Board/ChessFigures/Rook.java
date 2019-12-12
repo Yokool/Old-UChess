@@ -2,10 +2,12 @@ package com.EKEY.Board.ChessFigures;
 
 import java.awt.Image;
 
+import com.EKEY.Board.ChessFigures.Movement.Movement;
+
 public class Rook extends Figure{
 	
-	public Rook(int x, int y, int width, int height, Image image) {
-		super(x, y, width, height, image);
+	public Rook(int x, int y, int width, int height, Image image, Movement movement) {
+		super(x, y, width, height, image, movement);
 	}
 	
 	public Rook(Rook clone) {

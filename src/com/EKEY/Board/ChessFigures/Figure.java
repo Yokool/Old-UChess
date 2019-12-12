@@ -5,8 +5,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 import com.EKEY.GameObject;
+import com.EKEY.Board.ChessFigures.Movement.Movement;
 import com.EKEY.Misc.Camera;
-import com.EKEY.Misc.DataShare;
 
 public abstract class Figure extends GameObject{
 	
@@ -17,11 +17,14 @@ public abstract class Figure extends GameObject{
 	protected int tileX = -1;
 	protected int tileY = -1;
 	
+	protected Movement movement;
+	
 	protected boolean selected = false;
 	
-	public Figure(int x, int y, int width, int height, Image image) {
+	public Figure(int x, int y, int width, int height, Image image, Movement movement) {
 		super(x, y, width, height);
 		this.figureImage = image;
+		this.movement = movement;
 	}
 	
 	public Figure() {
@@ -43,6 +46,7 @@ public abstract class Figure extends GameObject{
 		if(selected) {
 			g.setColor(Color.BLACK); // TODO: DEBUGGING RECTANGLE REMOVE
 			g.drawRect(x - camera.getCameraX(), y - camera.getCameraY(), width, height);
+			movement.renderOptions(g);
 		}
 	}
 	
@@ -89,6 +93,14 @@ public abstract class Figure extends GameObject{
 
 	public void setSelected(boolean selected) {
 		this.selected = selected;
+	}
+
+	public Movement getMovement() {
+		return movement;
+	}
+
+	public void setMovement(Movement movement) {
+		this.movement = movement;
 	}
 	
 	

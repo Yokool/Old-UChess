@@ -17,6 +17,7 @@ import com.EKEY.Board.ChessFigures.Builder.KnightBuilder;
 import com.EKEY.Board.ChessFigures.Builder.PawnBuilder;
 import com.EKEY.Board.ChessFigures.Builder.QueenBuilder;
 import com.EKEY.Board.ChessFigures.Builder.RookBuilder;
+import com.EKEY.Board.ChessFigures.Movement.WhitePawnMovement;
 import com.EKEY.Board.ChessFigures.Prototypes.FigurePrototypes;
 import com.EKEY.Misc.DataShare;
 
@@ -180,6 +181,7 @@ public class Board {
 		for(int width = 0; width < boardWidth; width++) {
 			BoardTile tile_a = this.getTileByLoc(boardHeight - 2, width);
 			Pawn p = FigurePrototypes.getPawn_white();
+			p.setMovement(new WhitePawnMovement(p));
 			setupInitialTile(p, tile_a);
 		}
 		
