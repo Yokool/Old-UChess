@@ -50,8 +50,8 @@ public abstract class FigurePrototypes {
 		pawn_white = (Pawn) dirCopy.createStandartFigure(pawnBuilder, UChessImages.pawn_white);
 		pawn_black = (Pawn) dirCopy.createStandartFigure(pawnBuilder, UChessImages.pawn_black);
 		
-		rook_white = (Rook) dirCopy.createStandartFigure(rookBuilder, UChessImages.pawn_white);
-		rook_black = (Rook) dirCopy.createStandartFigure(rookBuilder, UChessImages.pawn_black);
+		rook_white = (Rook) dirCopy.createStandartFigure(rookBuilder, UChessImages.rook_white);
+		rook_black = (Rook) dirCopy.createStandartFigure(rookBuilder, UChessImages.rook_black);
 		
 		bishop_white = (Bishop) dirCopy.createStandartFigure(bishopBuilder, UChessImages.bishop_white);
 		bishop_black = (Bishop) dirCopy.createStandartFigure(bishopBuilder, UChessImages.bishop_black);
