@@ -62,6 +62,11 @@ public class Movement {
 		
 	}
 	
+	public static void Setup(Figure f, Movement m) {
+		f.setMovement(m);
+		m.setFigure(f);
+	}
+	
 	// TODO: NOT IMPLEMENTED YET
 	@Deprecated
 	public void moveFigure(BoardTile tile) {
