@@ -46,7 +46,11 @@ public abstract class Figure extends GameObject{
 		if(selected) {
 			g.setColor(Color.BLACK); // TODO: DEBUGGING RECTANGLE REMOVE
 			g.drawRect(x - camera.getCameraX(), y - camera.getCameraY(), width, height);
-			movement.renderOptions(g);
+			
+			if(movement != null) {
+				movement.renderOptions(g);
+			}
+			
 		}
 	}
 	

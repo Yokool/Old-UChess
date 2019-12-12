@@ -123,6 +123,10 @@ public class Board {
 		for(int width = 0; width < boardWidth; width++) {
 			BoardTile tile_z = this.getTileByLoc(1, width);
 			Pawn p = FigurePrototypes.getPawn_black();
+			Movement m = new Movement(0, 1, 2);
+			m.setFigure(p);
+			p.setMovement(m);
+			
 			setupInitialTile(p, tile_z);
 			
 		}
