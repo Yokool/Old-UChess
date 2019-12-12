@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 import com.EKEY.GameObject;
+import com.EKEY.Misc.Camera;
 import com.EKEY.Misc.DataShare;
 
 public abstract class Figure extends GameObject{
@@ -33,7 +34,8 @@ public abstract class Figure extends GameObject{
 	@Override
 	public void render(Graphics g) {
 		
-		g.drawImage(figureImage, x - DataShare.CAMERA.getCameraX(), y - DataShare.CAMERA.getCameraY(), width, height, null);
+		Camera camera = Camera.getInstance();
+		g.drawImage(figureImage, x - camera.getCameraX(), y - camera.getCameraY(), width, height, null);
 		
 	}
 	

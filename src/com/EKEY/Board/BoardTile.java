@@ -5,6 +5,7 @@ import java.awt.Graphics;
 
 import com.EKEY.GameObject;
 import com.EKEY.Board.ChessFigures.Figure;
+import com.EKEY.Misc.Camera;
 import com.EKEY.Misc.DataShare;
 
 /**
@@ -37,9 +38,11 @@ public abstract class BoardTile extends GameObject implements Cloneable{
 	@Override
 	public void render(Graphics g) {
 		
+		Camera camera = Camera.getInstance();
+		
 		g.setColor(color);
 		
-		g.fillRect(x - DataShare.CAMERA.getCameraX(), y - DataShare.CAMERA.getCameraY(), width, height);
+		g.fillRect(x - camera.getCameraX(), y - camera.getCameraY(), width, height);
 		
 	}
 	

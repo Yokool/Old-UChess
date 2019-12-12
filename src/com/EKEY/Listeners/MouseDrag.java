@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import com.EKEY.Misc.Camera;
 import com.EKEY.Misc.DataShare;
 
 /**
@@ -22,6 +23,8 @@ public class MouseDrag implements MouseListener, MouseMotionListener{
 	@Override
 	public void mouseDragged(MouseEvent EVENT) {
 		
+		Camera camera = Camera.getInstance();
+		
 		int curX = EVENT.getX();
 		int curY = EVENT.getY();
 		
@@ -31,11 +34,11 @@ public class MouseDrag implements MouseListener, MouseMotionListener{
 		X = EVENT.getX();
 		Y = EVENT.getY();
 		
-		DataShare.CAMERA.setCameraX(DataShare.CAMERA.getCameraX() - actualX);
-		DataShare.CAMERA.setCameraY(DataShare.CAMERA.getCameraY() - actualY);
+		camera.setCameraX(camera.getCameraX() - actualX);
+		camera.setCameraY(camera.getCameraY() - actualY);
 		
-		System.out.println("CAMERA X: " + DataShare.CAMERA.getCameraX());
-		System.out.println("CAMERA Y: " + DataShare.CAMERA.getCameraY());
+		System.out.println("CAMERA X: " + camera.getCameraX());
+		System.out.println("CAMERA Y: " + camera.getCameraY());
 	}
 
 	@Override

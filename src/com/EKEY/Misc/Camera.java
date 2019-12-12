@@ -7,11 +7,22 @@ package com.EKEY.Misc;
  */
 public final class Camera {
 	
-	public Camera() {
-		
-		DataShare.CAMERA = this;
+	private static Camera camera;
+	
+	private Camera() {
 		
 	}
+	
+	public static Camera getInstance() {
+		
+		if(camera == null) {
+			camera = new Camera();
+		}
+		
+		return camera;
+		
+	}
+	
 	/**
 	 * The X of the camera in the game world.
 	 */

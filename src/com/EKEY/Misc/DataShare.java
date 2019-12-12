@@ -16,7 +16,6 @@ public abstract class DataShare {
 	public static Handler HANDLER;
 	public static Board BOARD;
 	public static Window WINDOW;
-	public static Camera CAMERA;
 	
 	public static NormalTileBuilder NORMALTILEBUILDER;
 	
