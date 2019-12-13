@@ -4,6 +4,7 @@ import java.awt.Dimension;
 
 import com.EKEY.Board.Board;
 import com.EKEY.Board.ChessFigures.Builder.FigureDirector;
+import com.EKEY.Board.ChessFigures.Movement.MovementPrototypes;
 import com.EKEY.Board.ChessFigures.Prototypes.FigurePrototypes;
 import com.EKEY.Files.UChessImages;
 import com.EKEY.Files.UChessPaths;
@@ -21,6 +22,7 @@ public class AppRun {
 		UChessImages.loadAllImages();
 		
 		FigurePrototypes.createPrototypes();
+		MovementPrototypes.createMovementPrototypes();
 		
 		Window w = new Window("UChess", new Dimension(1080, 720), game);
 		w.buildFrame();

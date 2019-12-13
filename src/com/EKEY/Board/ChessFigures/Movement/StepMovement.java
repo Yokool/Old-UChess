@@ -68,6 +68,7 @@ public class StepMovement extends Movement{
 		}
 		
 	}
+	
 
 	@Override
 	public void recalc() {
@@ -98,7 +99,45 @@ public class StepMovement extends Movement{
 			bufferList.add(t);
 		}
 	}
+	
+	@Override
+	public Object clone() {
+		return super.clone();
+	}
+	
+	
+	public int getxStep() {
+		return xStep;
+	}
 
+	public void setxStep(int xStep) {
+		this.xStep = xStep;
+	}
+
+	public int getyStep() {
+		return yStep;
+	}
+
+	public void setyStep(int yStep) {
+		this.yStep = yStep;
+	}
+
+	public int getRepeat() {
+		return repeat;
+	}
+
+	public void setRepeat(int repeat) {
+		this.repeat = repeat;
+	}
+
+	public boolean isCanSkipFigures() {
+		return canSkipFigures;
+	}
+
+	public void setCanSkipFigures(boolean canSkipFigures) {
+		this.canSkipFigures = canSkipFigures;
+	}
+	
 	
 
 }

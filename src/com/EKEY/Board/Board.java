@@ -18,6 +18,7 @@ import com.EKEY.Board.ChessFigures.Builder.PawnBuilder;
 import com.EKEY.Board.ChessFigures.Builder.QueenBuilder;
 import com.EKEY.Board.ChessFigures.Builder.RookBuilder;
 import com.EKEY.Board.ChessFigures.Movement.Movement;
+import com.EKEY.Board.ChessFigures.Movement.MovementPrototypes;
 import com.EKEY.Board.ChessFigures.Movement.StepMovement;
 import com.EKEY.Board.ChessFigures.Prototypes.FigurePrototypes;
 import com.EKEY.Misc.DataShare;
@@ -124,8 +125,8 @@ public class Board {
 		for(int width = 0; width < boardWidth; width++) {
 			BoardTile tile_z = this.getTileByLoc(1, width);
 			Pawn p = FigurePrototypes.getPawn_black();
-			StepMovement m = new StepMovement(p, 0, 1, 2);
-			p.addMovement(m);
+			
+			p.addMovementSet(MovementPrototypes.getBlackPawnMovement());
 			
 			setupInitialTile(p, tile_z);
 			
@@ -187,8 +188,8 @@ public class Board {
 			BoardTile tile_a = this.getTileByLoc(boardHeight - 2, width);
 			
 			Pawn p = FigurePrototypes.getPawn_white();
-			StepMovement m = new StepMovement(p, 0, -1, 2);
-			p.addMovement(m);
+			
+			p.addMovementSet(MovementPrototypes.getWhitePawnMovementSet());
 			
 			setupInitialTile(p, tile_a);
 		}

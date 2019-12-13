@@ -19,7 +19,7 @@ import com.EKEY.Misc.DataShare;
  * 
  * Preconfigured objects can be find in the Prototype class.
  */
-public abstract class Movement {
+public abstract class Movement implements Cloneable{
 	
 	protected Figure figure;
 	
@@ -33,6 +33,17 @@ public abstract class Movement {
 	 */
 	public Movement(Figure figure) {
 		this.figure = figure;
+	}
+	
+	
+	@Override
+	public Object clone() {
+		try {
+			return super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	/**
