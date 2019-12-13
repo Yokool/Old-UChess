@@ -3,6 +3,7 @@ package com.EKEY;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
+import com.EKEY.Interfaces.Clickable;
 import com.EKEY.Interfaces.Renderable;
 import com.EKEY.Interfaces.Tickable;
 import com.EKEY.Misc.DataShare;
@@ -17,6 +18,8 @@ public class Handler {
 	private LinkedList<Renderable> renderList = new LinkedList<Renderable>();
 	
 	private LinkedList<Renderable> figureRenderList = new LinkedList<Renderable>();
+	
+	private LinkedList<Clickable> clickList = new LinkedList<Clickable>();
 	
 	public void tick() {
 		
@@ -36,6 +39,8 @@ public class Handler {
 			renderable.render(g);
 		}
 		
+		
+		
 	}
 	
 	public void registerTick(Tickable tickable) {
@@ -48,6 +53,14 @@ public class Handler {
 	
 	public void registerFigureRender(Renderable renderable) {
 		figureRenderList.add(renderable);
+	}
+	
+	public void registerClickable(Clickable clickable) {
+		clickList.add(clickable);
+	}
+	
+	public LinkedList<Clickable> getClickList(){
+		return clickList;
 	}
 	
 }

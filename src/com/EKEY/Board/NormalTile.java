@@ -25,6 +25,11 @@ public class NormalTile extends BoardTile{
 	public NormalTile clone() {
 		return new NormalTile(this);
 	}
+
+	@Override
+	public void onClick() {
+		// TODO: NOT IMPLEMENTED YET
+	}
 	
 
 }

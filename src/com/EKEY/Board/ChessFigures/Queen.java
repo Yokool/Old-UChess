@@ -2,14 +2,16 @@ package com.EKEY.Board.ChessFigures;
 
 import java.awt.Image;
 
+import com.EKEY.Board.ChessFigures.Movement.Movement;
+
 public class Queen extends Figure{
 	
 	public Queen() {
 		super();
 	}
 	
-	public Queen(int x, int y, int width, int height, Image image) {
-		super(x, y, width, height, image);
+	public Queen(int x, int y, int width, int height, Image image, Movement movement) {
+		super(x, y, width, height, image, movement);
 	}
 	
 	public Queen(Queen clone) {

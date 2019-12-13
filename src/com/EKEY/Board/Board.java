@@ -17,8 +17,9 @@ import com.EKEY.Board.ChessFigures.Builder.KnightBuilder;
 import com.EKEY.Board.ChessFigures.Builder.PawnBuilder;
 import com.EKEY.Board.ChessFigures.Builder.QueenBuilder;
 import com.EKEY.Board.ChessFigures.Builder.RookBuilder;
+import com.EKEY.Board.ChessFigures.Movement.Movement;
+import com.EKEY.Board.ChessFigures.Movement.StepMovement;
 import com.EKEY.Board.ChessFigures.Prototypes.FigurePrototypes;
-import com.EKEY.Files.UChessImages;
 import com.EKEY.Misc.DataShare;
 
 /**
@@ -53,7 +54,7 @@ public class Board {
 	private BoardTile[][] tiles = null;
 
 	/**
-	 * A method that
+	 * A method that creates the board with the specified parameters.
 	 * 
 	 * @param boardWidth  - The width of the board, can't be less than 8.
 	 * @param boardHeight - The height of the board, can't be less than 8.
@@ -103,12 +104,16 @@ public class Board {
 				
 				DataShare.HANDLER.registerTick(tile);
 				DataShare.HANDLER.registerRender(tile);
+				DataShare.HANDLER.registerClickable(tile);
 
 			}
 
 		}
 	}
-
+	
+	/**
+	 * A method that creates all the starter figures.
+	 */
 	public void createFigures() {
 		
 		int centerCord = (int) (this.boardWidth * 0.5) - 1; // we are subtracting 1 since the tiles are 0 based
@@ -119,6 +124,9 @@ public class Board {
 		for(int width = 0; width < boardWidth; width++) {
 			BoardTile tile_z = this.getTileByLoc(1, width);
 			Pawn p = FigurePrototypes.getPawn_black();
+			StepMovement m = new StepMovement(p, 0, 1, 2);
+			p.addMovement(m);
+			
 			setupInitialTile(p, tile_z);
 			
 		}
@@ -177,7 +185,11 @@ public class Board {
 		// Initializing white pawns
 		for(int width = 0; width < boardWidth; width++) {
 			BoardTile tile_a = this.getTileByLoc(boardHeight - 2, width);
+			
 			Pawn p = FigurePrototypes.getPawn_white();
+			StepMovement m = new StepMovement(p, 0, -1, 2);
+			p.addMovement(m);
+			
 			setupInitialTile(p, tile_a);
 		}
 		
@@ -229,33 +241,79 @@ public class Board {
 		}
 	}
 	
+	/**
+	 * Used during world generation to setup figures and tiles in bulk.
+	 * @param figure
+	 * @param tile
+	 */
 	private void setupInitialTile(Figure figure, BoardTile tile) {
 		
 		figure.setX(tile.getX());
 		figure.setY(tile.getY());
 		
 		
+		Board.setTileCoords(figure, tile);
+		
+		DataShare.HANDLER.registerTick(figure);
+		DataShare.HANDLER.registerFigureRender(figure);
+		DataShare.HANDLER.registerClickable(figure);
+		
+	}
+	
+	/**
+	 * A helper method that sets the variables for figure and tile. IE. When moving a figure, this method should be called to easily
+	 * set the needed variables.
+	 * 
+	 * @param figure Figure being set.
+	 * @param tile The BoardTile being set.
+	 */
+	public static void setTileCoords(Figure figure, BoardTile tile) {
+		
+		figure.setTileX(tile.getTileX());
+		figure.setTileY(tile.getTileY());
+		
+		tile.setTileFigure(figure);
+		
+	}
+	
+	/**
+	 * A helper method that returns a tile with the specified coordinates, from the Board this method is being called on.
+	 * 
+	 * @param height The height of the tile we are searching for. 
+	 * @param width The width of the tile we are searching for.
+	 * @return
+	 */
+	public BoardTile getTileByLoc(int height, int width) {
+		BoardTile tilereturn = null;
+		try {
+			tilereturn = tiles[height][width];
+		}catch(Exception ex) {
+			System.err.println("getTileByLoc failed to find a cell with params: " + height + ", " + width);
+		}
+		
+		return tilereturn;
+	}
+	
+	public void moveFigureToTile(Figure figure, BoardTile tile) {
+		
+		BoardTile curTile = this.getTileByLoc(figure.getTileY(), figure.getTileX());
+		System.out.println("Moving figure from: X:" + curTile.getTileX() + " Y: " + curTile.getTileY() + " to X: " + tile.getTileX() + " Y: " + tile.getTileY());
+		
+		if(tile.getTileFigure() != null) {
+			return;
+		}
+		
+		curTile.setTileFigure(null);
+		tile.setTileFigure(figure);
+		
+		figure.setX(tile.getX());
+		figure.setY(tile.getY());
+		
 		figure.setTileX(tile.getTileX());
 		figure.setTileY(tile.getTileY());
 		
 		
-		tile.setTileFigure(figure);
-		
-		DataShare.HANDLER.registerTick(figure);
-		DataShare.HANDLER.registerFigureRender(figure);
-		
-	}
 
-	public BoardTile getTileByLoc(int height, int width) {
-		BoardTile tilereturn = tiles[height][width];
-		
-		if(tilereturn == null) {
-			RuntimeException ex = new RuntimeException("getTileByLoc failed to find a cell with params: " + height + ", " + width);
-			ex.printStackTrace();
-			throw ex;
-		}
-		
-		return tilereturn;
 	}
 
 	public BoardTile[][] getTiles() {

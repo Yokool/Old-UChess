@@ -1,11 +1,13 @@
 package com.EKEY.Board.ChessFigures;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.LinkedList;
 
 import com.EKEY.GameObject;
+import com.EKEY.Board.ChessFigures.Movement.Movement;
 import com.EKEY.Misc.Camera;
-import com.EKEY.Misc.DataShare;
 
 public abstract class Figure extends GameObject{
 	
@@ -16,9 +18,18 @@ public abstract class Figure extends GameObject{
 	protected int tileX = -1;
 	protected int tileY = -1;
 	
-	public Figure(int x, int y, int width, int height, Image image) {
+	protected LinkedList<Movement> movement = new LinkedList<Movement>();
+	
+	protected boolean selected = false;
+	
+	public Figure(int x, int y, int width, int height, Image image, Movement... movement) {
 		super(x, y, width, height);
 		this.figureImage = image;
+		
+		for(Movement m : movement) {
+			this.movement.add(m);
+		}
+		
 	}
 	
 	public Figure() {
@@ -37,6 +48,20 @@ public abstract class Figure extends GameObject{
 		Camera camera = Camera.getInstance();
 		g.drawImage(figureImage, x - camera.getCameraX(), y - camera.getCameraY(), width, height, null);
 		
+		if(selected) {
+			g.setColor(Color.BLACK); // TODO: DEBUGGING RECTANGLE REMOVE
+			g.drawRect(x - camera.getCameraX(), y - camera.getCameraY(), width, height);
+			
+			for(Movement m : movement) {
+				m.renderOptions(g);
+			}
+			
+		}
+	}
+	
+	@Override
+	public void onClick() {
+		System.out.println("Clicked figure " + this);
 	}
 	
 	public Image getFigureImage() {
@@ -69,6 +94,22 @@ public abstract class Figure extends GameObject{
 
 	public void setTileY(int tileY) {
 		this.tileY = tileY;
+	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+
+	public LinkedList<Movement> getMovement() {
+		return movement;
+	}
+
+	public void addMovement(Movement movement) {
+		this.movement.add(movement);
 	}
 	
 	
