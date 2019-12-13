@@ -16,28 +16,27 @@ public class MovementPrototypes {
 
 	public static LinkedList<Movement> getWhitePawnMovementSet() {
 		
-		LinkedList<Movement> buffer = new LinkedList<Movement>();
-		
-		for(Movement m : whitePawnMovement) {
-			buffer.add((Movement) m.clone());
-		}
-		
-		return buffer;
+		return cloneList(whitePawnMovement);
 		
 	}
 
 	public static LinkedList<Movement> getBlackPawnMovement() {
 		
+		return cloneList(blackPawnMovement);
+		
+	}
+	
+	private static LinkedList<Movement> cloneList(LinkedList<Movement> movementList){
+		
 		LinkedList<Movement> buffer = new LinkedList<Movement>();
 		
-		for(Movement m : blackPawnMovement) {
+		for(Movement m : movementList) {
 			buffer.add((Movement) m.clone());
 		}
 		
 		return buffer;
 		
 	}
-	
 	
 	
 }
