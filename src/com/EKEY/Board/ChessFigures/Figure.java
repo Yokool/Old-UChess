@@ -3,6 +3,7 @@ package com.EKEY.Board.ChessFigures;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.LinkedList;
 
 import com.EKEY.GameObject;
 import com.EKEY.Board.ChessFigures.Movement.Movement;
@@ -17,14 +18,18 @@ public abstract class Figure extends GameObject{
 	protected int tileX = -1;
 	protected int tileY = -1;
 	
-	protected Movement movement;
+	protected LinkedList<Movement> movement = new LinkedList<Movement>();
 	
 	protected boolean selected = false;
 	
-	public Figure(int x, int y, int width, int height, Image image, Movement movement) {
+	public Figure(int x, int y, int width, int height, Image image, Movement... movement) {
 		super(x, y, width, height);
 		this.figureImage = image;
-		this.movement = movement;
+		
+		for(Movement m : movement) {
+			this.movement.add(m);
+		}
+		
 	}
 	
 	public Figure() {
@@ -47,8 +52,8 @@ public abstract class Figure extends GameObject{
 			g.setColor(Color.BLACK); // TODO: DEBUGGING RECTANGLE REMOVE
 			g.drawRect(x - camera.getCameraX(), y - camera.getCameraY(), width, height);
 			
-			if(movement != null) {
-				movement.renderOptions(g);
+			for(Movement m : movement) {
+				m.renderOptions(g);
 			}
 			
 		}
@@ -99,12 +104,12 @@ public abstract class Figure extends GameObject{
 		this.selected = selected;
 	}
 
-	public Movement getMovement() {
+	public LinkedList<Movement> getMovement() {
 		return movement;
 	}
 
-	public void setMovement(Movement movement) {
-		this.movement = movement;
+	public void addMovement(Movement movement) {
+		this.movement.add(movement);
 	}
 	
 	

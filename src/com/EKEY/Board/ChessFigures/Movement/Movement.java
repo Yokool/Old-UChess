@@ -9,45 +9,22 @@ import com.EKEY.Board.ChessFigures.Figure;
 import com.EKEY.Misc.Camera;
 import com.EKEY.Misc.DataShare;
 
-public class Movement {
+public abstract class Movement {
 	
-	private Figure figure;
+	protected Figure figure;
 	
-	private int xStep = 0;
-	
-	
-	private int yStep = 0;
-	
-	private int repeat = 0;
-	
-
-	private ArrayList<BoardTile> bufferList = new ArrayList<BoardTile>();
+	protected ArrayList<BoardTile> bufferList = new ArrayList<BoardTile>();
 	
 	
 	// xCoords =   1, 10 - Go 1 step 10 tmies
 	// first param - step, second param is number of repeats
 	
-	public Movement(int xStep, int yStep, int repeat) {
-		
-		this.xStep = xStep;
-		this.repeat = repeat;
-		this.yStep = yStep;
-		
+	public Movement(Figure figure) {
+		this.figure = figure;
 	}
 	
-	public void recalc() {
-		
-		int xTracker = 0;
-		int yTracker = 0;
-		
-		for(int i = 0; i < repeat; i++) {
-			xTracker += xStep;
-			yTracker += yStep;
-			
-			bufferList.add(DataShare.BOARD.getTileByLoc(figure.getTileY() + yTracker, figure.getTileX() + xTracker) );
-		}
-		
-	}
+	
+	protected abstract void recalc();
 	
 	public void renderOptions(Graphics g) {
 		bufferList.clear();
@@ -60,11 +37,6 @@ public class Movement {
 			
 		}
 		
-	}
-	
-	public static void Setup(Figure f, Movement m) {
-		f.setMovement(m);
-		m.setFigure(f);
 	}
 	
 	// TODO: NOT IMPLEMENTED YET
