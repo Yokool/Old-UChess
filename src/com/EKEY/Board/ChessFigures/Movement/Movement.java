@@ -93,16 +93,9 @@ public abstract class Movement implements Cloneable{
 	
 	protected void moveFigure(BoardTile tile) {
 		
-		if(tile == lastTile) {
-			return;
-		}
-		
 		lastTile = tile;
 		DataShare.BOARD.moveFigureToTile(figure, lastTile);
 		
-		
-		
-
 	}
 
 	public void setFigure(Figure figure) {

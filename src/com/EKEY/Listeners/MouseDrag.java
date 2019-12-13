@@ -37,8 +37,6 @@ public class MouseDrag implements MouseListener, MouseMotionListener{
 		camera.setCameraX(camera.getCameraX() - actualX);
 		camera.setCameraY(camera.getCameraY() - actualY);
 		
-		System.out.println("CAMERA X: " + camera.getCameraX());
-		System.out.println("CAMERA Y: " + camera.getCameraY());
 	}
 
 	@Override
