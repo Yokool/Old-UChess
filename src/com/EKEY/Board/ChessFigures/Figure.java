@@ -110,8 +110,20 @@ public abstract class Figure extends GameObject{
 
 	public void addMovement(Movement movement) {
 		this.movement.add(movement);
+		movement.setFigure(this);
 	}
 	
+	public void addMovementSet(LinkedList<Movement> movementBundle) {
+		
+		this.movement.clear();
+		
+		for(Movement m : movementBundle) {
+			m.setFigure(this);
+			this.movement.add(m);
+			
+		}
+		
+	}
 	
 	
 	
