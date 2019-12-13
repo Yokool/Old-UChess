@@ -103,7 +103,8 @@ public class Board {
 				
 				
 				DataShare.HANDLER.registerTick(tile);
-				DataShare.HANDLER.registerRender(tile); // TODO: CLICKABLE TILE REGISTERING
+				DataShare.HANDLER.registerRender(tile);
+				DataShare.HANDLER.registerClickable(tile);
 
 			}
 
@@ -283,15 +284,36 @@ public class Board {
 	 * @return
 	 */
 	public BoardTile getTileByLoc(int height, int width) {
-		BoardTile tilereturn = tiles[height][width];
-		
-		if(tilereturn == null) {
-			RuntimeException ex = new RuntimeException("getTileByLoc failed to find a cell with params: " + height + ", " + width);
-			ex.printStackTrace();
-			throw ex;
+		BoardTile tilereturn = null;
+		try {
+			tilereturn = tiles[height][width];
+		}catch(Exception ex) {
+			System.err.println("getTileByLoc failed to find a cell with params: " + height + ", " + width);
 		}
 		
 		return tilereturn;
+	}
+	
+	public void moveFigureToTile(Figure figure, BoardTile tile) {
+		
+		BoardTile curTile = this.getTileByLoc(figure.getTileY(), figure.getTileX());
+		System.out.println("Moving figure from: X:" + curTile.getTileX() + " Y: " + curTile.getTileY() + " to X: " + tile.getTileX() + " Y: " + tile.getTileY());
+		
+		if(tile.getTileFigure() != null) {
+			return;
+		}
+		
+		curTile.setTileFigure(null);
+		tile.setTileFigure(figure);
+		
+		figure.setX(tile.getX());
+		figure.setY(tile.getY());
+		
+		figure.setTileX(tile.getTileX());
+		figure.setTileY(tile.getTileY());
+		
+		
+
 	}
 
 	public BoardTile[][] getTiles() {

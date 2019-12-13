@@ -1,5 +1,6 @@
 package com.EKEY.Board.ChessFigures.Movement;
 
+import com.EKEY.Board.BoardTile;
 import com.EKEY.Board.ChessFigures.Figure;
 import com.EKEY.Misc.DataShare;
 
@@ -22,6 +23,7 @@ public class StepMovement extends Movement{
 
 	@Override
 	public void recalc() {
+		
 		int xTracker = 0;
 		int yTracker = 0;
 		
@@ -29,8 +31,20 @@ public class StepMovement extends Movement{
 			xTracker += xStep;
 			yTracker += yStep;
 			
-			bufferList.add(DataShare.BOARD.getTileByLoc(figure.getTileY() + yTracker, figure.getTileX() + xTracker) );
+			BoardTile t = DataShare.BOARD.getTileByLoc(figure.getTileY() + yTracker, figure.getTileX() + xTracker);
+			
+			if(t == null) {
+				continue;
+			}
+			
+			if(t.getTileFigure() != null) {
+				continue;
+			}
+			
+			bufferList.add(t);
 		}
 	}
+
+	
 
 }

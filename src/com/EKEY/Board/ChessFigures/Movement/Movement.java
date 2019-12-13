@@ -15,6 +15,7 @@ public abstract class Movement {
 	
 	protected ArrayList<BoardTile> bufferList = new ArrayList<BoardTile>();
 	
+	protected BoardTile lastTile = null;
 	
 	// xCoords =   1, 10 - Go 1 step 10 tmies
 	// first param - step, second param is number of repeats
@@ -27,6 +28,7 @@ public abstract class Movement {
 	protected abstract void recalc();
 	
 	public void renderOptions(Graphics g) {
+		
 		bufferList.clear();
 		recalc();
 		
@@ -39,10 +41,29 @@ public abstract class Movement {
 		
 	}
 	
-	// TODO: NOT IMPLEMENTED YET
-	@Deprecated
-	public void moveFigure(BoardTile tile) {
+	public void notified(BoardTile tile) {
 		
+		if(bufferList.contains(tile)) {
+			moveFigure(tile);
+		}
+		
+	}
+	
+	protected void moveFigure(BoardTile tile) {
+		
+		if(tile == lastTile) {
+			return;
+		}
+		
+		
+		lastTile = tile;
+		
+		
+		DataShare.BOARD.moveFigureToTile(figure, lastTile);
+		
+		
+		
+
 	}
 
 	public void setFigure(Figure figure) {

@@ -4,7 +4,9 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import com.EKEY.Board.BoardTile;
 import com.EKEY.Board.ChessFigures.Figure;
+import com.EKEY.Board.ChessFigures.Movement.Movement;
 import com.EKEY.Interfaces.Clickable;
 import com.EKEY.Misc.DataShare;
 
@@ -41,6 +43,18 @@ public class ClickableMouse implements MouseListener{
 					}
 					
 					
+					
+				}
+				
+				if(selectedFigure != null && clickable instanceof BoardTile) {
+					
+					BoardTile tile = (BoardTile) clickable;
+					
+					for(Movement m : selectedFigure.getMovement()) {
+
+						m.notified(tile);
+						
+					}
 					
 				}
 				
