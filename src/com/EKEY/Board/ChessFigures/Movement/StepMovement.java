@@ -15,6 +15,7 @@ public class StepMovement extends Movement{
 	
 	private int repeat = 0;
 	
+	private boolean canSkipFigures = false;
 
 	// xCoords =   1, 10 - Go 1 step 10 tmies
 	// first param - step, second param is number of repeats
@@ -61,6 +62,11 @@ public class StepMovement extends Movement{
 		this.xStep = xStep;
 		this.repeat = repeat;
 		this.yStep = yStep;
+		
+		if(Math.abs(xStep) > 1 || Math.abs(yStep) > 1) {
+			this.canSkipFigures = true;
+		}
+		
 	}
 
 	@Override
@@ -80,7 +86,13 @@ public class StepMovement extends Movement{
 			}
 			
 			if(t.getTileFigure() != null) {
-				continue;
+				
+				if(!canSkipFigures) {
+					break;
+				}else {
+					continue;
+				}
+				
 			}
 			
 			bufferList.add(t);
