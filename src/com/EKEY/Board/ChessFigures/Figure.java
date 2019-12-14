@@ -61,7 +61,7 @@ public abstract class Figure extends GameObject{
 	
 	@Override
 	public void onClick() {
-		System.out.println("Clicked figure " + this);
+		//System.out.println("Clicked figure " + this);
 	}
 	
 	public Image getFigureImage() {

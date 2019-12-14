@@ -38,7 +38,7 @@ public class ClickableMouse implements MouseListener{
 						
 						// TODO: SELECTED FIGURE SHOW GRAPHICS
 						
-						System.out.println("Selected figure: " + selectedFigure);
+						//System.out.println("Selected figure: " + selectedFigure);
 						
 					}
 					

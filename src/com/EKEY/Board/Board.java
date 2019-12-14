@@ -305,7 +305,7 @@ public class Board {
 		try {
 			tilereturn = tiles[height][width];
 		}catch(Exception ex) {
-			System.err.println("getTileByLoc failed to find a cell with params: " + height + ", " + width);
+			//System.err.println("getTileByLoc failed to find a cell with params: " + height + ", " + width);
 		}
 		
 		return tilereturn;
