@@ -142,7 +142,7 @@ public class Board {
 		BoardTile tile_y = this.getTileByLoc(0, centerCord + 1);
 		King k_b = FigurePrototypes.getKing_black();
 		this.setupInitialTile(k_b, tile_y);
-		
+		k_b.addMovementSet(MovementPrototypes.getKingMovement());
 		
 		int SecondDivider = (int)(DividerWidth / 3.0);
 		
@@ -169,10 +169,13 @@ public class Board {
 				BoardTile tile = this.getTileByLoc(0, width);
 				Knight kn_b = FigurePrototypes.getKnight_black();
 				setupInitialTile(kn_b, tile);
+				kn_b.addMovementSet(MovementPrototypes.getKnightMovement());
 				
 				BoardTile _tile = this.getTileByLoc(0, this.boardWidth - width - 1);
 				Knight kn2_b = FigurePrototypes.getKnight_black();
 				setupInitialTile(kn2_b, _tile);
+				kn2_b.addMovementSet(MovementPrototypes.getKnightMovement());
+				
 			}else {
 				// bishops
 				BoardTile tile = this.getTileByLoc(0, width);
@@ -212,6 +215,7 @@ public class Board {
 		BoardTile tile_c = this.getTileByLoc(boardHeight - 1, centerCord + 1);
 		King k_w = FigurePrototypes.getKing_white();
 		setupInitialTile(k_w, tile_c);
+		k_w.addMovementSet(MovementPrototypes.getKingMovement());
 		
 		// other black figures - left side
 		for (int width = 0; width < DividerWidth; width++) {
@@ -235,10 +239,13 @@ public class Board {
 				BoardTile tile_f = this.getTileByLoc(this.boardHeight - 1, width);
 				Knight kn_w = FigurePrototypes.getKnight_white();
 				setupInitialTile(kn_w, tile_f);
+				kn_w.addMovementSet(MovementPrototypes.getKnightMovement());
 				
 				BoardTile tile_g = this.getTileByLoc(this.boardHeight - 1, this.boardWidth - width - 1);
 				Knight kn2_w = FigurePrototypes.getKnight_white();
 				setupInitialTile(kn2_w, tile_g);
+				kn2_w.addMovementSet(MovementPrototypes.getKnightMovement());
+				
 				
 			} else {
 				// bishops

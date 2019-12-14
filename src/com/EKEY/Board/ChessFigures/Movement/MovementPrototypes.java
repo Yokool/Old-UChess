@@ -9,7 +9,8 @@ public class MovementPrototypes {
 	private static LinkedList<Movement> rookMovement = new LinkedList<Movement>();
 	private static LinkedList<Movement> queenMovement = new LinkedList<Movement>();
 	private static LinkedList<Movement> bishopMovement = new LinkedList<Movement>();
-	
+	private static LinkedList<Movement> knightMovement = new LinkedList<Movement>();
+	private static LinkedList<Movement> kingMovement = new LinkedList<Movement>();
 	
 	public static void createMovementPrototypes() {
 		
@@ -36,7 +37,28 @@ public class MovementPrototypes {
 		bishopMovement.add(new StepMovement(null, 1, -1, 8));
 		bishopMovement.add(new StepMovement(null, -1, -1, 8));
 		
+		knightMovement.add(new SingleMovement(null, 1, -2));
+		knightMovement.add(new SingleMovement(null, -1, -2));
 		
+		knightMovement.add(new SingleMovement(null, 2, -1));
+		knightMovement.add(new SingleMovement(null, 2, 1));
+		
+		knightMovement.add(new SingleMovement(null, 1, 2));
+		knightMovement.add(new SingleMovement(null, -1, 2));
+		
+		knightMovement.add(new SingleMovement(null, -2, -1));
+		knightMovement.add(new SingleMovement(null, -2, 1));
+		
+		kingMovement.add(new SingleMovement(null, 1, -1));
+		kingMovement.add(new SingleMovement(null, 0, -1));
+		kingMovement.add(new SingleMovement(null, -1, -1));
+		
+		kingMovement.add(new SingleMovement(null, 1, 1));
+		kingMovement.add(new SingleMovement(null, 0, 1));
+		kingMovement.add(new SingleMovement(null, -1, 1));
+		
+		kingMovement.add(new SingleMovement(null, -1, 0));
+		kingMovement.add(new SingleMovement(null, 1, 0));
 	}
 
 	public static LinkedList<Movement> getWhitePawnMovementSet() {
@@ -65,8 +87,20 @@ public class MovementPrototypes {
 
 	public static LinkedList<Movement> getBishopMovement() {
 	
-	return cloneList(bishopMovement);
+		return cloneList(bishopMovement);
 	
+	}
+	
+	public static LinkedList<Movement> getKnightMovement(){
+		
+		return cloneList(knightMovement);
+		
+	}
+	
+	public static LinkedList<Movement> getKingMovement(){
+		
+		return cloneList(kingMovement);
+		
 	}
 	
 	private static LinkedList<Movement> cloneList(LinkedList<Movement> movementList){
