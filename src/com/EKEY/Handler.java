@@ -23,20 +23,20 @@ public class Handler {
 	
 	public void tick() {
 		
-		for(Tickable tickable : tickList) {
-			tickable.tick();
+		for(int i = 0; i < tickList.size(); i++) {
+			tickList.get(i).tick();
 		}
 		
 	}
 	
 	public void render(Graphics g) {
 		
-		for(Renderable renderable : renderList) {
-			renderable.render(g);
+		for(int i = 0; i < renderList.size(); i++) {
+			renderList.get(i).render(g);
 		}
 		
-		for(Renderable renderable : figureRenderList) {
-			renderable.render(g);
+		for(int i = 0; i < figureRenderList.size(); i++) {
+			figureRenderList.get(i).render(g);
 		}
 		
 		
