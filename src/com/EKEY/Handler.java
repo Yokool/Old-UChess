@@ -78,5 +78,19 @@ public class Handler {
 	public LinkedList<Clickable> getClickList(){
 		return clickList;
 	}
+
+	public LinkedList<Tickable> getTickList() {
+		return tickList;
+	}
+
+	public LinkedList<Renderable> getRenderList() {
+		return renderList;
+	}
+
+	public LinkedList<Renderable> getFigureRenderList() {
+		return figureRenderList;
+	}
+	
+	
 	
 }

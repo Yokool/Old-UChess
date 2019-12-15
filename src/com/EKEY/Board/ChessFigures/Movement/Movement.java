@@ -3,6 +3,7 @@ package com.EKEY.Board.ChessFigures.Movement;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.EKEY.Board.BoardTile;
 import com.EKEY.Board.ChessFigures.Figure;
@@ -81,7 +82,7 @@ public abstract class Movement implements Cloneable, Renderable{
 	@Override
 	public void render(Graphics g) {
 		
-		for(BoardTile tile : bufferList) {
+		for(BoardTile tile : Collections.synchronizedList(bufferList) ) {
 			
 			Camera cam = Camera.getInstance();
 			

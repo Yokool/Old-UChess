@@ -3,6 +3,9 @@ package com.EKEY.Listeners;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.AbstractList;
+import java.util.Collections;
+import java.util.ListIterator;
 
 import com.EKEY.Board.BoardTile;
 import com.EKEY.Board.ChessFigures.Figure;
@@ -19,8 +22,14 @@ public class ClickableMouse implements MouseListener{
 		
 		Point clickPoint = EVENT.getPoint();
 		
+		ListIterator<Clickable> it = ((AbstractList<Clickable>) DataShare.HANDLER.getClickList().clone()).listIterator();
 		
-		for(Clickable clickable : DataShare.HANDLER.getClickList()) {
+		while(it.hasNext()) {
+			Clickable clickable = null;
+			
+			clickable = it.next();
+			
+			
 			
 			if(clickable.getBounds().contains(clickPoint)) {
 				

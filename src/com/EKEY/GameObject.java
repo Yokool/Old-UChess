@@ -1,6 +1,8 @@
 package com.EKEY;
 
 import java.awt.Rectangle;
+import java.util.Iterator;
+import java.util.ListIterator;
 
 import com.EKEY.Interfaces.Clickable;
 import com.EKEY.Interfaces.Renderable;
@@ -49,9 +51,29 @@ public abstract class GameObject implements Renderable, Tickable, Cloneable, Cli
 		
 		Handler handler = DataShare.HANDLER;
 		
-		handler.unregisterTick(this);
-		handler.unregisterRender(this);
-		handler.unregisterClickable(this);
+		ListIterator<Clickable> it = handler.getClickList().listIterator();
+		while(it.hasNext()) {
+			if(it.next().equals(this)) {
+				it.remove();
+			}
+		}
+		
+		ListIterator<Tickable> it_ti = handler.getTickList().listIterator();
+		
+		while(it_ti.hasNext()) {
+			if(it_ti.next().equals(this)) {
+				it_ti.remove();
+			}
+		}
+		
+		ListIterator<Renderable> it_r = handler.getRenderList().listIterator();
+		
+		while(it_r.hasNext()) {
+			if(it_r.next().equals(this)) {
+				it_r.remove();
+			}
+		}
+		
 		
 		System.gc();
 	}

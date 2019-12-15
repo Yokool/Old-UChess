@@ -9,10 +9,12 @@ public class VanillaFling extends Fling{
 	@Override
 	public void flingOut(Figure targetF) {
 		
-		BoardTile targetTile = DataShare.BOARD.getTileByLoc(targetF.getTileX(), targetF.getTileY());
+		BoardTile targetTile = DataShare.BOARD.getTileByLoc(targetF.getTileY(), targetF.getTileX());
+		DataShare.BOARD.moveFigureToTile(figure, targetTile);
+		
 		targetF.deleteObject();
 		
-		DataShare.BOARD.moveFigureToTile(figure, targetTile);
+		
 		
 	}
 
