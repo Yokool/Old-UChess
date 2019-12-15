@@ -38,9 +38,8 @@ public abstract class Movement implements Cloneable, Renderable{
 	 * The constructor of the Movement class
 	 * @param figure The figure this movement object is tied to.
 	 */
-	public Movement(Figure figure) {
-		this.figure = figure;
-		this.fling = new VanillaFling();
+	public Movement(Fling fling) {
+		this.fling = fling;
 	}
 	
 	

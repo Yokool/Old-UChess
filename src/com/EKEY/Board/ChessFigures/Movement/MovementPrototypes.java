@@ -15,7 +15,6 @@ public class MovementPrototypes {
 	public static void createMovementPrototypes() {
 		
 		whitePawnMovement.add(new StepMovement(null, 0, -1, 2));
-		whitePawnMovement.add(new SingleMovement(null, -1, -1));
 		
 		blackPawnMovement.add(new StepMovement(null, 0, 1, 2));
 		
