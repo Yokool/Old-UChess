@@ -4,15 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.LinkedList;
-import java.util.ListIterator;
 
 import com.EKEY.GameObject;
 import com.EKEY.Handler;
 import com.EKEY.Board.BoardTile;
 import com.EKEY.Board.ChessFigures.Movement.Movement;
-import com.EKEY.Interfaces.Clickable;
-import com.EKEY.Interfaces.Renderable;
-import com.EKEY.Interfaces.Tickable;
 import com.EKEY.Misc.Camera;
 import com.EKEY.Misc.DataShare;
 
@@ -145,28 +141,10 @@ public abstract class Figure extends GameObject{
 		
 		Handler handler = DataShare.HANDLER;
 		
-		ListIterator<Clickable> it = handler.getClickList().listIterator();
-		while(it.hasNext()) {
-			if(it.next().equals(this)) {
-				it.remove();
-			}
-		}
+		handler.unregisterTick(this);
+		handler.unregisterFigureRender(this);
+		handler.unregisterClickable(this);
 		
-		ListIterator<Tickable> it_ti = handler.getTickList().listIterator();
-		
-		while(it_ti.hasNext()) {
-			if(it_ti.next().equals(this)) {
-				it_ti.remove();
-			}
-		}
-		
-		ListIterator<Renderable> it_r = handler.getFigureRenderList().listIterator();
-		
-		while(it_r.hasNext()) {
-			if(it_r.next().equals(this)) {
-				it_r.remove();
-			}
-		}
 		BoardTile tile = DataShare.BOARD.getTileByLoc(this.tileY, this.tileX);
 		
 		if(tile != null) {
