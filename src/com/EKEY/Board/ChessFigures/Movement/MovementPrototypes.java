@@ -24,48 +24,48 @@ public class MovementPrototypes {
 		blackPawnMovement.add(new ConditionalSingleMovement(new VanillaFling(), -1, 1));
 		blackPawnMovement.add(new ConditionalSingleMovement(new VanillaFling(), 1, 1));
 		
-		rookMovement.add(new StepMovement(null, 1, 0, 8));
-		rookMovement.add(new StepMovement(null, -1, 0, 8));
-		rookMovement.add(new StepMovement(null, 0, 1, 8));
-		rookMovement.add(new StepMovement(null, 0, -1, 8));
+		rookMovement.add(new StepMovement(new VanillaFling(), 1, 0, 8));
+		rookMovement.add(new StepMovement(new VanillaFling(), -1, 0, 8));
+		rookMovement.add(new StepMovement(new VanillaFling(), 0, 1, 8));
+		rookMovement.add(new StepMovement(new VanillaFling(), 0, -1, 8));
 		
-		queenMovement.add(new StepMovement(null, 1, 0, 8));
-		queenMovement.add(new StepMovement(null, -1, 0, 8));
-		queenMovement.add(new StepMovement(null, 0, 1, 8));
-		queenMovement.add(new StepMovement(null, 0, -1, 8));
+		queenMovement.add(new StepMovement(new VanillaFling(), 1, 0, 8));
+		queenMovement.add(new StepMovement(new VanillaFling(), -1, 0, 8));
+		queenMovement.add(new StepMovement(new VanillaFling(), 0, 1, 8));
+		queenMovement.add(new StepMovement(new VanillaFling(), 0, -1, 8));
 		
-		queenMovement.add(new StepMovement(null, 1, 1, 8));
-		queenMovement.add(new StepMovement(null, -1, 1, 8));
-		queenMovement.add(new StepMovement(null, 1, -1, 8));
-		queenMovement.add(new StepMovement(null, -1, -1, 8));
+		queenMovement.add(new StepMovement(new VanillaFling(), 1, 1, 8));
+		queenMovement.add(new StepMovement(new VanillaFling(), -1, 1, 8));
+		queenMovement.add(new StepMovement(new VanillaFling(), 1, -1, 8));
+		queenMovement.add(new StepMovement(new VanillaFling(), -1, -1, 8));
 		
-		bishopMovement.add(new StepMovement(null, 1, 1, 8));
-		bishopMovement.add(new StepMovement(null, -1, 1, 8));
-		bishopMovement.add(new StepMovement(null, 1, -1, 8));
-		bishopMovement.add(new StepMovement(null, -1, -1, 8));
+		bishopMovement.add(new StepMovement(new VanillaFling(), 1, 1, 8));
+		bishopMovement.add(new StepMovement(new VanillaFling(), -1, 1, 8));
+		bishopMovement.add(new StepMovement(new VanillaFling(), 1, -1, 8));
+		bishopMovement.add(new StepMovement(new VanillaFling(), -1, -1, 8));
 		
-		knightMovement.add(new SingleMovement(null, 1, -2));
-		knightMovement.add(new SingleMovement(null, -1, -2));
+		knightMovement.add(new SingleMovement(new VanillaFling(), 1, -2));
+		knightMovement.add(new SingleMovement(new VanillaFling(), -1, -2));
 		
-		knightMovement.add(new SingleMovement(null, 2, -1));
-		knightMovement.add(new SingleMovement(null, 2, 1));
+		knightMovement.add(new SingleMovement(new VanillaFling(), 2, -1));
+		knightMovement.add(new SingleMovement(new VanillaFling(), 2, 1));
 		
-		knightMovement.add(new SingleMovement(null, 1, 2));
-		knightMovement.add(new SingleMovement(null, -1, 2));
+		knightMovement.add(new SingleMovement(new VanillaFling(), 1, 2));
+		knightMovement.add(new SingleMovement(new VanillaFling(), -1, 2));
 		
-		knightMovement.add(new SingleMovement(null, -2, -1));
-		knightMovement.add(new SingleMovement(null, -2, 1));
+		knightMovement.add(new SingleMovement(new VanillaFling(), -2, -1));
+		knightMovement.add(new SingleMovement(new VanillaFling(), -2, 1));
 		
-		kingMovement.add(new SingleMovement(null, 1, -1));
-		kingMovement.add(new SingleMovement(null, 0, -1));
-		kingMovement.add(new SingleMovement(null, -1, -1));
+		kingMovement.add(new SingleMovement(new VanillaFling(), 1, -1));
+		kingMovement.add(new SingleMovement(new VanillaFling(), 0, -1));
+		kingMovement.add(new SingleMovement(new VanillaFling(), -1, -1));
 		
-		kingMovement.add(new SingleMovement(null, 1, 1));
-		kingMovement.add(new SingleMovement(null, 0, 1));
-		kingMovement.add(new SingleMovement(null, -1, 1));
+		kingMovement.add(new SingleMovement(new VanillaFling(), 1, 1));
+		kingMovement.add(new SingleMovement(new VanillaFling(), 0, 1));
+		kingMovement.add(new SingleMovement(new VanillaFling(), -1, 1));
 		
-		kingMovement.add(new SingleMovement(null, -1, 0));
-		kingMovement.add(new SingleMovement(null, 1, 0));
+		kingMovement.add(new SingleMovement(new VanillaFling(), -1, 0));
+		kingMovement.add(new SingleMovement(new VanillaFling(), 1, 0));
 	}
 
 	public static LinkedList<Movement> getWhitePawnMovementSet() {
