@@ -19,6 +19,7 @@ public class ClickableMouse implements MouseListener{
 		
 		Point clickPoint = EVENT.getPoint();
 		
+		
 		for(Clickable clickable : DataShare.HANDLER.getClickList()) {
 			
 			if(clickable.getBounds().contains(clickPoint)) {
@@ -36,9 +37,6 @@ public class ClickableMouse implements MouseListener{
 						fig.setSelected(true);
 						selectedFigure = fig;
 						
-						// TODO: SELECTED FIGURE SHOW GRAPHICS
-						
-						//System.out.println("Selected figure: " + selectedFigure);
 						
 					}
 					
@@ -51,7 +49,7 @@ public class ClickableMouse implements MouseListener{
 					BoardTile tile = (BoardTile) clickable;
 					
 					for(Movement m : selectedFigure.getMovement()) {
-
+						
 						m.notified(tile);
 						
 					}
@@ -63,6 +61,7 @@ public class ClickableMouse implements MouseListener{
 			}
 			
 		}
+		
 		
 	}
 

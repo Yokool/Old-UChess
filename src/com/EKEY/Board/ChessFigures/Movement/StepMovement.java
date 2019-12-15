@@ -89,7 +89,10 @@ public class StepMovement extends Movement{
 			if(t.getTileFigure() != null) {
 				
 				if(!canSkipFigures) {
+					
+					bufferList.add(t);
 					break;
+					
 				}else {
 					continue;
 				}

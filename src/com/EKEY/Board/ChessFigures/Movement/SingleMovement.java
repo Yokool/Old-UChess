@@ -33,10 +33,6 @@ public class SingleMovement extends Movement{
 			return;
 		}
 		
-		if(tile.getTileFigure() != null) {
-			return;
-		}
-		
 		bufferList.add(tile);
 		
 	}

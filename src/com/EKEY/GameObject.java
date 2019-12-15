@@ -6,6 +6,7 @@ import com.EKEY.Interfaces.Clickable;
 import com.EKEY.Interfaces.Renderable;
 import com.EKEY.Interfaces.Tickable;
 import com.EKEY.Misc.Camera;
+import com.EKEY.Misc.DataShare;
 
 public abstract class GameObject implements Renderable, Tickable, Cloneable, Clickable{
 	
@@ -36,6 +37,23 @@ public abstract class GameObject implements Renderable, Tickable, Cloneable, Cli
 	public Rectangle getBounds() {
 		Camera cam = Camera.getInstance();
 		return new Rectangle(x - cam.getCameraX(), y - cam.getCameraY(), width, height);
+	}
+	
+	public void deleteObject() {
+		
+		try {
+			this.finalize();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+		Handler handler = DataShare.HANDLER;
+		
+		handler.unregisterTick(this);
+		handler.unregisterRender(this);
+		handler.unregisterClickable(this);
+		
+		System.gc();
 	}
 	
 	public int getX() {

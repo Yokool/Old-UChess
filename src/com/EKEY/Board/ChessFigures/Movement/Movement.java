@@ -6,6 +6,10 @@ import java.util.ArrayList;
 
 import com.EKEY.Board.BoardTile;
 import com.EKEY.Board.ChessFigures.Figure;
+import com.EKEY.Board.ChessFigures.Movement.Flinging.Fling;
+import com.EKEY.Board.ChessFigures.Movement.Flinging.VanillaFling;
+import com.EKEY.Interfaces.Renderable;
+import com.EKEY.Interfaces.Tickable;
 import com.EKEY.Misc.Camera;
 import com.EKEY.Misc.DataShare;
 
@@ -19,7 +23,7 @@ import com.EKEY.Misc.DataShare;
  * 
  * Preconfigured objects can be find in the Prototype class.
  */
-public abstract class Movement implements Cloneable{
+public abstract class Movement implements Cloneable, Renderable{
 	
 	protected Figure figure;
 	
@@ -27,13 +31,18 @@ public abstract class Movement implements Cloneable{
 	
 	protected BoardTile lastTile = null;
 	
+	protected Fling fling;
+	
 	/**
 	 * The constructor of the Movement class
 	 * @param figure The figure this movement object is tied to.
 	 */
 	public Movement(Figure figure) {
 		this.figure = figure;
+		this.fling = new VanillaFling();
 	}
+	
+	
 	
 	
 	@Override
@@ -52,6 +61,13 @@ public abstract class Movement implements Cloneable{
 	 */
 	protected abstract void recalc();
 	
+	public void update() {
+		bufferList.clear();
+		recalc();
+	}
+	
+	
+	
 	/**
 	 * This method should not be changed unless fully needed to, it renders the transparent dots showing
 	 * where you are allowed to go.
@@ -62,13 +78,17 @@ public abstract class Movement implements Cloneable{
 	 * @param g This method is called in the Figure class to this parameter is filled in. Thus you shouldn't call this
 	 * method yourself.
 	 */
-	public void renderOptions(Graphics g) {
-		
-		bufferList.clear();
-		recalc();
+	@Override
+	public void render(Graphics g) {
 		
 		for(BoardTile tile : bufferList) {
+			
 			Camera cam = Camera.getInstance();
+			
+			if(tile.getTileFigure() != null) {
+				return;
+			}
+			
 			g.setColor(new Color(0.0f, 0.0f, 0.0f, 0.5f));
 			g.fillOval(tile.getX() - cam.getCameraX() + 47, tile.getY() - cam.getCameraY() + 47, 32, 32);
 			
@@ -86,7 +106,14 @@ public abstract class Movement implements Cloneable{
 	public void notified(BoardTile tile) {
 		
 		if(bufferList.contains(tile)) { // When the tile is inside the bufferList only then can the figure be moved onto the tile
+			
+			if(fling != null && tile.getTileFigure() != null) {
+				fling.flingOut(tile.getTileFigure());
+				update();
+			}
+			
 			moveFigure(tile);
+			
 		}
 		
 	}
@@ -100,6 +127,11 @@ public abstract class Movement implements Cloneable{
 
 	public void setFigure(Figure figure) {
 		this.figure = figure;
+		
+		if(fling != null) {
+			fling.setFigure(figure);
+		}
+		
 	}
 	
 	
