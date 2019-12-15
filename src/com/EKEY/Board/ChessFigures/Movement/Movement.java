@@ -15,28 +15,41 @@ import com.EKEY.Misc.Camera;
 import com.EKEY.Misc.DataShare;
 
 /**
- * A class for moving a figure, each figure in the game can have a any amount of Movement objects
+ * A class for moving a figure, each figure in the game can have any amount of Movement objects
  * tied to it.
  * 
- * Using composition and configuration, you can get any result you want.
+ * Using composition, you can get any result you want.
  * 
  * These movement objects are best configured using the constructor.
  * 
- * Preconfigured objects can be find in the Prototype class.
+ * Preconfigured objects can be found in the Prototype class.
+ * 
+ * The movement class can be tied to a Fling object, which allows it to throw out figures out of the playing field.
+ * 
+ * The class must be tied to a figure to work correctly. The figure is not initialized using the constructor and must be
+ * set manually using the setFigure method.
+ * 
+ * The setFigure method can also inialize the tied fling object if it exists.
  */
 public abstract class Movement implements Cloneable, Renderable{
 	
+	/**
+	 * The figure that is tied to the movement object. Is set using the setFigure method and not the constructor.
+	 */
 	protected Figure figure;
 	
 	protected ArrayList<BoardTile> bufferList = new ArrayList<BoardTile>();
 	
-	protected BoardTile lastTile = null;
+	protected BoardTile lastTile = null; // TODO: IS THIS NECESSARY?
 	
+	/**
+	 * The tied fling object.
+	 */
 	protected Fling fling;
 	
 	/**
 	 * The constructor of the Movement class
-	 * @param figure The figure this movement object is tied to.
+	 * @param Fling The tied fling object
 	 */
 	public Movement(Fling fling) {
 		this.fling = fling;
@@ -114,13 +127,19 @@ public abstract class Movement implements Cloneable, Renderable{
 		
 	}
 	
-	protected void moveFigure(BoardTile tile) {
+	protected void moveFigure(BoardTile tile) { // TODO: IS THIS METHOD NECESSARY?
 		
 		lastTile = tile;
 		DataShare.BOARD.moveFigureToTile(figure, lastTile);
 		
 	}
-
+	
+	/**
+	 * This method should be called once upon initialization. It sets up this class to work correctly and if
+	 * the class has a tied Fling object, that one gets set aswell.
+	 * 
+	 * @param figure
+	 */
 	public void setFigure(Figure figure) {
 		this.figure = figure;
 		
