@@ -2,6 +2,8 @@ package com.EKEY.Board.ChessFigures.Movement;
 
 import java.util.LinkedList;
 
+import com.EKEY.Board.ChessFigures.Movement.Flinging.VanillaFling;
+
 public class MovementPrototypes {
 	
 	private static LinkedList<Movement> whitePawnMovement = new LinkedList<Movement>();
@@ -15,8 +17,12 @@ public class MovementPrototypes {
 	public static void createMovementPrototypes() {
 		
 		whitePawnMovement.add(new StepMovement(null, 0, -1, 2));
+		whitePawnMovement.add(new ConditionalSingleMovement(new VanillaFling(), -1, -1));
+		whitePawnMovement.add(new ConditionalSingleMovement(new VanillaFling(), 1, -1));
 		
 		blackPawnMovement.add(new StepMovement(null, 0, 1, 2));
+		blackPawnMovement.add(new ConditionalSingleMovement(new VanillaFling(), -1, 1));
+		blackPawnMovement.add(new ConditionalSingleMovement(new VanillaFling(), 1, 1));
 		
 		rookMovement.add(new StepMovement(null, 1, 0, 8));
 		rookMovement.add(new StepMovement(null, -1, 0, 8));

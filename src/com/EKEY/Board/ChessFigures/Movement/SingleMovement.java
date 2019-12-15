@@ -9,8 +9,8 @@ import com.EKEY.Misc.DataShare;
  */
 public class SingleMovement extends Movement{
 	
-	private int x;
-	private int y;
+	protected int x;
+	protected int y;
 	
 	/**
 	 * 

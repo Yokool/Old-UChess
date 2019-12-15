@@ -81,16 +81,12 @@ public abstract class Movement implements Cloneable, Renderable{
 	@Override
 	public void render(Graphics g) {
 		
-		for(BoardTile tile : Collections.synchronizedList(bufferList) ) {
+		for(BoardTile tile : bufferList) {
 			
 			Camera cam = Camera.getInstance();
 			
-			if(tile.getTileFigure() != null) {
-				return;
-			}
-			
 			g.setColor(new Color(0.0f, 0.0f, 0.0f, 0.5f));
-			g.fillOval(tile.getX() - cam.getCameraX() + 47, tile.getY() - cam.getCameraY() + 47, 32, 32);
+			g.fillOval(tile.getX() - cam.getCameraX() + 47, tile.getY() - cam.getCameraY() + 47, 32, 32); // TODO: Make sure that the circles get drawn above the figures
 			
 		}
 		
