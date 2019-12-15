@@ -6,8 +6,11 @@ import java.awt.Image;
 import java.util.LinkedList;
 
 import com.EKEY.GameObject;
+import com.EKEY.Handler;
+import com.EKEY.Board.BoardTile;
 import com.EKEY.Board.ChessFigures.Movement.Movement;
 import com.EKEY.Misc.Camera;
+import com.EKEY.Misc.DataShare;
 
 public abstract class Figure extends GameObject{
 	
@@ -53,7 +56,7 @@ public abstract class Figure extends GameObject{
 			g.drawRect(x - camera.getCameraX(), y - camera.getCameraY(), width, height);
 			
 			for(Movement m : movement) {
-				m.renderOptions(g);
+				m.render(g);
 			}
 			
 		}
@@ -61,7 +64,9 @@ public abstract class Figure extends GameObject{
 	
 	@Override
 	public void onClick() {
-		//System.out.println("Clicked figure " + this);
+		for(Movement m : movement) {
+			m.update();
+		}
 	}
 	
 	public Image getFigureImage() {
@@ -125,7 +130,28 @@ public abstract class Figure extends GameObject{
 		
 	}
 	
-	
-	
+	@Override
+	public void deleteObject() {
+		
+		try {
+			this.finalize();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+		Handler handler = DataShare.HANDLER;
+		
+		handler.unregisterTick(this);
+		handler.unregisterFigureRender(this);
+		handler.unregisterClickable(this);
+		
+		BoardTile tile = DataShare.BOARD.getTileByLoc(this.tileY, this.tileX);
+		
+		if(tile != null) {
+			tile.setTileFigure(null);
+		}
+		
+		System.gc();
+	}
 
 }

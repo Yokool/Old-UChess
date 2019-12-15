@@ -1,7 +1,7 @@
 package com.EKEY.Board.ChessFigures.Movement;
 
 import com.EKEY.Board.BoardTile;
-import com.EKEY.Board.ChessFigures.Figure;
+import com.EKEY.Board.ChessFigures.Movement.Flinging.Fling;
 import com.EKEY.Misc.DataShare;
 
 /**
@@ -9,8 +9,8 @@ import com.EKEY.Misc.DataShare;
  */
 public class SingleMovement extends Movement{
 	
-	private int x;
-	private int y;
+	protected int x;
+	protected int y;
 	
 	/**
 	 * 
@@ -18,8 +18,8 @@ public class SingleMovement extends Movement{
 	 * @param x The x position of the tile we want to go onto from the figure x location.
 	 * @param y The y position of the tile we want to go onto from the figure y location.
 	 */
-	public SingleMovement(Figure figure, int x, int y) {
-		super(figure);
+	public SingleMovement(Fling fling, int x, int y) {
+		super(fling);
 		this.x = x;
 		this.y = y;
 	}
@@ -30,10 +30,6 @@ public class SingleMovement extends Movement{
 		BoardTile tile = DataShare.BOARD.getTileByLoc(figure.getTileY() + y, figure.getTileX() + x);
 		
 		if(tile == null) {
-			return;
-		}
-		
-		if(tile.getTileFigure() != null) {
 			return;
 		}
 		

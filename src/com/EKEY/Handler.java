@@ -59,8 +59,38 @@ public class Handler {
 		clickList.add(clickable);
 	}
 	
+	public void unregisterTick(Tickable tickable) {
+		tickList.remove(tickable);
+	}
+	
+	public void unregisterRender(Renderable renderable) {
+		renderList.remove(renderable);
+	}
+	
+	public void unregisterFigureRender(Renderable renderable) {
+		figureRenderList.remove(renderable);
+	}
+	
+	public void unregisterClickable(Clickable clickable) {
+		clickList.remove(clickable);
+	}
+	
 	public LinkedList<Clickable> getClickList(){
 		return clickList;
 	}
+
+	public LinkedList<Tickable> getTickList() {
+		return tickList;
+	}
+
+	public LinkedList<Renderable> getRenderList() {
+		return renderList;
+	}
+
+	public LinkedList<Renderable> getFigureRenderList() {
+		return figureRenderList;
+	}
+	
+	
 	
 }

@@ -1,11 +1,14 @@
 package com.EKEY;
 
 import java.awt.Rectangle;
+import java.util.Iterator;
+import java.util.ListIterator;
 
 import com.EKEY.Interfaces.Clickable;
 import com.EKEY.Interfaces.Renderable;
 import com.EKEY.Interfaces.Tickable;
 import com.EKEY.Misc.Camera;
+import com.EKEY.Misc.DataShare;
 
 public abstract class GameObject implements Renderable, Tickable, Cloneable, Clickable{
 	
@@ -36,6 +39,43 @@ public abstract class GameObject implements Renderable, Tickable, Cloneable, Cli
 	public Rectangle getBounds() {
 		Camera cam = Camera.getInstance();
 		return new Rectangle(x - cam.getCameraX(), y - cam.getCameraY(), width, height);
+	}
+	
+	public void deleteObject() {
+		
+		try {
+			this.finalize();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+		Handler handler = DataShare.HANDLER;
+		
+		ListIterator<Clickable> it = handler.getClickList().listIterator();
+		while(it.hasNext()) {
+			if(it.next().equals(this)) {
+				it.remove();
+			}
+		}
+		
+		ListIterator<Tickable> it_ti = handler.getTickList().listIterator();
+		
+		while(it_ti.hasNext()) {
+			if(it_ti.next().equals(this)) {
+				it_ti.remove();
+			}
+		}
+		
+		ListIterator<Renderable> it_r = handler.getRenderList().listIterator();
+		
+		while(it_r.hasNext()) {
+			if(it_r.next().equals(this)) {
+				it_r.remove();
+			}
+		}
+		
+		
+		System.gc();
 	}
 	
 	public int getX() {

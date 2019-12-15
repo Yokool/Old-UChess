@@ -1,7 +1,7 @@
 package com.EKEY.Board.ChessFigures.Movement;
 
 import com.EKEY.Board.BoardTile;
-import com.EKEY.Board.ChessFigures.Figure;
+import com.EKEY.Board.ChessFigures.Movement.Flinging.Fling;
 import com.EKEY.Misc.DataShare;
 
 /**
@@ -57,8 +57,8 @@ public class StepMovement extends Movement{
 	 * @param yStep The amount of tiles in the y axis to step.
 	 * @param repeat The number of times to repeat the loop.
 	 */
-	public StepMovement(Figure figure,int xStep, int yStep, int repeat) {
-		super(figure);
+	public StepMovement(Fling fling,int xStep, int yStep, int repeat) {
+		super(fling);
 		this.xStep = xStep;
 		this.repeat = repeat;
 		this.yStep = yStep;
@@ -89,7 +89,10 @@ public class StepMovement extends Movement{
 			if(t.getTileFigure() != null) {
 				
 				if(!canSkipFigures) {
+					
+					bufferList.add(t);
 					break;
+					
 				}else {
 					continue;
 				}
