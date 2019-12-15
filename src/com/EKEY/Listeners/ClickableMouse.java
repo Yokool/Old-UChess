@@ -22,13 +22,9 @@ public class ClickableMouse implements MouseListener{
 		
 		Point clickPoint = EVENT.getPoint();
 		
-		ListIterator<Clickable> it = ((AbstractList<Clickable>) DataShare.HANDLER.getClickList().clone()).listIterator();
-		
-		while(it.hasNext()) {
-			Clickable clickable = null;
+		for(int i = 0; i < DataShare.HANDLER.getClickList().size(); i++) {
 			
-			clickable = it.next();
-			
+			Clickable clickable = DataShare.HANDLER.getClickList().get(i);
 			
 			
 			if(clickable.getBounds().contains(clickPoint)) {
