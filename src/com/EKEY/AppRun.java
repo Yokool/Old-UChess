@@ -21,8 +21,9 @@ public class AppRun {
 		UChessPaths.loadFiles();
 		UChessImages.loadAllImages();
 		
-		FigurePrototypes.createPrototypes();
 		MovementPrototypes.createMovementPrototypes();
+		FigurePrototypes.createPrototypes();
+		
 		
 		Window w = new Window("UChess", new Dimension(1080, 720), game);
 		w.buildFrame();

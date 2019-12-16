@@ -13,6 +13,7 @@ import com.EKEY.Board.ChessFigures.Builder.KnightBuilder;
 import com.EKEY.Board.ChessFigures.Builder.PawnBuilder;
 import com.EKEY.Board.ChessFigures.Builder.QueenBuilder;
 import com.EKEY.Board.ChessFigures.Builder.RookBuilder;
+import com.EKEY.Board.ChessFigures.Movement.MovementPrototypes;
 import com.EKEY.Files.UChessImages;
 import com.EKEY.Misc.DataShare;
 
@@ -49,21 +50,39 @@ public abstract class FigurePrototypes {
 		
 		pawn_white = (Pawn) dirCopy.createStandartFigure(pawnBuilder, UChessImages.pawn_white);
 		pawn_black = (Pawn) dirCopy.createStandartFigure(pawnBuilder, UChessImages.pawn_black);
+
+		pawn_white.addMovementSet(MovementPrototypes.getWhitePawnMovementSet());
+		pawn_black.addMovementSet(MovementPrototypes.getBlackPawnMovement());
 		
 		rook_white = (Rook) dirCopy.createStandartFigure(rookBuilder, UChessImages.rook_white);
 		rook_black = (Rook) dirCopy.createStandartFigure(rookBuilder, UChessImages.rook_black);
 		
+		rook_white.addMovementSet(MovementPrototypes.getRookMovement());
+		rook_black.addMovementSet(MovementPrototypes.getRookMovement());
+		
 		bishop_white = (Bishop) dirCopy.createStandartFigure(bishopBuilder, UChessImages.bishop_white);
 		bishop_black = (Bishop) dirCopy.createStandartFigure(bishopBuilder, UChessImages.bishop_black);
+		
+		bishop_white.addMovementSet(MovementPrototypes.getBishopMovement());
+		bishop_black.addMovementSet(MovementPrototypes.getBishopMovement());
 		
 		knight_white = (Knight) dirCopy.createStandartFigure(knightBuilder, UChessImages.knight_white);
 		knight_black = (Knight) dirCopy.createStandartFigure(knightBuilder, UChessImages.knight_black);
 		
+		knight_white.addMovementSet(MovementPrototypes.getKnightMovement());
+		knight_black.addMovementSet(MovementPrototypes.getKnightMovement());
+		
 		queen_white = (Queen) dirCopy.createStandartFigure(queenBuilder, UChessImages.queen_white);
 		queen_black = (Queen) dirCopy.createStandartFigure(queenBuilder, UChessImages.queen_black);
 		
+		queen_white.addMovementSet(MovementPrototypes.getQueenMovement());
+		queen_black.addMovementSet(MovementPrototypes.getQueenMovement());
+		
 		king_white = (King) dirCopy.createStandartFigure(kingBuilder, UChessImages.king_white);
 		king_black = (King) dirCopy.createStandartFigure(kingBuilder, UChessImages.king_black);
+		
+		king_white.addMovementSet(MovementPrototypes.getKingMovement());
+		king_black.addMovementSet(MovementPrototypes.getKingMovement());
 		
 	}
 
