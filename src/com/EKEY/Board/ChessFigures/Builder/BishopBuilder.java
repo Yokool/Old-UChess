@@ -1,9 +1,11 @@
 package com.EKEY.Board.ChessFigures.Builder;
 
 import java.awt.Image;
+import java.util.LinkedList;
 
 import com.EKEY.Board.ChessFigures.Bishop;
 import com.EKEY.Board.ChessFigures.Figure;
+import com.EKEY.Board.ChessFigures.Movement.Movement;
 
 public class BishopBuilder extends FigureBuilder{
 	
@@ -45,6 +47,16 @@ public class BishopBuilder extends FigureBuilder{
 		Bishop bs = bishop;
 		this.reset();
 		return bs;
+	}
+
+	@Override
+	public void setMovement(Movement mov) {
+		bishop.addMovement(mov);
+	}
+
+	@Override
+	public void setMovementSet(LinkedList<Movement> mov) {
+		bishop.addMovementSet(mov);
 	}
 
 }

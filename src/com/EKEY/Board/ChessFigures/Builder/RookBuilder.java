@@ -1,9 +1,11 @@
 package com.EKEY.Board.ChessFigures.Builder;
 
 import java.awt.Image;
+import java.util.LinkedList;
 
 import com.EKEY.Board.ChessFigures.Figure;
 import com.EKEY.Board.ChessFigures.Rook;
+import com.EKEY.Board.ChessFigures.Movement.Movement;
 
 public class RookBuilder extends FigureBuilder{
 	
@@ -46,4 +48,13 @@ public class RookBuilder extends FigureBuilder{
 		return br;
 	}
 
+	@Override
+	public void setMovement(Movement mov) {
+		rook.addMovement(mov);
+	}
+
+	@Override
+	public void setMovementSet(LinkedList<Movement> mov) {
+		rook.addMovementSet(mov);
+	}
 }
