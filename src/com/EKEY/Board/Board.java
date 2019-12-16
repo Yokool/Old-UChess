@@ -126,8 +126,6 @@ public class Board {
 			BoardTile tile_z = this.getTileByLoc(1, width);
 			Pawn p = FigurePrototypes.getPawn_black();
 			
-			p.addMovementSet(MovementPrototypes.getBlackPawnMovement());
-			
 			setupInitialTile(p, tile_z);
 			
 		}
@@ -136,13 +134,11 @@ public class Board {
 		BoardTile tile_x = this.getTileByLoc(0, centerCord);
 		Queen q_b = FigurePrototypes.getQueen_black();
 		setupInitialTile(q_b, tile_x);
-		q_b.addMovementSet(MovementPrototypes.getQueenMovement());
 		
 		// black king
 		BoardTile tile_y = this.getTileByLoc(0, centerCord + 1);
 		King k_b = FigurePrototypes.getKing_black();
 		this.setupInitialTile(k_b, tile_y);
-		k_b.addMovementSet(MovementPrototypes.getKingMovement());
 		
 		int SecondDivider = (int)(DividerWidth / 3.0);
 		
@@ -155,13 +151,11 @@ public class Board {
 				BoardTile tile = this.getTileByLoc(0, width);
 				Rook r_b = FigurePrototypes.getRook_black();
 				setupInitialTile(r_b, tile);
-				r_b.addMovementSet(MovementPrototypes.getRookMovement());
 				
 				
 				BoardTile _tile = this.getTileByLoc(0, this.boardWidth - width - 1);
 				Rook r2_b = FigurePrototypes.getRook_black();
 				setupInitialTile(r2_b, _tile);
-				r2_b.addMovementSet(MovementPrototypes.getRookMovement());
 				
 				
 			}else if (width < SecondDivider*2) {
@@ -169,24 +163,20 @@ public class Board {
 				BoardTile tile = this.getTileByLoc(0, width);
 				Knight kn_b = FigurePrototypes.getKnight_black();
 				setupInitialTile(kn_b, tile);
-				kn_b.addMovementSet(MovementPrototypes.getKnightMovement());
 				
 				BoardTile _tile = this.getTileByLoc(0, this.boardWidth - width - 1);
 				Knight kn2_b = FigurePrototypes.getKnight_black();
 				setupInitialTile(kn2_b, _tile);
-				kn2_b.addMovementSet(MovementPrototypes.getKnightMovement());
 				
 			}else {
 				// bishops
 				BoardTile tile = this.getTileByLoc(0, width);
 				Bishop b_b = FigurePrototypes.getBishop_black();
 				this.setupInitialTile(b_b, tile);
-				b_b.addMovementSet(MovementPrototypes.getBishopMovement());
 				
 				BoardTile _tile = this.getTileByLoc(0, this.boardWidth - width - 1);
 				Bishop b2_b = FigurePrototypes.getBishop_black();
 				this.setupInitialTile(b2_b, _tile);
-				b2_b.addMovementSet(MovementPrototypes.getBishopMovement());
 				
 			}
 			
@@ -200,8 +190,6 @@ public class Board {
 			
 			Pawn p = FigurePrototypes.getPawn_white();
 			
-			p.addMovementSet(MovementPrototypes.getWhitePawnMovementSet());
-			
 			setupInitialTile(p, tile_a);
 		}
 		
@@ -209,13 +197,11 @@ public class Board {
 		BoardTile tile_b = this.getTileByLoc(boardHeight - 1, centerCord);
 		Queen q_w = FigurePrototypes.getQueen_white();
 		setupInitialTile(q_w, tile_b);
-		q_w.addMovementSet(MovementPrototypes.getQueenMovement());
 		
 		// white king
 		BoardTile tile_c = this.getTileByLoc(boardHeight - 1, centerCord + 1);
 		King k_w = FigurePrototypes.getKing_white();
 		setupInitialTile(k_w, tile_c);
-		k_w.addMovementSet(MovementPrototypes.getKingMovement());
 		
 		// other black figures - left side
 		for (int width = 0; width < DividerWidth; width++) {
@@ -225,13 +211,11 @@ public class Board {
 				BoardTile tile_d = this.getTileByLoc(this.boardHeight - 1, width);
 				Rook r_w = FigurePrototypes.getRook_white();
 				setupInitialTile(r_w, tile_d);
-				r_w.addMovementSet(MovementPrototypes.getRookMovement());
 				
 				
 				BoardTile tile_e = this.getTileByLoc(this.boardHeight - 1, this.boardWidth - width - 1);
 				Rook r2_w = FigurePrototypes.getRook_white();
 				setupInitialTile(r2_w, tile_e);
-				r2_w.addMovementSet(MovementPrototypes.getRookMovement());
 				
 
 			} else if (width < SecondDivider * 2) {
@@ -239,12 +223,10 @@ public class Board {
 				BoardTile tile_f = this.getTileByLoc(this.boardHeight - 1, width);
 				Knight kn_w = FigurePrototypes.getKnight_white();
 				setupInitialTile(kn_w, tile_f);
-				kn_w.addMovementSet(MovementPrototypes.getKnightMovement());
 				
 				BoardTile tile_g = this.getTileByLoc(this.boardHeight - 1, this.boardWidth - width - 1);
 				Knight kn2_w = FigurePrototypes.getKnight_white();
 				setupInitialTile(kn2_w, tile_g);
-				kn2_w.addMovementSet(MovementPrototypes.getKnightMovement());
 				
 				
 			} else {
@@ -252,12 +234,10 @@ public class Board {
 				BoardTile tile_h = this.getTileByLoc(this.boardHeight - 1, width);
 				Bishop b_w = FigurePrototypes.getBishop_white();
 				setupInitialTile(b_w, tile_h);
-				b_w.addMovementSet(MovementPrototypes.getBishopMovement());
 				
 				BoardTile tile_i = this.getTileByLoc(this.boardHeight - 1, this.boardWidth - width - 1);
 				Bishop b2_w = FigurePrototypes.getBishop_white();
 				setupInitialTile(b2_w, tile_i);
-				b2_w.addMovementSet(MovementPrototypes.getBishopMovement());
 				
 			}
 					

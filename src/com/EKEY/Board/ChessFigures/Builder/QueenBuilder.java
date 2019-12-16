@@ -1,9 +1,10 @@
 package com.EKEY.Board.ChessFigures.Builder;
 
 import java.awt.Image;
+import java.util.LinkedList;
 
-import com.EKEY.Board.ChessFigures.Figure;
 import com.EKEY.Board.ChessFigures.Queen;
+import com.EKEY.Board.ChessFigures.Movement.Movement;
 
 public class QueenBuilder extends FigureBuilder{
 	
@@ -44,6 +45,16 @@ public class QueenBuilder extends FigureBuilder{
 		Queen bq = queen;
 		this.reset();
 		return bq;
+	}
+	
+	@Override
+	public void setMovement(Movement mov) {
+		queen.addMovement(mov);
+	}
+
+	@Override
+	public void setMovementSet(LinkedList<Movement> mov) {
+		queen.addMovementSet(mov);
 	}
 	
 }

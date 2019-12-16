@@ -30,7 +30,7 @@ public abstract class Figure extends GameObject{
 		this.figureImage = image;
 		
 		for(Movement m : movement) {
-			this.movement.add(m);
+			this.addMovement(m);
 		}
 		
 	}
@@ -42,6 +42,11 @@ public abstract class Figure extends GameObject{
 	
 	public Figure(Figure clone) {
 		super(clone);
+		
+		for(Movement m : clone.getMovement()) {
+			this.addMovement((Movement) m.clone());
+		}
+		
 		this.figureImage = clone.getFigureImage();
 	}
 	
