@@ -3,6 +3,7 @@ package com.EKEY.Board.ChessFigures.Builder;
 import java.awt.Image;
 import java.util.LinkedList;
 
+import com.EKEY.Board.ChessFigures.ColorEnum;
 import com.EKEY.Board.ChessFigures.Figure;
 import com.EKEY.Board.ChessFigures.Rook;
 import com.EKEY.Board.ChessFigures.Movement.Movement;
@@ -56,5 +57,10 @@ public class RookBuilder extends FigureBuilder{
 	@Override
 	public void setMovementSet(LinkedList<Movement> mov) {
 		rook.addMovementSet(mov);
+	}
+	
+	@Override
+	public void setColor(ColorEnum color) {
+		rook.setColorEnum(color);
 	}
 }

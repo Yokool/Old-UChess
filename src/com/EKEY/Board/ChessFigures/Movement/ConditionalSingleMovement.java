@@ -15,7 +15,7 @@ public class ConditionalSingleMovement extends SingleMovement{
 	}
 	
 	@Override
-	protected void recalc() {
+	public void recalc() {
 		
 		BoardTile tile = DataShare.BOARD.getTileByLoc(figure.getTileY() + y, figure.getTileX() + x);
 		

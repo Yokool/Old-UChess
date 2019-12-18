@@ -22,12 +22,14 @@ public abstract class Figure extends GameObject{
 	protected int tileY = -1;
 	
 	protected LinkedList<Movement> movement = new LinkedList<Movement>();
+	protected ColorEnum colorEnum;
 	
 	protected boolean selected = false;
 	
-	public Figure(int x, int y, int width, int height, Image image, Movement... movement) {
+	public Figure(int x, int y, int width, int height, Image image, ColorEnum color,Movement... movement) {
 		super(x, y, width, height);
 		this.figureImage = image;
+		this.colorEnum = color;
 		
 		for(Movement m : movement) {
 			this.addMovement(m);
@@ -159,4 +161,12 @@ public abstract class Figure extends GameObject{
 		System.gc();
 	}
 
+	public ColorEnum getColorEnum() {
+		return colorEnum;
+	}
+
+	public void setColorEnum(ColorEnum colorEnum) {
+		this.colorEnum = colorEnum;
+	}
+	
 }

@@ -72,11 +72,31 @@ public abstract class Movement implements Cloneable, Renderable{
 	 * This method must be implemented in each subclass of Movement. This is the most important method of the movement
 	 * system as it determines which tiles will be rendered with the dot on them and which ones are walkable.
 	 */
-	protected abstract void recalc();
+	public abstract void recalc();
 	
 	public void update() {
 		bufferList.clear();
 		recalc();
+		
+		for(int i = 0; i < bufferList.size(); i++) {
+			
+			BoardTile tile = bufferList.get(i);
+			
+			if(tile.getTileFigure() != null) {
+				
+				if(fling == null) {
+					bufferList.remove(i);
+					continue;
+				}
+				
+				if(tile.getTileFigure().getColorEnum() == figure.getColorEnum()) {
+					bufferList.remove(i);
+					continue;
+				}
+				
+			}
+			
+		}
 	}
 	
 	
@@ -98,11 +118,11 @@ public abstract class Movement implements Cloneable, Renderable{
 			
 			Camera cam = Camera.getInstance();
 			
+			
 			BoardTile tile = bufferList.get(i);
 			
-			if(fling == null && tile.getTileFigure() != null) {
-				continue;
-			}
+			
+			
 			
 			g.setColor(new Color(0.0f, 0.0f, 0.0f, 0.5f));
 			g.fillOval(tile.getX() - cam.getCameraX() + 47, tile.getY() - cam.getCameraY() + 47, 32, 32); // TODO: Make sure that the circles get drawn above the figures
@@ -153,6 +173,10 @@ public abstract class Movement implements Cloneable, Renderable{
 			fling.setFigure(figure);
 		}
 		
+	}
+	
+	public ArrayList<BoardTile> getBufferList() {
+		return bufferList;
 	}
 	
 	

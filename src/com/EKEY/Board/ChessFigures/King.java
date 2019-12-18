@@ -10,8 +10,8 @@ public class King extends Figure{
 		
 	}
 	
-	public King(int x, int y, int width, int height, Image image, Movement movement) {
-		super(x, y, width, height, image, movement);
+	public King(int x, int y, int width, int height, Image image, ColorEnum color, Movement movement) {
+		super(x, y, width, height, image, color, movement);
 	}
 	
 	public King(King clone) {

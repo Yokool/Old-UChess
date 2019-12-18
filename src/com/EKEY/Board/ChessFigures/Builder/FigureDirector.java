@@ -3,6 +3,7 @@ package com.EKEY.Board.ChessFigures.Builder;
 import java.awt.Image;
 
 import com.EKEY.Board.BoardTile;
+import com.EKEY.Board.ChessFigures.ColorEnum;
 import com.EKEY.Board.ChessFigures.Figure;
 
 public class FigureDirector {
@@ -37,7 +38,7 @@ public class FigureDirector {
 		
 	}
 
-	public Figure createStandartFigure(FigureBuilder builder, Image figureImage) {
+	public Figure createStandartFigure(FigureBuilder builder, Image figureImage, ColorEnum colorEnum) {
 		
 		builder.setX(0);
 		builder.setY(0);
@@ -46,6 +47,8 @@ public class FigureDirector {
 		builder.setHeight(128);
 		
 		builder.setImage(figureImage);
+		
+		builder.setColor(colorEnum);
 		
 		return builder.getResult();
 	}

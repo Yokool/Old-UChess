@@ -3,6 +3,7 @@ package com.EKEY.Board.ChessFigures.Builder;
 import java.awt.Image;
 import java.util.LinkedList;
 
+import com.EKEY.Board.ChessFigures.ColorEnum;
 import com.EKEY.Board.ChessFigures.Pawn;
 import com.EKEY.Board.ChessFigures.Movement.Movement;
 
@@ -57,5 +58,10 @@ public class PawnBuilder extends FigureBuilder{
 	@Override
 	public void setMovementSet(LinkedList<Movement> mov) {
 		pawn.addMovementSet(mov);
+	}
+	
+	@Override
+	public void setColor(ColorEnum color) {
+		pawn.setColorEnum(color);
 	}
 }

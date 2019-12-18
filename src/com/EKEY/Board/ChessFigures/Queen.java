@@ -10,8 +10,8 @@ public class Queen extends Figure{
 		super();
 	}
 	
-	public Queen(int x, int y, int width, int height, Image image, Movement movement) {
-		super(x, y, width, height, image, movement);
+	public Queen(int x, int y, int width, int height, Image image, ColorEnum color, Movement movement) {
+		super(x, y, width, height, image, color, movement);
 	}
 	
 	public Queen(Queen clone) {

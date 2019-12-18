@@ -10,8 +10,8 @@ public class Knight extends Figure{
 		super();
 	}
 	
-	public Knight(int x, int y, int width, int height, Image image, Movement movement) {
-		super(x, y, width, height, image, movement);
+	public Knight(int x, int y, int width, int height, Image image, ColorEnum color, Movement movement) {
+		super(x, y, width, height, image, color, movement);
 	}
 	
 	public Knight(Knight clone) {

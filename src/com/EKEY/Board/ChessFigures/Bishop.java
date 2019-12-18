@@ -10,8 +10,8 @@ public class Bishop extends Figure{
 		super();
 	}
 	
-	public Bishop(int x, int y, int width, int height, Image image, Movement movement) {
-		super(x, y, width, height, image, movement);
+	public Bishop(int x, int y, int width, int height, Image image, ColorEnum color,Movement movement) {
+		super(x, y, width, height, image, color, movement);
 	}
 	
 	public Bishop(Bishop clone) {

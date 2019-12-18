@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.util.LinkedList;
 
 import com.EKEY.Board.ChessFigures.Bishop;
+import com.EKEY.Board.ChessFigures.ColorEnum;
 import com.EKEY.Board.ChessFigures.Figure;
 import com.EKEY.Board.ChessFigures.Movement.Movement;
 
@@ -57,6 +58,11 @@ public class BishopBuilder extends FigureBuilder{
 	@Override
 	public void setMovementSet(LinkedList<Movement> mov) {
 		bishop.addMovementSet(mov);
+	}
+
+	@Override
+	public void setColor(ColorEnum color) {
+		bishop.setColorEnum(color);
 	}
 
 }
