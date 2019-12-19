@@ -3,6 +3,7 @@ package com.EKEY.Board.ChessFigures.Movement;
 import java.util.LinkedList;
 
 import com.EKEY.Board.ChessFigures.Movement.Flinging.VanillaFling;
+import com.EKEY.Board.ChessFigures.Movement.Wrappers.CheckWrapper;
 
 public class MovementPrototypes {
 	
@@ -55,7 +56,7 @@ public class MovementPrototypes {
 		
 		knightMovement.add(new SingleMovement(new VanillaFling(), -2, -1));
 		knightMovement.add(new SingleMovement(new VanillaFling(), -2, 1));
-		
+		/*
 		kingMovement.add(new SingleMovement(new VanillaFling(), 1, -1));
 		kingMovement.add(new SingleMovement(new VanillaFling(), 0, -1));
 		kingMovement.add(new SingleMovement(new VanillaFling(), -1, -1));
@@ -66,6 +67,17 @@ public class MovementPrototypes {
 		
 		kingMovement.add(new SingleMovement(new VanillaFling(), -1, 0));
 		kingMovement.add(new SingleMovement(new VanillaFling(), 1, 0));
+		*/
+		kingMovement.add(new CheckWrapper(new SingleMovement(new VanillaFling(), 1, -1)));
+		kingMovement.add(new CheckWrapper(new SingleMovement(new VanillaFling(), 0, -1)));
+		kingMovement.add(new CheckWrapper(new SingleMovement(new VanillaFling(), -1, -1)));
+		
+		kingMovement.add(new CheckWrapper(new SingleMovement(new VanillaFling(), 1, 1)));
+		kingMovement.add(new CheckWrapper(new SingleMovement(new VanillaFling(), 0, 1)));
+		kingMovement.add(new CheckWrapper(new SingleMovement(new VanillaFling(), -1, 1)));
+		
+		kingMovement.add(new CheckWrapper(new SingleMovement(new VanillaFling(), -1, 0)));
+		kingMovement.add(new CheckWrapper(new SingleMovement(new VanillaFling(), 1, 0)));
 	}
 
 	public static LinkedList<Movement> getWhitePawnMovementSet() {
