@@ -1,6 +1,7 @@
 package com.EKEY.Board;
 
 import java.awt.Color;
+import java.util.function.Consumer;
 
 import com.EKEY.Board.Builder.NormalTileBuilder;
 import com.EKEY.Board.Builder.TileDirector;
@@ -17,9 +18,6 @@ import com.EKEY.Board.ChessFigures.Builder.KnightBuilder;
 import com.EKEY.Board.ChessFigures.Builder.PawnBuilder;
 import com.EKEY.Board.ChessFigures.Builder.QueenBuilder;
 import com.EKEY.Board.ChessFigures.Builder.RookBuilder;
-import com.EKEY.Board.ChessFigures.Movement.Movement;
-import com.EKEY.Board.ChessFigures.Movement.MovementPrototypes;
-import com.EKEY.Board.ChessFigures.Movement.StepMovement;
 import com.EKEY.Board.ChessFigures.Prototypes.FigurePrototypes;
 import com.EKEY.Misc.DataShare;
 
@@ -327,5 +325,175 @@ public class Board {
 	public void setTiles(BoardTile[][] tiles) {
 		this.tiles = tiles;
 	}
+	
+	public void castRay(BoardTile start, Directions dir, Consumer<BoardTile> con) { // TODO: STEP REFACTOR
+		
+		switch(dir) {
+		
+		case EAST:
+			
+			for(int x = start.getTileX(); x >= 0; x--) {
+				BoardTile rayTile = this.getTileByLoc(start.getTileY(), x);
+				con.accept(rayTile);
+			}
+			
+			break;
+			
+		case NORTH:
+			
+			for(int y = start.getTileY(); y >= 0; y--) {
+				BoardTile rayTile = this.getTileByLoc(y, start.getTileX());
+				con.accept(rayTile);
+			}
+			
+			break;
+			
+		case SOUTH:
+			
+			for(int y = start.getTileY(); y < this.boardWidth; y++) {
+				BoardTile rayTile = this.getTileByLoc(y, start.getTileX());
+				con.accept(rayTile);
+			}
+			
+			break;
+			
+		case WEST:
+			
+			for(int x = start.getTileX(); x < this.boardWidth; x--) {
+				BoardTile rayTile = this.getTileByLoc(start.getTileY(), x);
+				con.accept(rayTile);
+			}
+			
+			break;
+		
+		}
+		
+	}
+	
+	public BoardTile step(BoardTile start, Directions dir, int amount) {
+		
+		switch(dir) {
+		
+		case EAST:
+			return this.getTileByLoc(start.getTileY(), start.getTileX() + amount);
+			
+		case NORTH:		
+			return this.getTileByLoc(start.getTileY() - amount, start.getTileX());	
+			
+		case SOUTH:	
+			return this.getTileByLoc(start.getTileY() + amount, start.getTileX());
+			
+		case WEST:
+			return this.getTileByLoc(start.getTileY(), start.getTileX() - amount);
+			
+		}
+		
+		return null;
+		
+	}
+	
+	public void castSqure(BoardTile start, int radius, Consumer<BoardTile> con) {
+		
+		for(int y = 0; y <= radius; y++) { // going for each row from start to the radius
+			
+			BoardTile northT = step(start, Directions.NORTH, y);
+			con.accept(northT);
+			
+			int dist = y - 1;
+			
+			// walking from north to right
+			for(int x = 1; x <= dist; x++) {
+				
+				BoardTile t = step(northT, Directions.EAST, x);
+				con.accept(t);
+				
+			}
+			
+			// upper right
+			BoardTile upR = step(northT, Directions.EAST, y);
+			
+			con.accept(upR);
+			
+			// walking from the upper right to the middle right
+			for(int y2 = 1; y2 <= dist; y2++) {
+				
+				BoardTile t = step(upR, Directions.SOUTH, y2);
+				con.accept(t);
+			}
+			
+			// middle right
+			BoardTile middleR = step(upR, Directions.SOUTH, y);
+			con.accept(middleR);
+			
+			// walking from the middleR to bottom right
+			for(int y2 = 1; y2 <= dist; y2++) {
+				
+				BoardTile t = step(middleR, Directions.SOUTH, y2);
+				con.accept(t);
+				
+			}
+			
+			// bottom right
+			BoardTile bottomR = step(middleR, Directions.SOUTH, y);
+			con.accept(bottomR);
+			
+			for(int x2 = 1; x2 <= dist; x2++) {
+				
+				BoardTile t = step(bottomR, Directions.WEST, x2);
+				con.accept(t);
+				
+			}
+			
+			BoardTile bottomM = step(bottomR, Directions.WEST, y);
+			con.accept(bottomM);
+			for(int x2 = 1; x2 <= dist; x2++) {
+				
+				BoardTile t = step(bottomM, Directions.WEST, x2);
+				con.accept(t);
+				
+			}
+			
+			BoardTile bottomL = step(bottomM, Directions.WEST, y);
+			con.accept(bottomL);
+			
+			for(int y2 = 1; y2 <= dist; y2++) {
+				
+				BoardTile t = step(bottomL, Directions.NORTH, y2);
+				con.accept(t);
+				
+			}
+			
+			BoardTile middleL = step(bottomL, Directions.NORTH, y);
+			con.accept(middleL);
+			
+			for(int y2 = 1; y2 <= dist; y2++) {
+				
+				BoardTile t = step(middleL, Directions.NORTH, y2);
+				con.accept(t);
+				
+			}
+			
+			BoardTile upperL = step(middleL, Directions.NORTH, y);
+			con.accept(upperL);
+			
+			for(int x2 = 1; x2 <= dist; x2++) {
+				
+				BoardTile t = step(upperL, Directions.EAST, x2);
+				con.accept(t);
+				
+			}
+			
+		}
+		
+	}
+	
+}
 
+enum Directions{
+	
+	NORTH,
+	EAST,
+	WEST,
+	SOUTH
+	
 }

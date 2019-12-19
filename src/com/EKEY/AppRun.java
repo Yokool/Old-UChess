@@ -29,7 +29,7 @@ public class AppRun {
 		w.buildFrame();
 		
 		Board board = new Board();
-		board.createBoard(8, 8);
+		board.createBoard(16, 16);
 		board.createFigures();
 		
 		game.startGame();

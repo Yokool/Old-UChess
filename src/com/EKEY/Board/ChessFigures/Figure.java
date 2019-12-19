@@ -26,7 +26,7 @@ public abstract class Figure extends GameObject{
 	
 	protected boolean selected = false;
 	
-	public Figure(int x, int y, int width, int height, Image image, ColorEnum color,Movement... movement) {
+	public Figure(int x, int y, int width, int height, Image image, ColorEnum color, Movement... movement) {
 		super(x, y, width, height);
 		this.figureImage = image;
 		this.colorEnum = color;
@@ -50,6 +50,7 @@ public abstract class Figure extends GameObject{
 		}
 		
 		this.figureImage = clone.getFigureImage();
+		this.colorEnum = clone.colorEnum;
 	}
 	
 	@Override
