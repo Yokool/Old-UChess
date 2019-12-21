@@ -326,46 +326,11 @@ public class Board {
 		this.tiles = tiles;
 	}
 	
-	public void castRay(BoardTile start, Directions dir, Consumer<BoardTile> con) { // TODO: STEP REFACTOR
+	public void castRay(BoardTile start, Directions dir, int limit, Consumer<BoardTile> con) { // TODO: STEP REFACTOR
 		
-		switch(dir) {
-		
-		case EAST:
-			
-			for(int x = start.getTileX(); x >= 0; x--) {
-				BoardTile rayTile = this.getTileByLoc(start.getTileY(), x);
-				con.accept(rayTile);
-			}
-			
-			break;
-			
-		case NORTH:
-			
-			for(int y = start.getTileY(); y >= 0; y--) {
-				BoardTile rayTile = this.getTileByLoc(y, start.getTileX());
-				con.accept(rayTile);
-			}
-			
-			break;
-			
-		case SOUTH:
-			
-			for(int y = start.getTileY(); y < this.boardWidth; y++) {
-				BoardTile rayTile = this.getTileByLoc(y, start.getTileX());
-				con.accept(rayTile);
-			}
-			
-			break;
-			
-		case WEST:
-			
-			for(int x = start.getTileX(); x < this.boardWidth; x--) {
-				BoardTile rayTile = this.getTileByLoc(start.getTileY(), x);
-				con.accept(rayTile);
-			}
-			
-			break;
-		
+		for(int loc = 0; loc <= limit; loc++) {
+			BoardTile t = step(start , dir, loc);
+			con.accept(t);
 		}
 		
 	}
@@ -378,16 +343,16 @@ public class Board {
 		
 		case EAST:
 			returnB = this.getTileByLoc(start.getTileY(), start.getTileX() + amount);
-			
+			break;
 		case NORTH:		
 			returnB = this.getTileByLoc(start.getTileY() - amount, start.getTileX());	
-			
+			break;
 		case SOUTH:	
 			returnB = this.getTileByLoc(start.getTileY() + amount, start.getTileX());
-			
+			break;
 		case WEST:
 			returnB = this.getTileByLoc(start.getTileY(), start.getTileX() - amount);
-			
+			break;
 		}
 		
 		return returnB;
@@ -395,155 +360,69 @@ public class Board {
 	}
 	
 	public void castSqure(BoardTile start, int radius, Consumer<BoardTile> con) {
+
+		// casting rays in all four directions
+		castRay(start, Directions.SOUTH, radius, tile -> {
+			con.accept(tile);
+		});
 		
-		for(int y = 0; y <= radius; y++) { // going for each row from start to the radius
+		// right corner cube
+		for(int x = start.getTileX() + 1; x <= start.getTileX() + radius; x++) {
 			
-			BoardTile northT = step(start, Directions.NORTH, y);
-			
-			if(northT == null) {
-				continue;
-			}
-			
-			con.accept(northT);
-			
-			int dist = y - 1;
-			
-			// walking from north to right
-			for(int x = 1; x <= dist; x++) {
+			for(int y = start.getTileY() - 1; y >= start.getTileY() - radius; y--) {
 				
-				BoardTile t = step(northT, Directions.EAST, x);
-				
-				if(t == null) {
-					continue;
-				}
-				
-				con.accept(t);
-				
-			}
-			
-			// upper right
-			BoardTile upR = step(northT, Directions.EAST, y);
-			
-			if(upR == null) {
-				continue;
-			}
-			
-			con.accept(upR);
-			
-			// walking from the upper right to the middle right
-			for(int y2 = 1; y2 <= dist; y2++) {
-				
-				BoardTile t = step(upR, Directions.SOUTH, y2);
-				if(t == null) {
-					continue;
-				}
-				
-				con.accept(t);
-			}
-			
-			// middle right
-			BoardTile middleR = step(upR, Directions.SOUTH, y);
-			
-			if(middleR == null) {
-				continue;
-			}
-			
-			con.accept(middleR);
-			
-			// walking from the middleR to bottom right
-			for(int y2 = 1; y2 <= dist; y2++) {
-				
-				BoardTile t = step(middleR, Directions.SOUTH, y2);
-				if(t == null) {
-					continue;
-				}
-				con.accept(t);
-				
-			}
-			
-			// bottom right
-			BoardTile bottomR = step(middleR, Directions.SOUTH, y);
-			
-			if(bottomR == null) {
-				continue;
-			}
-			
-			con.accept(bottomR);
-			
-			for(int x2 = 1; x2 <= dist; x2++) {
-				
-				BoardTile t = step(bottomR, Directions.WEST, x2);
-				if(t == null) {
-					continue;
-				}
-				con.accept(t);
-				
-			}
-			
-			BoardTile bottomM = step(bottomR, Directions.WEST, y);
-			if(bottomM == null) {
-				continue;
-			}
-			con.accept(bottomM);
-			for(int x2 = 1; x2 <= dist; x2++) {
-				
-				BoardTile t = step(bottomM, Directions.WEST, x2);
-				if(t == null) {
-					continue;
-				}
-				con.accept(t);
-				
-			}
-			
-			BoardTile bottomL = step(bottomM, Directions.WEST, y);
-			if(bottomL == null) {
-				continue;
-			}
-			con.accept(bottomL);
-			
-			for(int y2 = 1; y2 <= dist; y2++) {
-				
-				BoardTile t = step(bottomL, Directions.NORTH, y2);
-				if(t == null) {
-					continue;
-				}
-				con.accept(t);
-				
-			}
-			
-			BoardTile middleL = step(bottomL, Directions.NORTH, y);
-			if(middleL == null) {
-				continue;
-			}
-			con.accept(middleL);
-			
-			for(int y2 = 1; y2 <= dist; y2++) {
-				
-				BoardTile t = step(middleL, Directions.NORTH, y2);
-				if(t == null) {
-					continue;
-				}
-				con.accept(t);
-				
-			}
-			
-			BoardTile upperL = step(middleL, Directions.NORTH, y);
-			if(upperL == null) {
-				continue;
-			}
-			con.accept(upperL);
-			
-			for(int x2 = 1; x2 <= dist; x2++) {
-				
-				BoardTile t = step(upperL, Directions.EAST, x2);
-				if(t == null) {
-					continue;
-				}
-				con.accept(t);
+				BoardTile tile = this.getTileByLoc(y, x);
+				con.accept(tile);
 				
 			}
 			
 		}
+		
+		castRay(start, Directions.WEST, radius, tile -> {
+			con.accept(tile);
+		});
+		
+		for(int x = start.getTileX() + 1; x <= start.getTileX() + radius; x++) {
+			
+			for(int y = start.getTileY() + 1; y <= start.getTileY() + radius; y++) {
+				
+				BoardTile tile = this.getTileByLoc(y, x);
+				con.accept(tile);
+				
+			}
+			
+		}
+		
+		castRay(start, Directions.SOUTH, radius, tile -> {
+			con.accept(tile);
+		});
+		
+		for(int x = start.getTileX() - 1; x >= start.getTileX() - radius; x--) {
+			
+			for(int y = start.getTileY() + 1; y <= start.getTileY() + radius; y++) {
+				
+				BoardTile tile = this.getTileByLoc(y, x);
+				con.accept(tile);
+				
+			}
+			
+		}
+		
+		castRay(start, Directions.EAST, radius, tile -> {
+			con.accept(tile);
+		});
+		
+		for(int x = start.getTileX() - 1; x >= start.getTileX() - radius; x--) {
+			
+			for(int y = start.getTileY() - 1; y >= start.getTileY() - radius; y--) {
+				
+				BoardTile tile = this.getTileByLoc(y, x);
+				con.accept(tile);
+				
+			}
+			
+		}
+		
 		
 	}
 	
