@@ -19,7 +19,13 @@ public class CheckWrapper extends BaseMovementWrapper{
 		
 		super.update();
 		
+		System.out.println("CHECK WRAPPER DEBUG:");
+		System.out.println(figure);
+		System.out.println(figure.getTileX());
+		System.out.println(figure.getTileY());
+		
 		BoardTile figureTile = DataShare.BOARD.getTileByLoc(figure.getTileY(), figure.getTileX());
+		
 		
 		LinkedList<Figure> figureList = new LinkedList<Figure>();
 		
@@ -94,7 +100,7 @@ public class CheckWrapper extends BaseMovementWrapper{
 	
 	@Override
 	public Object clone() {
-		return this.movement.clone(); // FIXME: RETURNING BASEMOVEMENTWRAPPER
+		return new CheckWrapper((Movement) this.movement.clone()); // FIXME: RETURNING BASEMOVEMENTWRAPPER
 	}
 	
 }

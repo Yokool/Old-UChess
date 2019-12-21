@@ -3,6 +3,7 @@ package com.EKEY.Board.ChessFigures.Movement.Wrappers;
 import java.awt.Graphics;
 
 import com.EKEY.Board.BoardTile;
+import com.EKEY.Board.ChessFigures.Figure;
 import com.EKEY.Board.ChessFigures.Movement.Movement;
 
 public class BaseMovementWrapper extends Movement{
@@ -12,6 +13,7 @@ public class BaseMovementWrapper extends Movement{
 	public BaseMovementWrapper(Movement movement) {
 		super(null);
 		this.movement = movement;
+		this.figure = movement.getFigure();
 	}
 	/*
 	@Override
@@ -52,7 +54,12 @@ public class BaseMovementWrapper extends Movement{
 	}
 	
 	@Override
+	public void setFigure(Figure f) {
+		this.movement.setFigure(f);
+	}
+	
+	@Override
 	public Object clone() {
-		return this.movement.clone(); // FIXME: RETURNING BASEMOVEMENTWRAPPER
+		return new BaseMovementWrapper((Movement) this.movement.clone()); // FIXME: RETURNING BASEMOVEMENTWRAPPER
 	}
 }

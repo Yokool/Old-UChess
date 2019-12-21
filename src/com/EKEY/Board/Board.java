@@ -372,23 +372,25 @@ public class Board {
 	
 	public BoardTile step(BoardTile start, Directions dir, int amount) {
 		
+		BoardTile returnB = null;
+		
 		switch(dir) {
 		
 		case EAST:
-			return this.getTileByLoc(start.getTileY(), start.getTileX() + amount);
+			returnB = this.getTileByLoc(start.getTileY(), start.getTileX() + amount);
 			
 		case NORTH:		
-			return this.getTileByLoc(start.getTileY() - amount, start.getTileX());	
+			returnB = this.getTileByLoc(start.getTileY() - amount, start.getTileX());	
 			
 		case SOUTH:	
-			return this.getTileByLoc(start.getTileY() + amount, start.getTileX());
+			returnB = this.getTileByLoc(start.getTileY() + amount, start.getTileX());
 			
 		case WEST:
-			return this.getTileByLoc(start.getTileY(), start.getTileX() - amount);
+			returnB = this.getTileByLoc(start.getTileY(), start.getTileX() - amount);
 			
 		}
 		
-		return null;
+		return returnB;
 		
 	}
 	
@@ -397,6 +399,11 @@ public class Board {
 		for(int y = 0; y <= radius; y++) { // going for each row from start to the radius
 			
 			BoardTile northT = step(start, Directions.NORTH, y);
+			
+			if(northT == null) {
+				continue;
+			}
+			
 			con.accept(northT);
 			
 			int dist = y - 1;
@@ -405,6 +412,11 @@ public class Board {
 			for(int x = 1; x <= dist; x++) {
 				
 				BoardTile t = step(northT, Directions.EAST, x);
+				
+				if(t == null) {
+					continue;
+				}
+				
 				con.accept(t);
 				
 			}
@@ -412,73 +424,121 @@ public class Board {
 			// upper right
 			BoardTile upR = step(northT, Directions.EAST, y);
 			
+			if(upR == null) {
+				continue;
+			}
+			
 			con.accept(upR);
 			
 			// walking from the upper right to the middle right
 			for(int y2 = 1; y2 <= dist; y2++) {
 				
 				BoardTile t = step(upR, Directions.SOUTH, y2);
+				if(t == null) {
+					continue;
+				}
+				
 				con.accept(t);
 			}
 			
 			// middle right
 			BoardTile middleR = step(upR, Directions.SOUTH, y);
+			
+			if(middleR == null) {
+				continue;
+			}
+			
 			con.accept(middleR);
 			
 			// walking from the middleR to bottom right
 			for(int y2 = 1; y2 <= dist; y2++) {
 				
 				BoardTile t = step(middleR, Directions.SOUTH, y2);
+				if(t == null) {
+					continue;
+				}
 				con.accept(t);
 				
 			}
 			
 			// bottom right
 			BoardTile bottomR = step(middleR, Directions.SOUTH, y);
+			
+			if(bottomR == null) {
+				continue;
+			}
+			
 			con.accept(bottomR);
 			
 			for(int x2 = 1; x2 <= dist; x2++) {
 				
 				BoardTile t = step(bottomR, Directions.WEST, x2);
+				if(t == null) {
+					continue;
+				}
 				con.accept(t);
 				
 			}
 			
 			BoardTile bottomM = step(bottomR, Directions.WEST, y);
+			if(bottomM == null) {
+				continue;
+			}
 			con.accept(bottomM);
 			for(int x2 = 1; x2 <= dist; x2++) {
 				
 				BoardTile t = step(bottomM, Directions.WEST, x2);
+				if(t == null) {
+					continue;
+				}
 				con.accept(t);
 				
 			}
 			
 			BoardTile bottomL = step(bottomM, Directions.WEST, y);
+			if(bottomL == null) {
+				continue;
+			}
 			con.accept(bottomL);
 			
 			for(int y2 = 1; y2 <= dist; y2++) {
 				
 				BoardTile t = step(bottomL, Directions.NORTH, y2);
+				if(t == null) {
+					continue;
+				}
 				con.accept(t);
 				
 			}
 			
 			BoardTile middleL = step(bottomL, Directions.NORTH, y);
+			if(middleL == null) {
+				continue;
+			}
 			con.accept(middleL);
 			
 			for(int y2 = 1; y2 <= dist; y2++) {
 				
 				BoardTile t = step(middleL, Directions.NORTH, y2);
+				if(t == null) {
+					continue;
+				}
 				con.accept(t);
 				
 			}
 			
 			BoardTile upperL = step(middleL, Directions.NORTH, y);
+			if(upperL == null) {
+				continue;
+			}
 			con.accept(upperL);
 			
 			for(int x2 = 1; x2 <= dist; x2++) {
 				
 				BoardTile t = step(upperL, Directions.EAST, x2);
+				if(t == null) {
+					continue;
+				}
 				con.accept(t);
 				
 			}
