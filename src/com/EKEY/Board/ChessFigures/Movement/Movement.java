@@ -89,7 +89,9 @@ public abstract class Movement implements Cloneable, Renderable{
 					continue;
 				}
 				
-				if(tile.getTileFigure().getColorEnum() == figure.getColorEnum()) {
+				
+				
+				if(tile.getTileFigure().getColorEnum() != null && tile.getTileFigure().getColorEnum().equals(figure.getColorEnum())) {
 					bufferList.remove(i);
 					continue;
 				}
@@ -179,7 +181,17 @@ public abstract class Movement implements Cloneable, Renderable{
 		return bufferList;
 	}
 	
+	public Fling getFling() {
+		return fling;
+	}
 	
+	public void setFling(Fling fling) {
+		this.fling = fling;
+	}
+	
+	public Figure getFigure() {
+		return figure;
+	}
 	
 	
 }

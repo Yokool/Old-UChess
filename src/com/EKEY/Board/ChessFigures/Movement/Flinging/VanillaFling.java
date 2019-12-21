@@ -2,6 +2,10 @@ package com.EKEY.Board.ChessFigures.Movement.Flinging;
 
 import com.EKEY.Board.BoardTile;
 import com.EKEY.Board.ChessFigures.Figure;
+import com.EKEY.Board.ChessFigures.Builder.FigureDirector;
+import com.EKEY.Board.ChessFigures.Builder.PawnBuilder;
+import com.EKEY.Board.ChessFigures.Prototypes.FigurePrototypes;
+import com.EKEY.Files.UChessImages;
 import com.EKEY.Misc.DataShare;
 
 /**
@@ -16,7 +20,6 @@ public class VanillaFling extends Fling{
 		DataShare.BOARD.moveFigureToTile(figure, targetTile);
 		
 		targetF.deleteObject();
-		
 		
 		
 	}
