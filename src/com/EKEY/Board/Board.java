@@ -5,19 +5,7 @@ import java.util.function.Consumer;
 
 import com.EKEY.Board.Builder.NormalTileBuilder;
 import com.EKEY.Board.Builder.TileDirector;
-import com.EKEY.Board.ChessFigures.Bishop;
 import com.EKEY.Board.ChessFigures.Figure;
-import com.EKEY.Board.ChessFigures.King;
-import com.EKEY.Board.ChessFigures.Knight;
-import com.EKEY.Board.ChessFigures.Pawn;
-import com.EKEY.Board.ChessFigures.Queen;
-import com.EKEY.Board.ChessFigures.Rook;
-import com.EKEY.Board.ChessFigures.Builder.BishopBuilder;
-import com.EKEY.Board.ChessFigures.Builder.KingBuilder;
-import com.EKEY.Board.ChessFigures.Builder.KnightBuilder;
-import com.EKEY.Board.ChessFigures.Builder.PawnBuilder;
-import com.EKEY.Board.ChessFigures.Builder.QueenBuilder;
-import com.EKEY.Board.ChessFigures.Builder.RookBuilder;
 import com.EKEY.Board.ChessFigures.Prototypes.FigurePrototypes;
 import com.EKEY.Misc.DataShare;
 
@@ -31,14 +19,7 @@ public class Board {
 
 	private NormalTileBuilder NormalTILEBuilder = new NormalTileBuilder();
 	private TileDirector tileDirector = new TileDirector();
-
-	private PawnBuilder pawnBuilder = new PawnBuilder();
-	private QueenBuilder queenBuilder = new QueenBuilder();
-	private KingBuilder kingBuilder = new KingBuilder();
-	private RookBuilder rookBuilder = new RookBuilder();
-	private KnightBuilder knightBuilder = new KnightBuilder();
-	private BishopBuilder bishopBuilder = new BishopBuilder();
-
+	
 	private int boardWidth = 0;
 	private int boardHeight = 0;
 
@@ -122,7 +103,7 @@ public class Board {
 		// Initializing black pawns
 		for(int width = 0; width < boardWidth; width++) {
 			BoardTile tile_z = this.getTileByLoc(1, width);
-			Pawn p = FigurePrototypes.getPawn_black();
+			Figure p = FigurePrototypes.getPawn_black();
 			
 			setupInitialTile(p, tile_z);
 			
@@ -130,12 +111,12 @@ public class Board {
 		
 		// black queen
 		BoardTile tile_x = this.getTileByLoc(0, centerCord);
-		Queen q_b = FigurePrototypes.getQueen_black();
+		Figure q_b = FigurePrototypes.getQueen_black();
 		setupInitialTile(q_b, tile_x);
 		
 		// black king
 		BoardTile tile_y = this.getTileByLoc(0, centerCord + 1);
-		King k_b = FigurePrototypes.getKing_black();
+		Figure k_b = FigurePrototypes.getKing_black();
 		this.setupInitialTile(k_b, tile_y);
 		
 		int SecondDivider = (int)(DividerWidth / 3.0);
@@ -147,33 +128,33 @@ public class Board {
 				
 				// rooks
 				BoardTile tile = this.getTileByLoc(0, width);
-				Rook r_b = FigurePrototypes.getRook_black();
+				Figure r_b = FigurePrototypes.getRook_black();
 				setupInitialTile(r_b, tile);
 				
 				
 				BoardTile _tile = this.getTileByLoc(0, this.boardWidth - width - 1);
-				Rook r2_b = FigurePrototypes.getRook_black();
+				Figure r2_b = FigurePrototypes.getRook_black();
 				setupInitialTile(r2_b, _tile);
 				
 				
 			}else if (width < SecondDivider*2) {
 				// knights
 				BoardTile tile = this.getTileByLoc(0, width);
-				Knight kn_b = FigurePrototypes.getKnight_black();
+				Figure kn_b = FigurePrototypes.getKnight_black();
 				setupInitialTile(kn_b, tile);
 				
 				BoardTile _tile = this.getTileByLoc(0, this.boardWidth - width - 1);
-				Knight kn2_b = FigurePrototypes.getKnight_black();
+				Figure kn2_b = FigurePrototypes.getKnight_black();
 				setupInitialTile(kn2_b, _tile);
 				
 			}else {
 				// bishops
 				BoardTile tile = this.getTileByLoc(0, width);
-				Bishop b_b = FigurePrototypes.getBishop_black();
+				Figure b_b = FigurePrototypes.getBishop_black();
 				this.setupInitialTile(b_b, tile);
 				
 				BoardTile _tile = this.getTileByLoc(0, this.boardWidth - width - 1);
-				Bishop b2_b = FigurePrototypes.getBishop_black();
+				Figure b2_b = FigurePrototypes.getBishop_black();
 				this.setupInitialTile(b2_b, _tile);
 				
 			}
@@ -186,19 +167,19 @@ public class Board {
 		for(int width = 0; width < boardWidth; width++) {
 			BoardTile tile_a = this.getTileByLoc(boardHeight - 2, width);
 			
-			Pawn p = FigurePrototypes.getPawn_white();
+			Figure p = FigurePrototypes.getPawn_white();
 			
 			setupInitialTile(p, tile_a);
 		}
 		
 		// white queen
 		BoardTile tile_b = this.getTileByLoc(boardHeight - 1, centerCord);
-		Queen q_w = FigurePrototypes.getQueen_white();
+		Figure q_w = FigurePrototypes.getQueen_white();
 		setupInitialTile(q_w, tile_b);
 		
 		// white king
 		BoardTile tile_c = this.getTileByLoc(boardHeight - 1, centerCord + 1);
-		King k_w = FigurePrototypes.getKing_white();
+		Figure k_w = FigurePrototypes.getKing_white();
 		setupInitialTile(k_w, tile_c);
 		
 		// other black figures - left side
@@ -207,34 +188,34 @@ public class Board {
 			if (width < SecondDivider) {
 				// rooks
 				BoardTile tile_d = this.getTileByLoc(this.boardHeight - 1, width);
-				Rook r_w = FigurePrototypes.getRook_white();
+				Figure r_w = FigurePrototypes.getRook_white();
 				setupInitialTile(r_w, tile_d);
 				
 				
 				BoardTile tile_e = this.getTileByLoc(this.boardHeight - 1, this.boardWidth - width - 1);
-				Rook r2_w = FigurePrototypes.getRook_white();
+				Figure r2_w = FigurePrototypes.getRook_white();
 				setupInitialTile(r2_w, tile_e);
 				
 
 			} else if (width < SecondDivider * 2) {
 				// knights
 				BoardTile tile_f = this.getTileByLoc(this.boardHeight - 1, width);
-				Knight kn_w = FigurePrototypes.getKnight_white();
+				Figure kn_w = FigurePrototypes.getKnight_white();
 				setupInitialTile(kn_w, tile_f);
 				
 				BoardTile tile_g = this.getTileByLoc(this.boardHeight - 1, this.boardWidth - width - 1);
-				Knight kn2_w = FigurePrototypes.getKnight_white();
+				Figure kn2_w = FigurePrototypes.getKnight_white();
 				setupInitialTile(kn2_w, tile_g);
 				
 				
 			} else {
 				// bishops
 				BoardTile tile_h = this.getTileByLoc(this.boardHeight - 1, width);
-				Bishop b_w = FigurePrototypes.getBishop_white();
+				Figure b_w = FigurePrototypes.getBishop_white();
 				setupInitialTile(b_w, tile_h);
 				
 				BoardTile tile_i = this.getTileByLoc(this.boardHeight - 1, this.boardWidth - width - 1);
-				Bishop b2_w = FigurePrototypes.getBishop_white();
+				Figure b2_w = FigurePrototypes.getBishop_white();
 				setupInitialTile(b2_w, tile_i);
 				
 			}
