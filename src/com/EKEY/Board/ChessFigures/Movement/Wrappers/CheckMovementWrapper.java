@@ -23,7 +23,7 @@ public class CheckMovementWrapper extends BaseMovementWrapper{
 		
 		LinkedList<Figure> figureList = new LinkedList<Figure>();
 		
-		DataShare.BOARD.castSqure(figureTile, 4, tile -> {
+		DataShare.BOARD.castSqure(figureTile, 4, tile -> { // FIXME: VALLUES OVER 3 BREAK THIS
 			
 			if(tile == null) {
 				return;
