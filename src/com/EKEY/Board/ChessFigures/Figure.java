@@ -12,7 +12,7 @@ import com.EKEY.Board.ChessFigures.Movement.Movement;
 import com.EKEY.Misc.Camera;
 import com.EKEY.Misc.DataShare;
 
-public abstract class Figure extends GameObject{
+public class Figure extends GameObject{
 	
 	protected Image figureImage;
 	
@@ -71,10 +71,20 @@ public abstract class Figure extends GameObject{
 	}
 	
 	@Override
+	public Object clone() {
+		return new Figure(this);
+	}
+	
+	@Override
 	public void onClick() {
 		for(Movement m : movement) {
 			m.update();
 		}
+	}
+	
+	@Override
+	public void tick() { // TODO: UNIMPLEMENTED
+		
 	}
 	
 	public Image getFigureImage() {

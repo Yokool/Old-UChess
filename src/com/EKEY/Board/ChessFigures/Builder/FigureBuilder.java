@@ -7,23 +7,51 @@ import com.EKEY.Board.ChessFigures.ColorEnum;
 import com.EKEY.Board.ChessFigures.Figure;
 import com.EKEY.Board.ChessFigures.Movement.Movement;
 
-public abstract class FigureBuilder {
+public class FigureBuilder {
 	
-	public abstract void reset();
+	private Figure figure = new Figure();
 	
-	public abstract void setX(int x);
-	public abstract void setY(int y);
+	public void reset() {
+		figure = new Figure();
+	}
 	
-	public abstract void setWidth(int width);
-	public abstract void setHeight(int height);
+	public void setX(int x) {
+		figure.setX(x);
+	}
 	
-	public abstract void setImage(Image img);
+	public void setY(int y) {
+		figure.setY(y);
+	}
 	
-	public abstract void setMovement(Movement mov);
-	public abstract void setMovementSet(LinkedList<Movement> mov);
+	public void setWidth(int width) {
+		figure.setWidth(width);
+	}
 	
-	public abstract void setColor(ColorEnum color);
+	public void setHeight(int height) {
+		figure.setHeight(height);
+	}
 	
-	public abstract Figure getResult();
+	public void setImage(Image img) {
+		figure.setFigureImage(img);
+	}
+	
+	public void setMovement(Movement mov) {
+		figure.addMovement(mov);
+	}
+	
+	public void setMovementSet(LinkedList<Movement> mov) {
+		figure.addMovementSet(mov);
+	}
+	
+	public void setColor(ColorEnum color) {
+		figure.setColorEnum(color);
+	}
+	
+	public Figure getResult() {
+		
+		Figure fig = figure;
+		this.reset();
+		return fig;
+	}
 	
 }
