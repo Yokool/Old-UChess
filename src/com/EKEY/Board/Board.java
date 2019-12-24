@@ -7,6 +7,7 @@ import com.EKEY.Board.Builder.NormalTileBuilder;
 import com.EKEY.Board.Builder.TileDirector;
 import com.EKEY.Board.ChessFigures.Figure;
 import com.EKEY.Board.ChessFigures.Prototypes.FigurePrototypes;
+import com.EKEY.Board.Turns.Player;
 import com.EKEY.Misc.DataShare;
 
 /**
@@ -226,8 +227,18 @@ public class Board {
 	
 	/**
 	 * Used during world generation to setup figures and tiles in bulk.
-	 * @param figure
-	 * @param tile
+	 * 
+	 * The method sets the x and y of the figure relative to the tile in the parameter so the
+	 * figure can be rendered correctly.
+	 * 
+	 * The tileX and tileY + the tile figure variables are also set.
+	 * <br>
+	 * <b>IMPORTANT</b>
+	 * <br>
+	 * This method ADDS the figure in the parameter to a player WITH the same color IF IT THE PLAYER with the same color EXISTS.
+	 * 
+	 * @param figure The figure to setup.
+	 * @param tile The tile to setup the figure on.
 	 */
 	private void setupInitialTile(Figure figure, BoardTile tile) {
 		
@@ -236,6 +247,14 @@ public class Board {
 		
 		
 		Board.setTileCoords(figure, tile);
+		
+		for(Player player : DataShare.getPlayerList()) {
+			
+			if(player.getPlayerColor().equals(figure.getColorEnum())) {
+				player.addFigure(figure);
+			}
+			
+		}
 		
 		DataShare.HANDLER.registerTick(figure);
 		DataShare.HANDLER.registerFigureRender(figure);
