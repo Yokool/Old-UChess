@@ -10,6 +10,7 @@ import com.EKEY.Handler;
 import com.EKEY.Board.BoardTile;
 import com.EKEY.Board.ChessFigures.Movement.Movement;
 import com.EKEY.Board.Turns.Player;
+import com.EKEY.Listeners.ClickableMouse;
 import com.EKEY.Misc.Camera;
 import com.EKEY.Misc.DataShare;
 
@@ -78,6 +79,65 @@ public class Figure extends GameObject{
 	
 	@Override
 	public void onClick() {
+		
+		/*
+		 * if(clickable.getBounds().contains(clickPoint)) { // if we are clicking in the bounds of the clickable object
+				
+				if(clickable instanceof Figure) { // figure related part
+					
+					Figure fig = (Figure) clickable;
+					
+					if(selectedFigure == null || fig != selectedFigure) { // either if we haven't selected a figure yet or we are clicking on a differnet figure that is not selected
+						
+						if(selectedFigure != null) { // if we are selecting a new figure
+							selectedFigure.setSelected(false); // deselect the last one
+						}
+						
+						fig.setSelected(true); // set the new one
+						selectedFigure = fig;
+						
+						
+					}
+					
+					
+					
+				}
+				
+				if(selectedFigure != null && clickable instanceof BoardTile) { // if we selected a figure and we are clicking on a tile
+					
+					BoardTile tile = (BoardTile) clickable;
+					
+					for(Movement m : selectedFigure.getMovement()) { // for each movement inside the selected figure
+						
+						m.moveFigureWithMovement(tile); // notify it that it should move to that tile
+						
+					}
+					
+					selectedFigure.setSelected(false);
+					selectedFigure = null;
+					
+				}
+				
+				clickable.onClick();
+				
+			}
+		 * 
+		 */
+		
+		ClickableMouse clickableMouse = DataShare.CLICKABLEMOUSE;
+		
+		if(clickableMouse.getSelectedFigure() == null || clickableMouse.getSelectedFigure() != this) {
+			
+			clickableMouse.setSelectedFigure(this);
+			
+			if(clickableMouse.getSelectedFigure() != null) {
+				clickableMouse.getSelectedFigure().setSelected(false);
+			}
+			
+		}
+		
+		this.setSelected(true);
+		
 		for(Movement m : movement) {
 			m.update();
 		}

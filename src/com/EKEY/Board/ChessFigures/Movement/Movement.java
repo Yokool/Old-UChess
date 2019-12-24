@@ -142,6 +142,8 @@ public abstract class Movement implements Cloneable, Renderable{
 	 */
 	public void moveFigureWithMovement(BoardTile tile) {
 		
+		update();
+		
 		if(bufferList.contains(tile)) { // When the tile is inside the bufferList only then can the figure be moved onto the tile
 			
 			if(fling != null && tile.getTileFigure() != null) {

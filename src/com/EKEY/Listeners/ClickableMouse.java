@@ -3,9 +3,6 @@ package com.EKEY.Listeners;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.AbstractList;
-import java.util.Collections;
-import java.util.ListIterator;
 
 import com.EKEY.Board.BoardTile;
 import com.EKEY.Board.ChessFigures.Figure;
@@ -16,6 +13,10 @@ import com.EKEY.Misc.DataShare;
 public class ClickableMouse implements MouseListener{
 	
 	private Figure selectedFigure = null;
+	
+	public ClickableMouse() {
+		DataShare.CLICKABLEMOUSE = this;
+	}
 	
 	@Override
 	public void mouseClicked(MouseEvent EVENT) {
@@ -28,41 +29,6 @@ public class ClickableMouse implements MouseListener{
 			
 			
 			if(clickable.getBounds().contains(clickPoint)) { // if we are clicking in the bounds of the clickable object
-				
-				if(clickable instanceof Figure) { // figure related part
-					
-					Figure fig = (Figure) clickable;
-					
-					if(selectedFigure == null || fig != selectedFigure) { // either if we haven't selected a figure yet or we are clicking on a differnet figure that is not selected
-						
-						if(selectedFigure != null) { // if we are selecting a new figure
-							selectedFigure.setSelected(false); // deselect the last one
-						}
-						
-						fig.setSelected(true); // set the new one
-						selectedFigure = fig;
-						
-						
-					}
-					
-					
-					
-				}
-				
-				if(selectedFigure != null && clickable instanceof BoardTile) { // if we selected a figure and we are clicking on a tile
-					
-					BoardTile tile = (BoardTile) clickable;
-					
-					for(Movement m : selectedFigure.getMovement()) { // for each movement inside the selected figure
-						
-						m.moveFigureWithMovement(tile); // notify it that it should move to that tile
-						
-					}
-					
-					selectedFigure.setSelected(false);
-					selectedFigure = null;
-					
-				}
 				
 				clickable.onClick();
 				
@@ -92,5 +58,15 @@ public class ClickableMouse implements MouseListener{
 	public void mouseReleased(MouseEvent arg0) {
 		
 	}
+
+	public Figure getSelectedFigure() {
+		return selectedFigure;
+	}
+
+	public void setSelectedFigure(Figure selectedFigure) {
+		this.selectedFigure = selectedFigure;
+	}
+	
+	
 
 }

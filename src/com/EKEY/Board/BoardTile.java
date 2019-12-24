@@ -5,6 +5,8 @@ import java.awt.Graphics;
 
 import com.EKEY.GameObject;
 import com.EKEY.Board.ChessFigures.Figure;
+import com.EKEY.Board.ChessFigures.Movement.Movement;
+import com.EKEY.Listeners.ClickableMouse;
 import com.EKEY.Misc.Camera;
 import com.EKEY.Misc.DataShare;
 
@@ -52,6 +54,27 @@ public abstract class BoardTile extends GameObject implements Cloneable{
 		this.tileY = gridY;
 		
 	}
+	
+	@Override
+	public void onClick() {
+		
+		ClickableMouse clickableMouse = DataShare.CLICKABLEMOUSE;
+		
+		if(clickableMouse.getSelectedFigure() != null) { // if we selected a figure
+			
+			for(Movement m : clickableMouse.getSelectedFigure().getMovement()) { // for each movement inside the selected figure
+				
+				m.moveFigureWithMovement(this); // notify it that it should move to that tile
+				
+			}
+			
+			clickableMouse.getSelectedFigure().setSelected(false);
+			clickableMouse.setSelectedFigure(null);
+			
+		}
+		
+	}
+	
 	
 	public Figure getTileFigure() {
 		return tileFigure;
