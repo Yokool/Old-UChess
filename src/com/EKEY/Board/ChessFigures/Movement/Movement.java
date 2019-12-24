@@ -138,6 +138,8 @@ public abstract class Movement implements Cloneable, Renderable{
 	 * 
 	 * This method is called everytime a user clicks a BoardTile.
 	 * 
+	 * The method is used to handle moving the figure and to fling figures out.
+	 * 
 	 * @param tile
 	 */
 	public void notified(BoardTile tile) {
@@ -155,6 +157,8 @@ public abstract class Movement implements Cloneable, Renderable{
 		
 	}
 	
+	@Deprecated
+	// TODO: REMOVE THIS
 	protected void moveFigure(BoardTile tile) { // TODO: IS THIS METHOD NECESSARY?
 		
 		lastTile = tile;

@@ -22,24 +22,24 @@ public class ClickableMouse implements MouseListener{
 		
 		Point clickPoint = EVENT.getPoint();
 		
-		for(int i = 0; i < DataShare.HANDLER.getClickList().size(); i++) {
+		for(int i = 0; i < DataShare.HANDLER.getClickList().size(); i++) { // for each registered clickable object
 			
 			Clickable clickable = DataShare.HANDLER.getClickList().get(i);
 			
 			
-			if(clickable.getBounds().contains(clickPoint)) {
+			if(clickable.getBounds().contains(clickPoint)) { // if we are clicking in the bounds of the clickable object
 				
-				if(clickable instanceof Figure) {
+				if(clickable instanceof Figure) { // figure related part
 					
 					Figure fig = (Figure) clickable;
 					
-					if(selectedFigure == null || fig != selectedFigure) {
+					if(selectedFigure == null || fig != selectedFigure) { // either if we haven't selected a figure yet or we are clicking on a differnet figure that is not selected
 						
-						if(selectedFigure != null) {
-							selectedFigure.setSelected(false);
+						if(selectedFigure != null) { // if we are selecting a new figure
+							selectedFigure.setSelected(false); // deselect the last one
 						}
 						
-						fig.setSelected(true);
+						fig.setSelected(true); // set the new one
 						selectedFigure = fig;
 						
 						
@@ -49,13 +49,13 @@ public class ClickableMouse implements MouseListener{
 					
 				}
 				
-				if(selectedFigure != null && clickable instanceof BoardTile) {
+				if(selectedFigure != null && clickable instanceof BoardTile) { // if we selected a figure and we are clicking on a tile
 					
 					BoardTile tile = (BoardTile) clickable;
 					
-					for(Movement m : selectedFigure.getMovement()) {
+					for(Movement m : selectedFigure.getMovement()) { // for each movement inside the selected figure
 						
-						m.notified(tile);
+						m.notified(tile); // notify it that it should move to that tile
 						
 					}
 					
