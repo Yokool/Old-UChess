@@ -63,7 +63,7 @@ public abstract class BoardTile extends GameObject implements Cloneable{
 		if(clickableMouse.getSelectedFigure() != null) { // if we selected a figure
 			
 			for(Movement m : clickableMouse.getSelectedFigure().getMovement()) { // for each movement inside the selected figure
-				
+				// TODO: THIS IS SUCH A HORRIBLE WAY OF DOING STUFF
 				m.moveFigureWithMovement(this); // notify it that it should move to that tile
 				
 			}
