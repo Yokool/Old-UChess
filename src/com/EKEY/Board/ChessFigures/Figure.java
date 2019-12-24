@@ -9,6 +9,7 @@ import com.EKEY.GameObject;
 import com.EKEY.Handler;
 import com.EKEY.Board.BoardTile;
 import com.EKEY.Board.ChessFigures.Movement.Movement;
+import com.EKEY.Board.Turns.Player;
 import com.EKEY.Misc.Camera;
 import com.EKEY.Misc.DataShare;
 
@@ -152,24 +153,36 @@ public class Figure extends GameObject{
 	public void deleteObject() {
 		
 		try {
-			this.finalize();
+			this.finalize(); // finalize the object incase we miss some references
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 		
 		Handler handler = DataShare.HANDLER;
 		
+		// unregistering all the related renders...
 		handler.unregisterTick(this);
 		handler.unregisterFigureRender(this);
 		handler.unregisterClickable(this);
 		
-		BoardTile tile = DataShare.BOARD.getTileByLoc(this.tileY, this.tileX);
+		BoardTile tile = DataShare.BOARD.getTileByLoc(this.tileY, this.tileX); // removing from the tile the figure is on
 		
 		if(tile != null) {
-			tile.setTileFigure(null);
+			tile.setTileFigure(null); // removing the tied tile figure from the tile the figure is currently on (if it isn't null)
 		}
 		
-		System.gc();
+		// removing the figure from the player with the same color enum
+		for(int i = 0; i < DataShare.getPlayerList().size(); i++) {
+			Player p = DataShare.getPlayerList().get(i);
+			if(p.getPlayerColor().equals(this.getColorEnum())) {
+				if(p.getPlayerFigures().contains(this)) {
+					p.removeFigure(this);
+				}
+			}
+			
+		}
+		
+		System.gc(); // try to clear the heap now incase we missed some references and we really want the object gone
 	}
 
 	public ColorEnum getColorEnum() {
