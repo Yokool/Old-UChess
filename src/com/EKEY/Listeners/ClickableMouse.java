@@ -59,6 +59,9 @@ public class ClickableMouse implements MouseListener{
 						
 					}
 					
+					selectedFigure.setSelected(false);
+					selectedFigure = null;
+					
 				}
 				
 				clickable.onClick();

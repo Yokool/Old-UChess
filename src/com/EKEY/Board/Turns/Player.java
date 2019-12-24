@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import com.EKEY.Board.ChessFigures.ColorEnum;
 import com.EKEY.Board.ChessFigures.Figure;
+import com.EKEY.Board.ChessFigures.Movement.Movement;
 import com.EKEY.Misc.DataShare;
 
 /**
@@ -31,6 +32,21 @@ public class Player {
 	public Player(ColorEnum playerColor) {
 		this.playerColor = playerColor;
 		DataShare.addPlayer(this);
+	}
+	
+	/**
+	 * Updates the movement objects of all figures in the player figures list.
+	 */
+	public void updateAllFigures() {
+		
+		for(int i = 0; i < playerFigures.size(); i++) {
+			Figure figure = playerFigures.get(i);
+			for(int j = 0; j < figure.getMovement().size(); j++) {
+				Movement m = figure.getMovement().get(j);
+				m.update();
+			}
+		}
+		
 	}
 	
 	// getters/setters
