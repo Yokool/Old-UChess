@@ -55,7 +55,7 @@ public class ClickableMouse implements MouseListener{
 					
 					for(Movement m : selectedFigure.getMovement()) { // for each movement inside the selected figure
 						
-						m.notified(tile); // notify it that it should move to that tile
+						m.moveFigureWithMovement(tile); // notify it that it should move to that tile
 						
 					}
 					
