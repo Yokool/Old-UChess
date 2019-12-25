@@ -114,6 +114,10 @@ public abstract class Movement implements Cloneable, Renderable{
 	@Override
 	public void render(Graphics g) {
 		
+		if(!this.getFigure().isReadyToPlay()) {
+			return;
+		}
+		
 		for(int i = 0; i < bufferList.size(); i++) {
 			
 			Camera cam = Camera.getInstance();
@@ -142,16 +146,18 @@ public abstract class Movement implements Cloneable, Renderable{
 	 */
 	public void moveFigureWithMovement(BoardTile tile) {
 		
-		update();
+		if(!this.getFigure().isReadyToPlay()) {
+			return;
+		}
 		
 		if(bufferList.contains(tile)) { // When the tile is inside the bufferList only then can the figure be moved onto the tile
 			
 			if(fling != null && tile.getTileFigure() != null) {
 				fling.flingOut(tile.getTileFigure());
-				update();
 			}
 			
 			DataShare.BOARD.moveFigureToTile(figure, tile);
+			DataShare.TURNSYSTEM.nextTurn();
 		}
 		
 	}

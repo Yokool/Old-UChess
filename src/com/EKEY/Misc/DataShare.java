@@ -7,6 +7,7 @@ import com.EKEY.Handler;
 import com.EKEY.Board.Board;
 import com.EKEY.Board.Builder.NormalTileBuilder;
 import com.EKEY.Board.Turns.Player;
+import com.EKEY.Board.Turns.TurnSystem;
 import com.EKEY.GUI.Window;
 import com.EKEY.Listeners.ClickableMouse;
 
@@ -20,6 +21,7 @@ public abstract class DataShare {
 	public static Board BOARD;
 	public static Window WINDOW;
 	public static ClickableMouse CLICKABLEMOUSE;
+	public static TurnSystem TURNSYSTEM;
 	
 	private static ArrayList<Player> playerList = new ArrayList<Player>();
 	

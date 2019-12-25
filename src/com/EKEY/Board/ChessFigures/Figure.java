@@ -28,6 +28,8 @@ public class Figure extends GameObject{
 	
 	protected boolean selected = false;
 	
+	protected boolean readyToPlay = false;
+	
 	public Figure(int x, int y, int width, int height, Image image, ColorEnum color, Movement... movement) {
 		super(x, y, width, height);
 		this.figureImage = image;
@@ -79,50 +81,6 @@ public class Figure extends GameObject{
 	
 	@Override
 	public void onClick() {
-		
-		/*
-		 * if(clickable.getBounds().contains(clickPoint)) { // if we are clicking in the bounds of the clickable object
-				
-				if(clickable instanceof Figure) { // figure related part
-					
-					Figure fig = (Figure) clickable;
-					
-					if(selectedFigure == null || fig != selectedFigure) { // either if we haven't selected a figure yet or we are clicking on a differnet figure that is not selected
-						
-						if(selectedFigure != null) { // if we are selecting a new figure
-							selectedFigure.setSelected(false); // deselect the last one
-						}
-						
-						fig.setSelected(true); // set the new one
-						selectedFigure = fig;
-						
-						
-					}
-					
-					
-					
-				}
-				
-				if(selectedFigure != null && clickable instanceof BoardTile) { // if we selected a figure and we are clicking on a tile
-					
-					BoardTile tile = (BoardTile) clickable;
-					
-					for(Movement m : selectedFigure.getMovement()) { // for each movement inside the selected figure
-						
-						m.moveFigureWithMovement(tile); // notify it that it should move to that tile
-						
-					}
-					
-					selectedFigure.setSelected(false);
-					selectedFigure = null;
-					
-				}
-				
-				clickable.onClick();
-				
-			}
-		 * 
-		 */
 		
 		ClickableMouse clickableMouse = DataShare.CLICKABLEMOUSE;
 		
@@ -252,5 +210,15 @@ public class Figure extends GameObject{
 	public void setColorEnum(ColorEnum colorEnum) {
 		this.colorEnum = colorEnum;
 	}
+
+	public boolean isReadyToPlay() {
+		return readyToPlay;
+	}
+
+	public void setReadyToPlay(boolean readyToPlay) {
+		this.readyToPlay = readyToPlay;
+	}
+	
+	
 	
 }

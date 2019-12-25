@@ -12,6 +12,7 @@ public class TurnSystem {
 	private ArrayList<Player> playerList;
 	
 	public TurnSystem() {
+		DataShare.TURNSYSTEM = this;
 		playerList = DataShare.getPlayerList();
 	}
 	/**
@@ -28,10 +29,29 @@ public class TurnSystem {
 	}
 	
 	/**
-	 * Calls this when the player is finished with their turn
+	 * Starts the first player in the playerList to do their turn.
 	 */
-	public void playerFinished() {
-		incrementIndex();
+	public void startTheGame() {
+		playerList.get(0).playerStarted();
+	}
+	
+	/**
+	 * When the player is done with their turn this is called.
+	 * 
+	 * This method is currently called from the Movement class when a player moves a figure, thus ending their round.
+	 * This applies for every Movement subclass and currently can't be changed.
+	 */
+	public void nextTurn() {
+		
+		getPlayerWithTurn().playerFinished(); // the player that just played is done with their turn and finished
+		
+		for(Player player : playerList) { // update all the players
+			player.updateAllFigures();
+		}
+		
+		incrementIndex(); // incremement the player index -> get the player ready to make their turn
+		
+		getPlayerWithTurn().playerStarted(); // unblock the players figures and make him ready to do his turn
 	}
 	
 	public int getIndex() {

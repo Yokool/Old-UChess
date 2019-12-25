@@ -35,7 +35,10 @@ public class Player {
 	}
 	
 	/**
-	 * Updates the movement objects of all figures in the player figures list.
+	 * Updates the movement objects of all figures in this players figures list.
+	 * 
+	 * An updated figure refers to a figure that has all of their tied Movement objects updated (Their bufferLists have been
+	 * cleared and reassigned).
 	 */
 	public void updateAllFigures() {
 		
@@ -47,6 +50,42 @@ public class Player {
 			}
 		}
 		
+	}
+	/**
+	 * Sets all the figures in the list belonging to this player to ready to play.
+	 */
+	private void unblockAllFigures() {
+		for(int i = 0; i < playerFigures.size(); i++) {
+			Figure figure = playerFigures.get(i);
+			figure.setReadyToPlay(true);
+		}
+	}
+	/**
+	 * Sets all the figures in the list belonging to this player to not ready to play.
+	 */
+	private void blockAllFigures() {
+		for(int i = 0; i < playerFigures.size(); i++) {
+			Figure figure = playerFigures.get(i);
+			figure.setReadyToPlay(false);
+		}
+	}
+	/**
+	 * Called when the player starts their turn.
+	 * 
+	 * Updates and unblocks this players figures.
+	 */
+	public void playerStarted() {
+		unblockAllFigures();
+		updateAllFigures();
+	}
+	/**
+	 * Called when the player finishes their turn.
+	 * 
+	 * Updates and blocks this players figures.
+	 */
+	public void playerFinished() {
+		blockAllFigures();
+		updateAllFigures();
 	}
 	
 	// getters/setters
