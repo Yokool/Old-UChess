@@ -114,7 +114,7 @@ public abstract class Movement implements Cloneable, Renderable{
 	@Override
 	public void render(Graphics g) {
 		
-		if(!this.getFigure().isReadyToPlay()) {
+		if(!this.getFigure().isReadyToPlay() && !DataShare.DEBUG) {
 			return;
 		}
 		
@@ -146,7 +146,7 @@ public abstract class Movement implements Cloneable, Renderable{
 	 */
 	public void moveFigureWithMovement(BoardTile tile) {
 		
-		if(!this.getFigure().isReadyToPlay()) {
+		if(!this.getFigure().isReadyToPlay() && !DataShare.DEBUG) {
 			return;
 		}
 		

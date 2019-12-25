@@ -23,6 +23,8 @@ public abstract class DataShare {
 	public static ClickableMouse CLICKABLEMOUSE;
 	public static TurnSystem TURNSYSTEM;
 	
+	public static boolean DEBUG = true;
+	
 	private static ArrayList<Player> playerList = new ArrayList<Player>();
 	
 	public static NormalTileBuilder NORMALTILEBUILDER;
