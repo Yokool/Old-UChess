@@ -26,10 +26,4 @@ public class NormalTile extends BoardTile{
 		return new NormalTile(this);
 	}
 
-	@Override
-	public void onClick() {
-		// TODO: NOT IMPLEMENTED YET
-	}
-	
-
 }

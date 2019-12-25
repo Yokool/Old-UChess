@@ -40,8 +40,6 @@ public abstract class Movement implements Cloneable, Renderable{
 	
 	protected ArrayList<BoardTile> bufferList = new ArrayList<BoardTile>();
 	
-	protected BoardTile lastTile = null; // TODO: IS THIS NECESSARY?
-	
 	/**
 	 * The tied fling object.
 	 */
@@ -116,6 +114,10 @@ public abstract class Movement implements Cloneable, Renderable{
 	@Override
 	public void render(Graphics g) {
 		
+		if(!this.getFigure().isReadyToPlay()) {
+			return;
+		}
+		
 		for(int i = 0; i < bufferList.size(); i++) {
 			
 			Camera cam = Camera.getInstance();
@@ -134,31 +136,29 @@ public abstract class Movement implements Cloneable, Renderable{
 	}
 	
 	/**
-	 * This method should not be called directly, it is used in the ClickableMouse class.
+	 * You can use this method should called directly, it is used in the ClickableMouse class.
 	 * 
 	 * This method is called everytime a user clicks a BoardTile.
 	 * 
+	 * The method is used to handle moving the figure and to fling figures out.
+	 * 
 	 * @param tile
 	 */
-	public void notified(BoardTile tile) {
+	public void moveFigureWithMovement(BoardTile tile) {
+		
+		if(!this.getFigure().isReadyToPlay()) {
+			return;
+		}
 		
 		if(bufferList.contains(tile)) { // When the tile is inside the bufferList only then can the figure be moved onto the tile
 			
 			if(fling != null && tile.getTileFigure() != null) {
 				fling.flingOut(tile.getTileFigure());
-				update();
 			}
 			
-			moveFigure(tile);
-			
+			DataShare.BOARD.moveFigureToTile(figure, tile);
+			DataShare.TURNSYSTEM.nextTurn();
 		}
-		
-	}
-	
-	protected void moveFigure(BoardTile tile) { // TODO: IS THIS METHOD NECESSARY?
-		
-		lastTile = tile;
-		DataShare.BOARD.moveFigureToTile(figure, lastTile);
 		
 	}
 	

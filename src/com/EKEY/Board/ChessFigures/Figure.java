@@ -9,6 +9,8 @@ import com.EKEY.GameObject;
 import com.EKEY.Handler;
 import com.EKEY.Board.BoardTile;
 import com.EKEY.Board.ChessFigures.Movement.Movement;
+import com.EKEY.Board.Turns.Player;
+import com.EKEY.Listeners.ClickableMouse;
 import com.EKEY.Misc.Camera;
 import com.EKEY.Misc.DataShare;
 
@@ -25,6 +27,8 @@ public class Figure extends GameObject{
 	protected ColorEnum colorEnum;
 	
 	protected boolean selected = false;
+	
+	protected boolean readyToPlay = false;
 	
 	public Figure(int x, int y, int width, int height, Image image, ColorEnum color, Movement... movement) {
 		super(x, y, width, height);
@@ -77,6 +81,21 @@ public class Figure extends GameObject{
 	
 	@Override
 	public void onClick() {
+		
+		ClickableMouse clickableMouse = DataShare.CLICKABLEMOUSE;
+		
+		if(clickableMouse.getSelectedFigure() == null || clickableMouse.getSelectedFigure() != this) {
+			
+			clickableMouse.setSelectedFigure(this);
+			
+			if(clickableMouse.getSelectedFigure() != null) {
+				clickableMouse.getSelectedFigure().setSelected(false);
+			}
+			
+		}
+		
+		this.setSelected(true);
+		
 		for(Movement m : movement) {
 			m.update();
 		}
@@ -152,24 +171,36 @@ public class Figure extends GameObject{
 	public void deleteObject() {
 		
 		try {
-			this.finalize();
+			this.finalize(); // finalize the object incase we miss some references
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 		
 		Handler handler = DataShare.HANDLER;
 		
+		// unregistering all the related renders...
 		handler.unregisterTick(this);
 		handler.unregisterFigureRender(this);
 		handler.unregisterClickable(this);
 		
-		BoardTile tile = DataShare.BOARD.getTileByLoc(this.tileY, this.tileX);
+		BoardTile tile = DataShare.BOARD.getTileByLoc(this.tileY, this.tileX); // removing from the tile the figure is on
 		
 		if(tile != null) {
-			tile.setTileFigure(null);
+			tile.setTileFigure(null); // removing the tied tile figure from the tile the figure is currently on (if it isn't null)
 		}
 		
-		System.gc();
+		// removing the figure from the player with the same color enum
+		for(int i = 0; i < DataShare.getPlayerList().size(); i++) {
+			Player p = DataShare.getPlayerList().get(i);
+			if(p.getPlayerColor().equals(this.getColorEnum())) {
+				if(p.getPlayerFigures().contains(this)) {
+					p.removeFigure(this);
+				}
+			}
+			
+		}
+		
+		System.gc(); // try to clear the heap now incase we missed some references and we really want the object gone
 	}
 
 	public ColorEnum getColorEnum() {
@@ -179,5 +210,15 @@ public class Figure extends GameObject{
 	public void setColorEnum(ColorEnum colorEnum) {
 		this.colorEnum = colorEnum;
 	}
+
+	public boolean isReadyToPlay() {
+		return readyToPlay;
+	}
+
+	public void setReadyToPlay(boolean readyToPlay) {
+		this.readyToPlay = readyToPlay;
+	}
+	
+	
 	
 }

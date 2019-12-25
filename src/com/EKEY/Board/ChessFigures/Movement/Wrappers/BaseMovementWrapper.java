@@ -38,8 +38,8 @@ public abstract class BaseMovementWrapper extends Movement{
 	}
 	
 	@Override
-	public void notified(BoardTile tile) {
-		wrappedMovement.notified(tile);
+	public void moveFigureWithMovement(BoardTile tile) {
+		wrappedMovement.moveFigureWithMovement(tile);
 	}
 	
 	@Override
