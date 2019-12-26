@@ -1,7 +1,5 @@
 package com.EKEY.Board.ChessFigures.Movement;
 
-import java.util.LinkedList;
-
 import com.EKEY.Board.BoardTile;
 import com.EKEY.Board.ChessFigures.Movement.Flinging.Fling;
 import com.EKEY.Misc.DataShare;
@@ -17,22 +15,19 @@ public class ConditionalSingleMovement extends SingleMovement{
 	}
 	
 	@Override
-	public LinkedList<BoardTile> recalc() {
-		
-		LinkedList<BoardTile> bufferList = new LinkedList<BoardTile>();
+	public void recalc() {
 		
 		BoardTile tile = DataShare.BOARD.getTileByLoc(figure.getTileY() + y, figure.getTileX() + x);
 		
-		if(tile != null) {
-		
-			if(tile.getTileFigure() != null) {
-				
-				bufferList.add(tile);
-				
-			}
-			
+		if(tile == null) {
+			return;
 		}
 		
-		return bufferList;
+		if(tile.getTileFigure() == null) {
+			return;
+		}
+		
+		bufferList.add(tile);
+		
 	}
 }

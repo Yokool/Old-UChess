@@ -1,7 +1,5 @@
 package com.EKEY.Board.ChessFigures.Movement;
 
-import java.util.LinkedList;
-
 import com.EKEY.Board.BoardTile;
 import com.EKEY.Board.ChessFigures.Movement.Flinging.Fling;
 import com.EKEY.Misc.DataShare;
@@ -73,9 +71,7 @@ public class StepMovement extends Movement{
 	
 
 	@Override
-	public LinkedList<BoardTile> recalc() {
-		
-		LinkedList<BoardTile> bufferList = new LinkedList<BoardTile>();
+	public void recalc() {
 		
 		int xTracker = 0;
 		int yTracker = 0;
@@ -103,10 +99,7 @@ public class StepMovement extends Movement{
 			}
 			
 			bufferList.add(t);
-			
 		}
-		
-		return bufferList;
 	}
 	
 	@Override
