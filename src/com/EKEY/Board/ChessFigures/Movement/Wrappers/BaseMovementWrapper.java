@@ -1,7 +1,7 @@
 package com.EKEY.Board.ChessFigures.Movement.Wrappers;
 
 import java.awt.Graphics;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import com.EKEY.Board.BoardTile;
 import com.EKEY.Board.ChessFigures.Figure;
@@ -23,33 +23,18 @@ public abstract class BaseMovementWrapper extends Movement{
 	}
 	
 	@Override
-	public void recalc() {
-		wrappedMovement.recalc();
+	public LinkedList<BoardTile> recalc() {
+		return wrappedMovement.recalc();
 	}
 	
 	@Override
-	public void update() {
-		wrappedMovement.update();
-	}
-	
-	@Override
-	public void render(Graphics g) {
-		wrappedMovement.render(g);
-	}
-	
-	@Override
-	public void moveFigureWithMovement(BoardTile tile) {
-		wrappedMovement.moveFigureWithMovement(tile);
+	public LinkedList<BoardTile> update() {
+		return wrappedMovement.update();
 	}
 	
 	@Override
 	public void setFigure(Figure figure) {
 		wrappedMovement.setFigure(figure);
-	}
-	
-	@Override
-	public ArrayList<BoardTile> getBufferList() {
-		return wrappedMovement.getBufferList();
 	}
 	
 	@Override

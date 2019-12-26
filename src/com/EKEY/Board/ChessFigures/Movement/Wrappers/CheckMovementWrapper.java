@@ -14,16 +14,16 @@ public class CheckMovementWrapper extends BaseMovementWrapper{
 	}
 	
 	@Override
-	public void update() {
+	public LinkedList<BoardTile> update() {
 		
-		super.update();
+		LinkedList<BoardTile> bufferList = super.update();
 		
 		BoardTile figureTile = DataShare.BOARD.getTileByLoc(this.getFigure().getTileY(), this.getFigure().getTileX());
 		
 		
 		LinkedList<Figure> figureList = new LinkedList<Figure>();
 		
-		DataShare.BOARD.castSqure(figureTile, 4, tile -> { // FIXME: VALLUES OVER 3 BREAK THIS
+		DataShare.BOARD.castSqure(figureTile, 8, tile -> { // FIXME: VALLUES OVER 3 BREAK THIS
 			
 			if(tile == null) {
 				return;
@@ -57,8 +57,19 @@ public class CheckMovementWrapper extends BaseMovementWrapper{
 			
 			for(int j = 0; j < f.getMovement().size(); j++) {
 				Movement m = f.getMovement().get(j);
-				m.update(); // TODO: ERROR LINE
-				notAllowedTiles.addAll(m.getBufferList());
+				
+				if(m instanceof BaseMovementWrapper) {
+					
+					BaseMovementWrapper base = (BaseMovementWrapper) m;
+					notAllowedTiles.addAll(base.wrappedMovement.update());
+					
+				}else {
+					
+					notAllowedTiles.addAll(m.update());
+					
+				}
+				
+				
 			}
 			
 		}
@@ -67,11 +78,14 @@ public class CheckMovementWrapper extends BaseMovementWrapper{
 			
 			BoardTile tile = notAllowedTiles.get(i);
 			
-			if(this.getBufferList().contains(tile)) {
-				this.getBufferList().remove(tile);
+			if(bufferList.contains(tile)) {
+				bufferList.remove(tile);
 			}
 			
 		}
+		
+		return bufferList;
+		
 		
 	}
 	

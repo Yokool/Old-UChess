@@ -45,10 +45,6 @@ public class TurnSystem {
 		
 		getPlayerWithTurn().playerFinished(); // the player that just played is done with their turn and finished
 		
-		for(Player player : playerList) { // update all the players
-			player.updateAllFigures();
-		}
-		
 		incrementIndex(); // incremement the player index -> get the player ready to make their turn
 		
 		getPlayerWithTurn().playerStarted(); // unblock the players figures and make him ready to do his turn

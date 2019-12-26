@@ -96,9 +96,6 @@ public class Figure extends GameObject{
 		
 		this.setSelected(true);
 		
-		for(Movement m : movement) {
-			m.update();
-		}
 	}
 	
 	@Override

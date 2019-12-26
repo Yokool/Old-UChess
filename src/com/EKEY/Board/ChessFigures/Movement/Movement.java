@@ -3,14 +3,12 @@ package com.EKEY.Board.ChessFigures.Movement;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.LinkedList;
 
 import com.EKEY.Board.BoardTile;
 import com.EKEY.Board.ChessFigures.Figure;
 import com.EKEY.Board.ChessFigures.Movement.Flinging.Fling;
-import com.EKEY.Board.ChessFigures.Movement.Flinging.VanillaFling;
 import com.EKEY.Interfaces.Renderable;
-import com.EKEY.Interfaces.Tickable;
 import com.EKEY.Misc.Camera;
 import com.EKEY.Misc.DataShare;
 
@@ -37,8 +35,6 @@ public abstract class Movement implements Cloneable, Renderable{
 	 * The figure that is tied to the movement object. Is set using the setFigure method and not the constructor.
 	 */
 	protected Figure figure;
-	
-	protected ArrayList<BoardTile> bufferList = new ArrayList<BoardTile>();
 	
 	/**
 	 * The tied fling object.
@@ -70,11 +66,11 @@ public abstract class Movement implements Cloneable, Renderable{
 	 * This method must be implemented in each subclass of Movement. This is the most important method of the movement
 	 * system as it determines which tiles will be rendered with the dot on them and which ones are walkable.
 	 */
-	public abstract void recalc();
+	public abstract LinkedList<BoardTile> recalc();
 	
-	public void update() {
-		bufferList.clear();
-		recalc();
+	public LinkedList<BoardTile> update() {
+		LinkedList<BoardTile> bufferList = new LinkedList<BoardTile>();
+		bufferList = recalc();
 		
 		for(int i = 0; i < bufferList.size(); i++) {
 			
@@ -97,6 +93,8 @@ public abstract class Movement implements Cloneable, Renderable{
 			}
 			
 		}
+		
+		return bufferList;
 	}
 	
 	
@@ -117,6 +115,8 @@ public abstract class Movement implements Cloneable, Renderable{
 		if(!this.getFigure().isReadyToPlay()) {
 			return;
 		}
+		
+		LinkedList<BoardTile> bufferList = this.update();
 		
 		for(int i = 0; i < bufferList.size(); i++) {
 			
@@ -150,13 +150,13 @@ public abstract class Movement implements Cloneable, Renderable{
 			return;
 		}
 		
-		if(bufferList.contains(tile)) { // When the tile is inside the bufferList only then can the figure be moved onto the tile
+		if(this.update().contains(tile)) { // When the tile is inside the bufferList only then can the figure be moved onto the tile
 			
-			if(fling != null && tile.getTileFigure() != null) {
-				fling.flingOut(tile.getTileFigure());
+			if(this.getFling() != null && tile.getTileFigure() != null) {
+				this.getFling().flingOut(tile.getTileFigure());
 			}
 			
-			DataShare.BOARD.moveFigureToTile(figure, tile);
+			DataShare.BOARD.moveFigureToTile(this.getFigure(), tile);
 			DataShare.TURNSYSTEM.nextTurn();
 		}
 		
@@ -171,15 +171,12 @@ public abstract class Movement implements Cloneable, Renderable{
 	public void setFigure(Figure figure) {
 		this.figure = figure;
 		
-		if(fling != null) {
-			fling.setFigure(figure);
+		if(this.getFling() != null) {
+			this.getFling().setFigure(figure);
 		}
 		
 	}
 	
-	public ArrayList<BoardTile> getBufferList() {
-		return bufferList;
-	}
 	
 	public Fling getFling() {
 		return fling;
